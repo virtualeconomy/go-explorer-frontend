@@ -15,12 +15,12 @@ npm run dev  // run for dev
 
 #### 1. Clone the code from github on server
 
-`git clone https://github.com/virtualeconomy/go-explorer-v2.0.git`
+`git clone https://github.com/virtualeconomy/go-explorer-frontend.git`
 
-#### 2. Enter the `vsys-explorer` directory and install all dependencies
+#### 2. Enter the directory and install all dependencies
 
 ```bash
-cd /Frontend/vsys-explorer
+cd go-explorer-frontend
 
 npm install
 ```
