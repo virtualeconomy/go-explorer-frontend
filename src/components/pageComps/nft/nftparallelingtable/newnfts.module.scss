@@ -1,0 +1,195 @@
+@import "../../../../../styles/abstracts.sass";
+
+.info_table {
+    background-color: $PAGE_BGC;
+    .table {
+        background-color: $TABLE_BGC;
+        width: 700px;
+        margin: 0 auto;
+        box-shadow: 1.9500000476837158px 4px 3px 0px rgba(18, 22, 27, 0.2);
+        border-radius: 10px;
+        min-height: 750px;
+        .spinning {
+            align-items: center;
+            justify-content: center;
+            img {
+                height: 500px;
+                width: 56px;
+            }
+        }
+
+        .table_container {
+            padding: 52px;
+            font-size: 0;
+            .table_title {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+
+                h2 {
+                    cursor: pointer;
+                    color: #eeee;
+                    font-family: $LATO;
+                    font-style: normal;
+                    font-size: 32px;
+                    line-height: 48px;
+                }
+            }
+            :global {
+                .ant-table table {
+                    .ant-table-tbody > tr.ant-table-row:hover > td {
+                        background-color: $TABLE_BGC;
+                    }
+                    background-color: $TABLE_BGC;
+                    color: #eeee;
+                    height: 470px;
+                    th {
+                        cursor: pointer;
+                        border: none;
+                    }
+                    .ant-table-thead .ant-table-cell {
+                        background-color: $TABLE_BGC;
+                        color: $ORANGE_DEFAULT;
+                        font-family: $LATO;
+                        font-style: normal;
+                        font-weight: 700;
+                        padding: 24px 6px;
+                        font-size: 20px;
+                        line-height: 32px;
+                        span {
+                            color: $ORANGE_DEFAULT;
+                        }
+                    }
+                    .ant-table-tbody .ant-table-cell {
+                        font-family: $EXO_2;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 28px;
+                        padding: 24px 6px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        border-bottom: 0.5px solid #eeee;
+                    }
+                    a {
+                        font-weight: 700;
+                    }
+                    .ant-table-column-sort {
+                        background-color: $TABLE_BGC;
+                    }
+                    .ant-table-cell-row-hover {
+                        background-color: $TABLE_BGC;
+                        a {
+                            color: $ORANGE_DEFAULT;
+                        }
+                    }
+                    .ant-table-placeholder:hover > td {
+                        background-color: $TABLE_BGC;
+                    }
+                }
+            }
+
+            .page_sgin {
+                color: #eeee;
+                font-family: $LATO;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 60px;
+                opacity: 0.5;
+                display: block;
+            }
+            button[ant-click-animating-without-extra-node]:after {
+                border: 0 none;
+                opacity: 0;
+                animation: none 0 ease 0 1 normal;
+            }
+
+            .btn_right,
+            .btn_left {
+                background-color: $ORANGE_DEFAULT;
+                border: none;
+                border: 1px solid $ORANGE_DEFAULT;
+                height: 45px;
+                border-radius: 8px;
+                padding: 8px 16px;
+                font-family: $EXO_2;
+                font-weight: 500;
+                text-align: center;
+                color: #eeee;
+                margin-right: 15px;
+                span {
+                    font-size: 16px;
+                    display: inline-block;
+                    vertical-align: top;
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+            }
+            .btn_left {
+                background-color: rgba(255, 130, 50, 0.5);
+                border: 1px solid rgba(255, 130, 50, 0.5);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .info_table {
+        padding-bottom: 400px;
+        .table {
+            border-radius: 40px;
+            width: $MEDIA_CONTENT_WIDTH;
+            .spinning {
+                margin-top: 10%;
+                height: 500px;
+
+                img {
+                    width: 150px;
+                    height: 500px;
+                }
+            }
+            .table_container {
+                padding: 104px;
+                .table_title {
+                    h2 {
+                        font-size: 120px;
+                        line-height: 150px;
+                    }
+                }
+                :global {
+                    .ant-table {
+                        table {
+                            .ant-table-thead .ant-table-cell {
+                                line-height: 300px;
+                                font-size: 68px;
+                            }
+                            .ant-table-tbody .ant-table-cell {
+                                line-height: 280px;
+                                font-size: 60px;
+                            }
+                        }
+                    }
+                }
+                .page_sgin {
+                    line-height: 200px;
+                    font-size: 68px;
+                }
+                .btn_left,
+                .btn_right {
+                    height: 150px;
+                    border-radius: 30px;
+                    margin-right: 100px;
+                    span {
+                        font-size: 0;
+                        svg {
+                            width: 120px;
+                            height: 120px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

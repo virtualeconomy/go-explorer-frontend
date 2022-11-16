@@ -1,0 +1,119 @@
+@import '../../../../styles/abstracts.sass';
+
+.navBar {
+    color: $WHITE_DEFAULT;
+    background-color: $PAGE_BGC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+
+    .container {
+        width: $CONTENT_WIDTH;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .logo_content {
+            width: 40%;
+            cursor: pointer;
+
+            .logo {
+                cursor: pointer;
+            }
+        }
+
+        .menu_content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 60%;
+
+            .menu {
+                width: 75%;
+                font-family: $LATO;
+                font-size: 18px;
+                font-weight: 500;
+                border: none;
+                background-color: $PAGE_BGC;
+                display: flex;
+
+                :global {
+                    .ant-menu-item-selected {
+                        color: $ORANGE_DEFAULT !important;
+                        border-bottom: 1px solid $ORANGE_DEFAULT;
+                    }
+
+                    .ant-menu-item-selected::after {
+                        border-bottom: 1px solid $ORANGE_DEFAULT;
+                    }
+
+                    .ant-menu-submenu {
+                        display: none;
+                    }
+
+                    .ant-menu-item {
+                        width: 20%;
+                        color: $WHITE_DEFAULT;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: none;
+                    }
+                    .ant-menu-item:hover::after,
+                    .ant-menu-item-active::after {
+                        color: $ORANGE_DEFAULT !important;
+                        border-bottom: 1px solid $ORANGE_DEFAULT;
+                    }
+                }
+            }
+
+            .btn {
+                background-color: $ORANGE_DEFAULT;
+                border: none;
+                height: 40px;
+                width: 160px;
+                border-radius: 8px;
+                padding: 8px 16px 8px 16px;
+                font-family: $EXO_2;
+                font-size: 18px;
+                font-weight: 400;
+                color: #2d323c;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .mobile_content {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navBar {
+        padding-bottom: 300px;
+
+        .container {
+            align-items: flex-start;
+
+            .logo_content {
+                .logo {
+                    width: 3rem;
+                }
+            }
+
+            .menu_content {
+                display: none;
+            }
+
+            .mobile_content {
+                cursor: pointer;
+                display: block;
+            }
+        }
+    }
+}

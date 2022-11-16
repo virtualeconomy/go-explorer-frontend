@@ -1,0 +1,47 @@
+@import "../../../../styles/abstracts.sass";
+.back {
+    .back_top {
+        background-color: $TABLE_BGC;
+        bottom: 150px;
+        right: 100px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        :global {
+            .ant-back-top-content {
+                margin: 20px;
+                width: 40px;
+                height: 40px;
+                span > svg {
+                    background-color: $TABLE_BGC;
+                    color: $WHITE_DEFAULT;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .back {
+        .back_top {
+            right: 150px;
+            background-color: $PAGE_BGC;
+            width: 200px;
+            height: 200px;
+            :global {
+                .ant-back-top-content {
+                    margin: 50px;
+                    width: 100px;
+                    height: 100px;
+                    span > svg {
+                        background-color: $PAGE_BGC;
+                        width: 100px;
+                        height: 100px;
+                    }
+                }
+            }
+        }
+    }
+}

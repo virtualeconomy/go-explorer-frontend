@@ -1,0 +1,601 @@
+@import "../../../../styles/abstracts.sass";
+
+.info_table {
+    background-color: $PAGE_BGC;
+    padding-bottom: 80px;
+
+    .table {
+        background-color: $TABLE_BGC;
+        width: $CONTENT_WIDTH;
+        margin: 0 auto;
+        box-shadow: 1.9500000476837158px 4px 3px 0px rgba(18, 22, 27, 0.2);
+        border-radius: 10px;
+
+        .spinning {
+            height: 948px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            img {
+                height: 140px;
+                width: 56px;
+            }
+        }
+
+        .table_container {
+            padding: 52px;
+            font-size: 0;
+            p {
+                font-family: "Exo 2";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 28px;
+                color: $WHITE_DEFAULT;
+            }
+
+            .table_title {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+
+                h2 {
+                    display: inline-block;
+                    cursor: pointer;
+                    padding-right: 10px;
+                    margin-right: 40px;
+                    vertical-align: top;
+                    color: $WHITE_DEFAULT;
+                    font-family: $LATO;
+                    font-style: normal;
+                    font-size: 32px;
+                    line-height: 48px;
+                    border-bottom: #2d323c 1px solid;
+                }
+
+                .h2_swit {
+                    display: none;
+                }
+
+                .double_title h2:hover,
+                .h2_active {
+                    color: $ORANGE_DEFAULT;
+                    border-bottom: solid 1px $ORANGE_DEFAULT;
+                }
+
+                button[ant-click-animating-without-extra-node]:after {
+                    border: 0 none;
+                    opacity: 0;
+                    animation: none 0 ease 0 1 normal;
+                }
+
+                .token_btn {
+                    background-color: $TABLE_BGC;
+                    border: none;
+                    border: 1px solid $WHITE_DEFAULT;
+                    margin-right: 40px;
+                    height: 45px;
+                    border-radius: 8px;
+                    padding: 8px 16px;
+                    font-family: $EXO_2;
+                    font-weight: 500;
+                    text-align: center;
+                    color: $WHITE_DEFAULT;
+
+                    span {
+                        font-size: 16px;
+                        display: inline-block;
+                        vertical-align: top;
+
+                        svg {
+                            width: 15px;
+                            height: 24px;
+                        }
+                    }
+                }
+
+                .token_btn_none {
+                    display: none;
+                }
+
+                .token_list {
+                    z-index: 2;
+                    top: 50px;
+                    left: -20px;
+                    min-width: 200px;
+                    padding: 20px;
+                    position: absolute;
+                    background: $PAGE_BGC;
+                    border-radius: 10px;
+                    p {
+                        color: $WHITE_DEFAULT;
+                        border-radius: 5px;
+                        font-size: 18px;
+                        margin: 0;
+                        padding: 10px 20px;
+                    }
+                    p:hover,
+                    .token_active {
+                        cursor: pointer;
+                        background-color: $TABLE_BGC;
+                        color: $ORANGE_DEFAULT;
+                    }
+                }
+                .token_list_none {
+                    display: none;
+                }
+
+                .search_token {
+                    position: fixed;
+                    z-index: 2;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    background: rgba(34, 40, 49, 0.3);
+                    backdrop-filter: blur(1px);
+
+                    .search_content {
+                        width: 600px;
+                        height: 300px;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        margin: auto;
+                        background-color: $PAGE_BGC;
+                        border-radius: 10px;
+                        box-shadow: 1.95px 4px 3px rgba(18, 22, 27, 0.2);
+
+                        .search_cancel {
+                            padding: 0;
+                            margin: 0;
+                            width: 40px;
+                            height: 40px;
+                            position: absolute;
+                            right: 24px;
+                            top: 24px;
+                            border-radius: 2px;
+                            font-size: 14px;
+                            line-height: 40px;
+                            border: none;
+                            background-color: $ORANGE_DEFAULT;
+                            color: $PAGE_BGC;
+                        }
+
+                        .search_cancel:hover {
+                            background-color: $PAGE_BGC;
+                            color: $ORANGE_DEFAULT;
+                        }
+
+                        .search {
+                            width: 80%;
+                            display: flex;
+                            margin: 0 auto;
+                            align-items: center;
+                            margin-top: 120px;
+                            box-shadow: 1.95px 4px 3px rgba(18, 22, 27, 0.2);
+
+                            input {
+                                padding: 13px;
+                                font-family: $LATO;
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 16px;
+                                line-height: 38px;
+                                color: rgba(238, 238, 238, 0.5);
+                                background: $TABLE_BGC;
+                                border-radius: 10px 0 0 10px;
+                            }
+
+                            button:hover,
+                            button:focus,
+                            button:active,
+                            input:hover,
+                            input:focus,
+                            input:active {
+                                background: $TABLE_BGC;
+                            }
+
+                            button {
+                                background: $TABLE_BGC;
+                                padding: 20px;
+                                border-radius: 0px 10px 10px 0px;
+                                border: none;
+                                height: 64px;
+
+                                .search_icon {
+                                    width: 22px;
+                                    vertical-align: top;
+                                }
+                            }
+
+                            button[ant-click-animating-without-extra-node]:after {
+                                border: 0 none;
+                                opacity: 0;
+                                animation: none 0 ease 0 1 normal;
+                            }
+                        }
+                    }
+                }
+
+                .swit_btn {
+                    display: none;
+                    background-color: $TABLE_BGC;
+                    border: none;
+                    border: 1px solid $WHITE_DEFAULT;
+                    height: 45px;
+                    border-radius: 8px;
+                    padding: 8px 16px;
+                    font-family: $EXO_2;
+                    font-weight: 500;
+                    text-align: center;
+                    color: $WHITE_DEFAULT;
+                    margin-right: 10px;
+
+                    span {
+                        font-size: 16px;
+                        display: inline-block;
+                        vertical-align: top;
+
+                        svg {
+                            width: 24px;
+                            height: 24px;
+                        }
+                    }
+                }
+
+                .btn {
+                    background-color: $TABLE_BGC;
+                    border: none;
+                    border: 1px solid $WHITE_DEFAULT;
+                    height: 45px;
+                    border-radius: 8px;
+                    padding: 8px 16px;
+                    font-family: $EXO_2;
+                    font-weight: 500;
+                    text-align: center;
+                    color: $WHITE_DEFAULT;
+
+                    span {
+                        font-size: 16px;
+                        display: inline-block;
+                        vertical-align: top;
+
+                        svg {
+                            width: 24px;
+                            height: 24px;
+                        }
+                    }
+                }
+
+                button[ant-click-animating-without-extra-node]:after {
+                    border: 0 none;
+                    opacity: 0;
+                    animation: none 0 ease 0 1 normal;
+                }
+            }
+
+            :global {
+                .ant-table table {
+                    .ant-table-tbody > tr.ant-table-row:hover > td {
+                        background-color: $TABLE_BGC;
+                    }
+                    background-color: $TABLE_BGC;
+                    color: $WHITE_DEFAULT;
+
+                    th {
+                        border: none;
+                    }
+
+                    .ant-table-thead .ant-table-cell {
+                        background-color: #2d323c;
+                        color: $ORANGE_DEFAULT;
+                        font-family: $LATO;
+                        font-style: normal;
+                        font-weight: 700;
+                        padding: 24px 6px;
+                        font-size: 20px;
+                        line-height: 32px;
+
+                        span {
+                            color: $ORANGE_DEFAULT;
+                        }
+                        span.anticon {
+                            color: rgba(255, 130, 50, 0.5);;
+                        }
+                        span.active {
+                            color: $ORANGE_DEFAULT;
+                        }
+                    }
+
+                    .ant-table-tbody .ant-table-cell {
+                        font-family: $EXO_2;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 28px;
+                        padding: 24px 6px;
+                        font-size: 16px;
+                        border-bottom: 0.5px solid $WHITE_DEFAULT;
+
+                        img {
+                            width: 24px;
+                            height: 24px;
+                        }
+                    }
+
+                    a {
+                        text-decoration-line: underline;
+                        font-weight: 700;
+                    }
+
+                    .ant-table-column-sort {
+                        background-color: $TABLE_BGC;
+                    }
+
+                    .ant-table-cell-row-hover {
+                        background-color: $TABLE_BGC;
+
+                        a {
+                            color: $ORANGE_DEFAULT;
+                        }
+                    }
+
+                    .ant-table-placeholder:hover > td {
+                        background-color: $TABLE_BGC;
+                    }
+                }
+            }
+
+            .page_sgin {
+                color: $WHITE_DEFAULT;
+                font-family: $LATO;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 60px;
+                opacity: 0.5;
+                display: inline-block;
+            }
+
+            .more_btn {
+                background-color: $ORANGE_DEFAULT;
+                border: none;
+                height: 45px;
+                width: 100%;
+                border-radius: 8px;
+                padding: 8px 16px 8px 16px;
+                font-family: $EXO_2;
+                font-size: 18px;
+                font-weight: 400;
+                border: 1px solid $ORANGE_DEFAULT;
+                text-align: center;
+                color: rgba(238, 238, 238, 1);
+            }
+
+            .more_btn:hover {
+                background-color: $TABLE_BGC;
+                color: $ORANGE_DEFAULT;
+            }
+
+            .view_more_btn {
+                background-color: transparent;
+                border: none;
+                color: $WHITE_DEFAULT;
+                font-size: 18px;
+                font-family: $LATO;
+                float: right;
+                margin-top: 20px;
+
+                .arrow {
+                    font-size: 25px;
+                    margin-left: 10px;
+                }
+            }
+
+            .view_more_btn:hover {
+                color: $ORANGE_DEFAULT;
+                border: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .info_table {
+        padding-bottom: 400px;
+
+        .table {
+            width: $MEDIA_CONTENT_WIDTH;
+            border-radius: 40px;
+            padding-bottom: 70px;
+
+            .spinning {
+                margin-top: 10%;
+                height: 500px;
+
+                img {
+                    width: 150px;
+                    height: 500px;
+                }
+            }
+
+            .table_container {
+                padding: 104px;
+
+                p {
+                    line-height: 100px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    padding: 0;
+                    margin: 0;
+                    font-size: 50px;
+                    -webkit-line-clamp: 2;
+                }
+
+                .table_title {
+                    h2 {
+                        font-size: 120px;
+                        line-height: 150px;
+                    }
+
+                    .double_title h2 {
+                        display: none;
+                    }
+
+                    .double_title .h2_swit {
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+                        color: $WHITE_DEFAULT;
+                        border-bottom: $TABLE_BGC 1px solid;
+                        font-size: 120px;
+                        > span {
+                            width: 1000px;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
+                    .switchdiv {
+                        position: absolute;
+                        z-index: 5;
+                        left: 0;
+                        top: 180px;
+                        height: 500px;
+                        width: 1000px;
+                        padding: 80px;
+                        background: $PAGE_BGC;
+                        border-radius: 30px;
+
+                        .p_active {
+                            color: $ORANGE_DEFAULT;
+                        }
+
+                        p {
+                            padding: 0;
+                            padding: 50px 0;
+                            margin: 0;
+                            font-family: $LATO;
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 70px;
+                            line-height: 70px;
+                        }
+                    }
+
+                    .token_btn {
+                        display: none;
+                    }
+                    .token_list {
+                        display: none;
+                    }
+
+                    .search_token {
+                        display: none !important;
+                    }
+
+                    .swit_btn {
+                        display: inline;
+                        background-color: $TABLE_BGC;
+                        border: none;
+                        height: 150px;
+                        border-radius: 30px;
+
+                        span {
+                            font-size: 0;
+
+                            svg {
+                                width: 120px;
+                                height: 100px;
+                            }
+                        }
+                    }
+
+                    .btn {
+                        height: 150px;
+                        border-radius: 30px;
+                        span {
+                            font-size: 0;
+
+                            svg {
+                                width: 120px;
+                                height: 120px;
+                            }
+                        }
+                    }
+                }
+
+                :global {
+                    .ant-table {
+                        overflow: scroll;
+                        background-color: $TABLE_BGC;
+
+                        table {
+                            padding-bottom: 100px;
+                            width: 4000px;
+
+                            .ant-table-thead .ant-table-cell {
+                                line-height: 300px;
+                                font-size: 62px;
+
+                                .ant-table-column-sorter-up,
+                                .ant-table-column-sorter-down {
+                                    font-size: 68px;
+                                }
+                            }
+
+                            .ant-table-tbody .ant-table-cell {
+                                line-height: 280px;
+                                font-size: 60px;
+
+                                img {
+                                    width: 150px;
+                                    height: 150px;
+                                }
+                            }
+
+                            .ant-table-cell-row-hover {
+                                background-color: none;
+
+                                a {
+                                    color: $ORANGE_DEFAULT;
+                                }
+                            }
+
+                            .ant-table-placeholder:hover > td {
+                                background-color: none;
+                            }
+                        }
+                    }
+                }
+
+                .page_sgin {
+                    line-height: 200px;
+                    font-size: 68px;
+                }
+
+                .more_btn {
+                    height: 150px;
+                    font-size: 68px;
+                    border-radius: 30px;
+                    margin-top: 60px;
+                }
+
+                .view_more_btn {
+                    margin-top: 50px;
+                    font-size: 68px;
+
+                    .arrow {
+                        font-size: 95px;
+                        margin-left: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

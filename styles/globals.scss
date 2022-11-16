@@ -1,0 +1,17 @@
+@import './abstracts';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: $PAGE_WIDTH;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}

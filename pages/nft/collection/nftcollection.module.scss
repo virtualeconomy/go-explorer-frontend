@@ -1,0 +1,37 @@
+@import "../../../styles/abstracts.sass";
+.collection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $PAGE_BGC;
+    color: $WHITE_DEFAULT;
+    padding-bottom: 100px;
+    padding-top: 20px;
+    position: relative;
+    .title {
+        display: block;
+        position: absolute;
+        top: -80px;
+        margin: 0 auto;
+        width: $CONTENT_WIDTH;
+        font-family: $LATO;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 26px;
+        line-height: 100px;
+        // margin-bottom: 40px;
+        color: #eeeeee;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .collection {
+        // padding-bottom: 300px;
+        padding: 0;
+        .title {
+            top: -150px;
+            font-size: 120px;
+        }
+    }
+}

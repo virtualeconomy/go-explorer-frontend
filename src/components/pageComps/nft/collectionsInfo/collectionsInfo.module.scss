@@ -1,0 +1,199 @@
+@import "../../../../../styles//abstracts.sass";
+
+.collectionsInfo {
+    position: relative;
+    width: $CONTENT_WIDTH;
+    padding: 52px;
+    margin-bottom: 80px;
+    box-shadow: 1.95px 4px 3px rgba(18, 22, 27, 0.2);
+    border-radius: 10px;
+    background-color: $TABLE_BGC;
+
+    h1 {
+        font-family: $LATO;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 48px;
+        margin: 0;
+        color: $WHITE_DEFAULT;
+    }
+    .spinning {
+        align-items: center;
+        justify-content: center;
+        height: 170px;
+        img {
+            width: 56px;
+        }
+    }
+
+    .content,
+    .content_nft {
+        width: 1320px;
+        display: flex;
+        overflow-x: scroll;
+        padding-right: 50px;
+
+        .collections {
+            text-align: center;
+            width: 120px;
+            margin-right: 51px;
+            img {
+                cursor: pointer;
+                width: 120px;
+                height: 120px;
+                border-radius: 10px;
+            }
+            p {
+                padding: 0;
+                margin: 0;
+                color: $ORANGE_DEFAULT;
+                font-family: $LATO;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                height: 48px;
+                line-height: 48px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+        .link {
+            background: linear-gradient(90deg, rgba(45, 50, 60, 0) 0%, rgba(45, 50, 60, 0.8) 46.35%);
+            filter: drop-shadow(1.95px 4px 3px rgba(18, 22, 27, 0.2));
+            border-radius: 10px;
+            position: absolute;
+            right: 0;
+            height: 100%;
+            width: 150px;
+            top: 0px;
+            text-align: right;
+            img {
+                margin-right: 30px;
+                width: 24px;
+                height: 100%;
+                cursor: pointer;
+            }
+        }
+    }
+    .content_nft {
+        display: flex;
+        padding: 0;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .content_nft .collections:nth-of-type(n) {
+        margin-right: 51px;
+    }
+    .content_nft .collections:nth-of-type(8n) {
+        margin-right: 0px;
+    }
+    .content_nft::after {
+        content: "";
+        flex: auto;
+    }
+
+    .more_btn_collection {
+        display: none;
+    }
+    .more_btn {
+        background-color: $ORANGE_DEFAULT;
+        border: none;
+        height: 45px;
+        width: 100%;
+        border-radius: 8px;
+        padding: 8px 16px 8px 16px;
+        font-family: $EXO_2;
+        font-size: 18px;
+        font-weight: 400;
+        border: 1px solid $ORANGE_DEFAULT;
+        text-align: center;
+        color: rgba(238, 238, 238, 1);
+    }
+
+    .more_btn:hover {
+        background-color: #2d323c;
+        color: $ORANGE_DEFAULT;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .collectionsInfo {
+        width: $MEDIA_CONTENT_WIDTH;
+        border-radius: 30px;
+        padding: 100px;
+        margin-bottom: 400px;
+        h1 {
+            font-size: 120px;
+            display: inline-block;
+            line-height: 200px;
+        }
+        .spinning {
+            height: 300px;
+
+            img {
+                width: 150px;
+            }
+        }
+        .content,
+        .content_nft {
+            // border: 1px solid red;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            .collections {
+                width: 600px;
+                margin-right: 0px;
+                img {
+                    border-radius: 50px;
+                    width: 600px;
+                    height: 600px;
+                }
+                p {
+                    font-size: 62px;
+                    height: 200px;
+                    line-height: 200px;
+                }
+            }
+            .link {
+                display: none;
+            }
+        }
+        .content_nft .collections:nth-of-type(2n-1) {
+            margin-right: 200px;
+        }
+        .content_nft .collections:nth-of-type(2n) {
+            margin-right: 0px;
+        }
+        .more_btn {
+            height: 150px;
+            font-size: 68px;
+            border-radius: 30px;
+        }
+        .more_btn_collection {
+            display: block;
+            background-color: $ORANGE_DEFAULT;
+            border: none;
+            width: 100%;
+            font-family: $EXO_2;
+            font-weight: 400;
+            border: 1px solid $ORANGE_DEFAULT;
+            text-align: center;
+            color: rgba(238, 238, 238, 1);
+            height: 150px;
+            font-size: 68px;
+            border-radius: 30px;
+        }
+
+        .more_btn_collection:hover {
+            background-color: #2d323c;
+            color: $ORANGE_DEFAULT;
+        }
+    }
+}

@@ -1,0 +1,81 @@
+@import "../../../../styles/abstracts.sass";
+
+.searchall {
+    background-color: $PAGE_BGC;
+
+    .search {
+        width: $CONTENT_WIDTH;
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        background-color: $PAGE_BGC;
+        margin-top: 50px;
+
+        input {
+            padding: 13px;
+            font-family: $LATO;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 38px;
+            color: rgba(238, 238, 238, 0.5);
+            background: #2d323c;
+            border-radius: 10px 0 0 10px;
+        }
+
+        button:hover,
+        button:focus,
+        button:active,
+        input:hover,
+        input:focus,
+        input:active {
+            background: #2d323c;
+        }
+
+        button {
+            background: #2d323c;
+            padding: 20px;
+            border-radius: 0px 10px 10px 0px;
+            border: none;
+            height: 64px;
+
+            .search_icon {
+                width: 22px;
+                vertical-align: top;
+            }
+        }
+
+        button[ant-click-animating-without-extra-node]:after {
+            border: 0 none;
+            opacity: 0;
+            animation: none 0 ease 0 1 normal;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .searchall {
+
+        .search {
+            padding-top: 200px;
+            width: $MEDIA_CONTENT_WIDTH;
+
+            input {
+                height: 300px;
+                padding: 100px 50px;
+                font-size: 80px;
+                border-radius: 40px 0 0 40px;
+            }
+
+            button {
+                padding: 100px 50px 100px 50px;
+                border-radius: 0 40px 40px 0;
+                height: 300px;
+
+                .search_icon {
+                    width: 100px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+@import "../../styles/abstracts.sass";
+.page_padding {
+    background-color: $PAGE_BGC;
+    padding-bottom: 100px;
+    border: solid 1px $PAGE_BGC;
+}
+
+@media screen and (max-width: 768px) {
+    .page_padding {
+        padding-bottom: 0;
+    }
+}

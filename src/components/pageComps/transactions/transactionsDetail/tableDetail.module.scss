@@ -1,0 +1,247 @@
+@import "../../../../../styles/abstracts.sass";
+.table {
+    background-color: $PAGE_BGC;
+    border: 1px solid $PAGE_BGC;
+}
+.tableDetail {
+    font-size: 0;
+    width: $CONTENT_WIDTH;
+    margin: 0 auto;
+    background: rgba(45, 50, 60, 1);
+    box-shadow: 1.9500000476837158px 4px 3px 0px rgba(18, 22, 27, 0.2);
+    border-radius: 10px;
+    color: $WHITE_DEFAULT;
+    margin-bottom: 80px;
+    padding: 50px;
+
+    .subtitle {
+        border: none !important;
+
+        :global {
+            .ant-descriptions-item-container .ant-descriptions-item-content {
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+            }
+        }
+    }
+    .icon {
+        display: inline;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 120px;
+        height: 120px;
+        img {
+            height: 120px;
+            width: 120px;
+            border-radius: 10px;
+        }
+    }
+    tr > .icon_media {
+        display: none;
+    }
+    .ownership_history_detail :global {
+        .ant-descriptions-item-content,
+        .ant-descriptions-item-label {
+            line-height: 50px;
+        }
+    }
+    :global {
+        .ant-descriptions {
+            position: relative;
+            .ant-descriptions-title {
+                font-family: $LATO;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 32px;
+                color: #eeee;
+            }
+        }
+        .ant-descriptions-row > td {
+            padding: 0;
+        }
+
+        .ant-descriptions-item-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .ant-descriptions-item-content {
+            justify-content: flex-end;
+            font-family: $EXO_2;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 76px;
+            color: $WHITE_DEFAULT;
+
+            a {
+                display: inline-block;
+                text-decoration-line: underline;
+                font-weight: 700;
+            }
+
+            a:hover {
+                color: $ORANGE_DEFAULT;
+            }
+        }
+
+        .ant-descriptions-item-label {
+            font-family: $LATO;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            color: $ORANGE_DEFAULT;
+            line-height: 76px;
+        }
+
+        .ant-descriptions-item-label::after {
+            content: "";
+        }
+
+        .ant-descriptions-row + .ant-descriptions-row {
+            .ant-descriptions-item {
+                padding: 0;
+                border-top: 0.5px solid $WHITE_DEFAULT;
+                td {
+                    padding: 0;
+                }
+            }
+        }
+    }
+    .page_sgin {
+        color: #eeee;
+        font-family: $LATO;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 60px;
+        opacity: 0.5;
+        display: block;
+    }
+    .more_btn {
+        background-color: $ORANGE_DEFAULT;
+        border: none;
+        width: 100%;
+        border-radius: 8px;
+        padding: 8px 16px 8px 16px;
+        font-family: $EXO_2;
+        font-size: 18px;
+        height: 45px;
+        font-weight: 400;
+        border: 1px solid $ORANGE_DEFAULT;
+        text-align: center;
+        color: rgba(238, 238, 238, 1);
+    }
+
+    .more_btn:hover {
+        background-color: #2d323c;
+        color: $ORANGE_DEFAULT;
+    }
+
+    .spinning {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 56px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tableDetail {
+        width: $MEDIA_CONTENT_WIDTH;
+        margin-bottom: 400px;
+        padding: 110px;
+        border-radius: 40px;
+
+        .subtitle {
+            display: inline-block;
+            margin: 0 300px 100px 0;
+        }
+        .icon {
+            display: none;
+        }
+        tr > .icon_media {
+            display: inline-block;
+            img {
+                height: 600px;
+                width: 600px;
+                border-radius: 40px;
+            }
+        }
+        :global {
+            .ant-descriptions {
+                .ant-descriptions-title {
+                    font-size: 120px;
+                }
+            }
+
+            .ant-descriptions-item-content {
+                font-size: 60px;
+                span,
+                a {
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    margin: 100px 0 0px 0;
+                    font-size: 60px;
+                    line-height: 100px;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                    height: 200px;
+                }
+            }
+
+            .ant-descriptions-item-label {
+                line-height: 75px;
+                font-size: 62px;
+                width: 660px;
+            }
+        }
+        .ownership_history_detail :global {
+            .ant-descriptions-item-content {
+                font-size: 60px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                span,
+                a {
+                    margin: 0;
+                    line-height: 180px;
+                    height: 180px;
+                }
+            }
+
+            .ant-descriptions-item-label {
+                line-height: 180px;
+                font-size: 62px;
+                width: 660px;
+            }
+        }
+        .page_sgin {
+            line-height: 150px;
+            font-size: 40px;
+        }
+        .more_btn {
+            height: 150px;
+            font-size: 68px;
+            border-radius: 30px;
+        }
+
+        .spinning {
+            height: 300px;
+
+            img {
+                width: 150px;
+            }
+        }
+    }
+}

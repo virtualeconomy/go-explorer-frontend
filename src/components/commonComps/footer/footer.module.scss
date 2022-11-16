@@ -1,0 +1,61 @@
+@import "../../../../styles//abstracts.sass";
+.footer {
+    height: 156px;
+    background-color: #2d323c;
+    color: $WHITE_DEFAULT;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .footer_container {
+        width: $CONTENT_WIDTH;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .link_content {
+            display: flex;
+
+            .link_item {
+                margin-left: 36px;
+                cursor: pointer;
+            }
+        }
+
+        .copy_right {
+            font-family: $EXO_2;
+            font-size: 18px;
+            font-weight: 400;
+            text-align: right;
+
+            .terms {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        height: 5rem;
+
+        .footer_container {
+            flex-direction: column;
+            align-items: center;
+
+            .link_content {
+                margin: 56px 0 66px 0;
+                .logo {
+                    // width: 20px;
+                    // height: 20px;
+                }
+            }
+
+            .copy_right {
+                text-align: center;
+                font-size: 68px;
+            }
+        }
+    }
+}
