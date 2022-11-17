@@ -1,0 +1,32 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Local configuration files
+Makefile.*local
+
+# Test data
+*_test.json
+
+# IDE
+.idea/
+
+# Mac
+.DS_Store
+
+# VS Code
+.vscode
+
+# node
+node_modules
+build
+package-lock.json

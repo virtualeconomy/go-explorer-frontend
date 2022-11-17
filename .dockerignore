@@ -1,0 +1,16 @@
+Dockerfile*
+docker-compose*
+.dockerignore
+.git
+.github
+README.md
+LICENSE
+.vscode
+.DS_Store/
+migrations/
+.gitignore
+dist
+node_modules
+.env.example
+.eslintrc.js
+build
