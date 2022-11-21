@@ -30,3 +30,6 @@ Makefile.*local
 node_modules
 build
 package-lock.json
+
+# typescript
+next-env.d.ts

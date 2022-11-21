@@ -188,6 +188,12 @@ const CommonDataTable = (props: commonTableProps) => {
                             if (item.Collection) {
                                 item.Attributes.Name = item.Collection + ' #' + item.Index
                             }
+                            if (item.Attributes?.Description[0] === '{') {
+                                let url = JSON.parse(item.Attributes?.Description)
+                                if (url.properties) {
+                                    item.Attributes.Name = url.properties?.name
+                                }
+                            }
                             item.key ? item.key = item.key + Math.random() : item.key = (item.Timestamp | item.TimeStamp) + Math.random()
                         })
                         setTableList(result.data)
@@ -249,6 +255,12 @@ const CommonDataTable = (props: commonTableProps) => {
                                 if (item.Collection) {
                                     item.Attributes.Name = item.Collection + ' #' + item.Index
                                 }
+                                if (item.Attributes?.Description[0] === '{') {
+                                    let url = JSON.parse(item.Attributes?.Description)
+                                    if (url.url) {
+                                        item.Attributes.Name = url.properties?.name
+                                    }
+                                }
                                 if (item.slotId || item.slotId === 0) {
                                     item.key = item.slotId + Math.random()
                                 } else if (item.Id) {
@@ -291,6 +303,12 @@ const CommonDataTable = (props: commonTableProps) => {
                                 //Add NFT Name 
                                 if (item.Collection) {
                                     item.Attributes.Name = item.Collection + ' #' + item.Index
+                                }
+                                if (item.Attributes?.Description[0] === '{') {
+                                    let url = JSON.parse(item.Attributes?.Description)
+                                    if (url.url) {
+                                        item.Attributes.Name = url.properties?.name
+                                    }
                                 }
                                 if (item.slotId || item.slotId === 0) {
                                     item.key = item.slotId + Math.random()

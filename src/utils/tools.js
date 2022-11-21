@@ -75,10 +75,50 @@ const byteArrayToString = (str) => {
     return  attachment
 }
 
+//set NFT ipfs IconUrl Name
+const setipfsIconUrlName = (str, index) => {
+    const BuseUrl = [
+        'gateway.ipfs.io',
+        'gateway.pinata.cloud',
+        'gateway.pinata.cloud',
+        'gateway.ipfs.io',
+        'gateway.pinata.cloud',
+        'gateway.pinata.cloud',
+        'gateway.ipfs.io',
+        'gateway.pinata.cloud',
+        'gateway.pinata.cloud',
+        'gateway.ipfs.io',
+        'gateway.pinata.cloud',
+        'gateway.pinata.cloud',
+        'gateway.ipfs.io',
+        'gateway.pinata.cloud',
+        'ipfs.io',
+        'ipfs.io',
+    ]
+    let IconUrl = ''
+    let Name = ''
+    if (str[0] === '{') {
+        let url = JSON.parse(str)
+        if (url.img) {
+            IconUrl = 'https://' + BuseUrl[index % 16] + '/ipfs/' + url.img
+        } else if (url.image) {
+            IconUrl = 'https://' + BuseUrl[index % 16] + '/ipfs/' + url.image
+        } else if (url.ipfs_json_file) {
+            let result = (getNftimg(url.ipfs_json_file)).data?.image
+            IconUrl = result
+        } else if (url.url) {
+            IconUrl = url.url
+            Name = url.properties?.name
+        }
+    }
+    return { IconUrl, Name }
+}
+
 export {
     toThousands,
     formdataify,
     addTypeName,
     cutString,
-    byteArrayToString
+    byteArrayToString,
+    setipfsIconUrlName,
 }

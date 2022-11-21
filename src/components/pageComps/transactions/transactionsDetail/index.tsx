@@ -19,6 +19,9 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                 <Descriptions.Item label='ID'>
                     <span>{props.id}</span>
                 </Descriptions.Item>
+                <Descriptions.Item label='Attachment'>
+                    <span>{props.detailData?.Attachment ? props.detailData?.Attachment : '_'}</span>
+                </Descriptions.Item>
                 <Descriptions.Item label='Time Stamp'>
                     <span>{props.detailData?.TimeStamp / VSYS_TIME ? moment(props.detailData?.TimeStamp / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
                 </Descriptions.Item>
@@ -27,6 +30,35 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                         <a href="">{props.detailData?.BlockHeight}</a>
                     </Link>
                 </Descriptions.Item>
+                {
+                    props.detailData?.TxExplain?.TxType == 'token' ?
+                        <Descriptions.Item label='Explain'>
+                            {
+                                props.detailData?.TxExplain?.TxExtend?.FuncName == 'register' ?
+                                    <div>
+                                        Create token
+                                        <Link replace href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.TokenId } }}>
+                                            <a href="">{props.detailData?.TxExplain?.TxExtend?.TokenId}</a>
+                                        </Link>
+                                        with Max Supply {props.detailData?.TxExplain?.TxExtend?.FuncData?.Max / props.detailData?.TxExplain?.TxExtend?.FuncData?.Unity}
+                                        ,Unity {props.detailData?.TxExplain?.TxExtend?.FuncData?.Unity}
+                                    </div>
+                                    : ''
+                            }
+                        </Descriptions.Item> : props.detailData?.TxExplain?.TxType == 'nft' ?
+                            <Descriptions.Item label='Explain'>
+                                {
+                                    props.detailData?.TxExplain?.TxExtend?.FuncName == 'register' ?
+                                        <div>
+                                            Create NFT conllection
+                                            <Link replace href={{ pathname: '/nft/collection', query: { id: props.detailData?.TxExplain?.TxExtend?.ContractId } }}>
+                                                <a href="">{props.detailData?.TxExplain?.TxExtend?.ContractId}</a>
+                                            </Link>
+                                        </div>
+                                        : ''
+                                }</Descriptions.Item> : ''
+                }
+
                 <Descriptions.Item label='Recipient'>
                     <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.Recipient } }}>
                         <a href="">{props.detailData?.Recipient}</a>

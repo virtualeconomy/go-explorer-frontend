@@ -96,8 +96,14 @@ const Nft = (props: Props) => {
                     if (item.Collection) {
                         item.Attributes.Name = item.Collection + ' #' + item.Index
                     }
+                    if (item.Attributes.Description[0] === '{') {
+                        let url = JSON.parse(item.Attributes?.Description)
+                        if (url?.properties) {
+                            item.Attributes.Name = url.properties?.name
+                        }
+                    }
                 })
-                
+
                 setnftInit(res.data.data.LatestNft)
                 setnftTransactionInit(res.data.data.Transactions)
             } else {

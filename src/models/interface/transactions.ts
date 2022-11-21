@@ -34,6 +34,8 @@ export interface TransactionDetailDataType {
     Amount: number;
     Fee: number;
     Status: string;
+    Attachment: string;
+    TxExplain: any;
 }
 
 //addressDetail table

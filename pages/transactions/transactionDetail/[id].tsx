@@ -21,7 +21,7 @@ const TransactionDetail = (props: Props) => {
             postTransactionDetail(id as string).then(res => {
                 let code = res.data.code
                 if (!code) {
-                    setdetailData(res.data)
+                    setdetailData(res.data.data)
                 }
             }).finally(() => {
                 setspinshow(true)

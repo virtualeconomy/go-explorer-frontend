@@ -7,6 +7,7 @@ import NftOwnershipHistoryDetail from '../../../src/components/pageComps/nft/nft
 import NftregistryTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftregistryColumns } from '../../../src/models/commonData/tableColumns'
 import { getNftDetail, getNftimg, getNftRegister, getNftTransactions } from '../../../src/api'
+import { setipfsIconUrlName } from '../../../src/utils/tools'
 type Props = {}
 
 const NftInfo = (props: Props) => {
@@ -43,23 +44,17 @@ const NftInfo = (props: Props) => {
             getNftDetail(id as string).then(async (res) => {
                 setnftDetailSpin(true)
                 if (res.data.data) {
-                    if (res.data.data.NftDetail?.Attributes?.Description) {
-                        if (res.data.data.NftDetail?.Attributes.Description[0] === '{') {
-                            let url = JSON.parse(res.data.data.NftDetail?.Attributes?.Description)
-                            if (url.img) {
-                                res.data.data.NftDetail.Attributes.IconUrl = 'https://gateway.pinata.cloud/ipfs/' + url.img
-                            } else if (url.image) {
-                                res.data.data.NftDetail.Attributes.IconUrl = 'https://gateway.pinata.cloud/ipfs/' + url.image
-                            } else if (url.ipfs_json_file) {
-                                let result = (await getNftimg(url.ipfs_json_file)).data?.image
-                                res.data.data.NftDetail.Attributes.IconUrl = result
-                            } else if (url.url) {
-                                res.data.data.NftDetail.Attributes.IconUrl = url.url
-                            }
-                        }
-                    }
                     if (res.data.data.NftDetail?.Collection) {
                         res.data.data.NftDetail.Attributes.Name = res.data.data.NftDetail.Collection + ' #' + res.data.data.NftDetail.Index
+                    }
+                    if (res.data.data.NftDetail?.Attributes?.Description) {
+                        let result = setipfsIconUrlName(res.data.data.NftDetail?.Attributes?.Description,1)
+                        if (result.IconUrl) {
+                            res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
+                        }
+                        if (result.Name) {
+                            res.data.data.NftDetail.Attributes.Name = result.Name
+                        }
                     }
                     setnftDetaildata(res.data.data)
                 }

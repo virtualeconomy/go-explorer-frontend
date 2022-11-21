@@ -1,35 +1,34 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Image, Button, Empty } from 'antd'
+import { Image, Button, Empty, message } from 'antd'
 import { nftCard, NftCardProps } from '../../../../../models/interface/nft'
 import styles from '../../collectionsInfo/collectionsInfo.module.scss'
 import { getNftimg } from '../../../../../api'
+import { setipfsIconUrlName } from '../../../../../utils/tools'
 
 const CollectionNfts = (props: NftCardProps) => {
     const router = useRouter()
     const [nftcollectionsdata, setnftcollectionsdata] = useState<Array<nftCard>>([])
+    const [isLoading, setisLoading] = useState(false)
     useEffect(() => {
         if (props.nftsdata) {
             let data = props.nftsdata
             data.map(async (item, index) => {
                 if (item.Attributes?.Description) {
-                    if (item.Attributes.Description[0] === '{') {
-                        let url = JSON.parse(item.Attributes?.Description)
-                        if (url.img) {
-                            item.Attributes.IconUrl = 'https://gateway.pinata.cloud/ipfs/' + url.img
-                        } else if (url.image) {
-                            item.Attributes.IconUrl = 'https://gateway.pinata.cloud/ipfs/' + url.image
-                        } else if (url.ipfs_json_file) {
-                            let result = (await getNftimg(url.ipfs_json_file)).data?.image
-                            item.Attributes.IconUrl = result
-                        } else if (url.url) {
-                            item.Attributes.IconUrl = url.url
-                        }
+                    let result = setipfsIconUrlName(item.Attributes?.Description, index)
+                    if (result.IconUrl) {
+                        item.Attributes.IconUrl = result.IconUrl
+                    }
+                    if (result.Name) {
+                        item.Attributes.Name = result.Name
                     }
                 }
             })
             setnftcollectionsdata(data)
+            setTimeout(() => {
+                setisLoading(false)
+            }, 6000);
         }
 
     }, [props.nftsdata])
@@ -53,7 +52,7 @@ const CollectionNfts = (props: NftCardProps) => {
                         )
                     })}
                 </div>
-                <Button className={styles.more_btn} style={{ display: props.total <= props.nftsdata.length ? 'none' : 'block' }} onClick={() => { props.loadMore() }}>Load More</Button>
+                <Button className={styles.more_btn} style={{ display: props.total <= props.nftsdata.length ? 'none' : 'block' }} onClick={() => { props.loadMore(), setisLoading(true) }} loading={isLoading}>Load More</Button>
             </div>
             <div className={styles.spinning} style={{ display: (!props.spinshow) ? 'flex' : 'none' }}>
                 <Image
