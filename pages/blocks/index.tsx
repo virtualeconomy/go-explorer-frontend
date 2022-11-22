@@ -14,7 +14,7 @@ const Blocks = (props: Props) => {
         const data = (await postindex({ name: 'block' })).data
         setblockInit(data.data)
     }
-    const postData = { page: 1, size: 20 }
+    const postData = { page: 1, size: 20, height: 0 }
     return (
         <div className={styles.page_padding}>
             <BlacksTable

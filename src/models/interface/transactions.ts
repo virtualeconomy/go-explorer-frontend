@@ -3,6 +3,8 @@ export interface postDataType {
     page?: number;
     size?: number;
     num?: number;
+    seqId?:number;
+    blocksHeight?:number;
 }
 
 //get request parameter data type
@@ -36,6 +38,7 @@ export interface TransactionDetailDataType {
     Status: string;
     Attachment: string;
     TxExplain: any;
+    SenderAddress: string
 }
 
 //addressDetail table

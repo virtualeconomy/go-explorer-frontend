@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 const Transactions = () => {
 
-    const postData = { page: 1, size: 20 }
+    const postData = { page: 1, size: 20, seqId: 0 }
     const [transactionInit, settransactionInit] = useState({})
     useEffect(() => {
         getTXPageData()

@@ -28,7 +28,7 @@ const CollectionNfts = (props: NftCardProps) => {
             setnftcollectionsdata(data)
             setTimeout(() => {
                 setisLoading(false)
-            }, 6000);
+            }, 10000);
         }
 
     }, [props.nftsdata])

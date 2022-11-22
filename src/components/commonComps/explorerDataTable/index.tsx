@@ -247,6 +247,14 @@ const CommonDataTable = (props: commonTableProps) => {
                         } else {
                             newLoadData.pageNumber = 1
                         }
+                        if (newLoadData.height == 0 || newLoadData.height) {
+                            newLoadData.height = 0
+
+                        }
+                        if (newLoadData.seqId == 0 || newLoadData.seqId) {
+                            newLoadData.seqId = 0
+
+                        }
                         setLoadData(newLoadData)
                         let result = (await loadTableListFun(newLoadData)).data.data
                         if (result.data) {
@@ -290,6 +298,12 @@ const CommonDataTable = (props: commonTableProps) => {
                         newLoadData.page++
                     } else {
                         newLoadData.pageNumber++
+                    }
+                    if (newLoadData.height == 0 || newLoadData.height) {
+                        newLoadData.height = newTableList[newTableList.length - 1].Height
+                    }
+                    if (newLoadData.seqId == 0 || newLoadData.seqId) {
+                        newLoadData.seqId = newTableList[newTableList.length - 1].SeqId
                     }
                     setLoadData(newLoadData)
                     let result = (await loadTableListFun(newLoadData)).data.data
