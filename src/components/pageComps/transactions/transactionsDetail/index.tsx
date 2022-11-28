@@ -37,125 +37,132 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                             {
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'register' ?
                                     <div>
-                                        Create token 
+                                        Create token &nbsp;
                                         <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId } }}>
                                             <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId}</a>
-                                        </Link>
+                                        </Link>&nbsp;
                                         with Max Supply {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Max / props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Unity}
                                         ,Unity {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Unity}
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'supersede' ?
                                     <div>
-                                        Set issuer to 
+                                        Set issuer to &nbsp;
                                         <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.SenderAddress } }}>
                                             <a href="" style={{margin:0}}>{props.detailData?.SenderAddress}</a>
-                                        </Link>
+                                        </Link>&nbsp;
+                                    </div> :
+                                props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'issue' ?
+                                    <div>
+                                        {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                        ,Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity}&nbsp;token&nbsp;
+                                        <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId } }}>
+                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId}</a>
+                                        </Link>&nbsp;issued
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'destroy' ?
                                     <div>
-                                        token
+                                        token&nbsp;
                                         <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.SenderAddress } }}>
                                             <a href="" style={{margin:0}}>{props.detailData?.SenderAddress}</a>
-                                        </Link> destroyed
+                                        </Link>&nbsp; destroyed
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'transfer' ?
-                                <div>
-                                    transfer token (
-                                    <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
-                                        <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId}</a>
-                                    </Link>)
-                                </div> :
+                                    <div>
+                                        transfer token&nbsp;
+                                        <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                            <a href="" style={{margin:0}}>{'(' +props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
+                                        </Link>&nbsp;
+                                    </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'send' ?
-                                <div style={{lineHeight:"22px",display:'inline-block'}}>
-                                     
-                                    send token <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
-                                        <a href="" style={{margin:0}}>{'('+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
-                                    </Link> {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
-                                        ,with Unity ({props.detailData?.TxExplain?.TxExtend?.Info?.Unity}) <br/>
-                                        from <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
-                                        </Link><br/>  
-                                        to <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
+                                    <div style={{lineHeight:"22px",display:'inline-block'}}>
+                                        send token&nbsp;<Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                            <a href="" style={{margin:0}}>{'('+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
+                                        </Link>&nbsp; {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                            ,with Unity ({props.detailData?.TxExplain?.TxExtend?.Info?.Unity}) <br/>
+                                            from&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
+                                            </Link><br/>  
+                                            to&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
+                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
+                                            </Link>
+                                    </div> :
+                                props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'deposit' ?
+                                    <div style={{lineHeight:"22px",display:'inline-block' }}>
+                                        Deposit token&nbsp; <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                            <a href="" style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
+                                        </Link>&nbsp;{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                            ,with Unity ({props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
+                                            from&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
+                                            </Link><br/>
+                                            to&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress} }}>
+                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress}</a>
+                                            </Link>
+                                    </div> :
+                                props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'withdraw'  ?
+                                   <div style={{lineHeight:"22px",display:'inline-block' }}>
+                                        withdraw token&nbsp;<Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                            <a href="" style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
+                                        </Link>&nbsp;{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                            ,with Unity ({props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
+                                            from&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
+                                            </Link><br/>
+                                            to&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress} }}>
+                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress}</a>
+                                            </Link>
+                                   </div> :
+                                props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'updateList' ?
+                                    <div>
+                                        token action updateList updateAddress:&nbsp;
+                                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.UpdateAddress} }}>
+                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.UpdateAddress}</a>
                                         </Link>
-                                </div> :
-                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'deposit' ?
-                                 <div style={{lineHeight:"22px",display:'inline-block' }}>
-                                     Deposit token <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
-                                         <a href="" style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
-                                     </Link>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
-                                        ,with Unity ({props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
-                                        from <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
-                                        </Link><br/>
-                                        to <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress}</a>
-                                        </Link>
-                                 </div> :
-                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'withdraw'  ?
-                                 <div style={{lineHeight:"22px",display:'inline-block' }}>
-                                     withdraw token <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
-                                         <a href="" style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
-                                     </Link>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
-                                        ,with Unity ({props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
-                                        from <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
-                                        </Link><br/>
-                                        to <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress}</a>
-                                        </Link>
-                                 </div> :
-                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'updateList' ?
-                                 <div>
-                                     token action updateList updateAddress:
-                                    <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.UpdateAddress} }}>
-                                        <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.UpdateAddress}</a>
-                                    </Link>
-                                 </div> :''
+                                    </div> :''
                             }
                         </Descriptions.Item> : props.detailData?.TxExplain?.TxType == 'nft' ?
                         <Descriptions.Item label='Explain'>
                                 {
                                     props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'register' ?
                                         <div>
-                                            Create NFT conllection 
+                                            Create NFT conllection&nbsp; 
                                             <Link href={{ pathname: '/nft/collection', query: { id: props.detailData?.TxExplain?.TxExtend?.Transaction?.ContractId } }}>
                                                 <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.ContractId}</a>
                                             </Link>
                                         </div> :
                                     props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'supersede' ?
                                         <div>
-                                            Set issuer to 
+                                            Set issuer to&nbsp;
                                             <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer } }}>
                                                 <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer}</a>
                                             </Link>
                                         </div> : 
                                     props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'issue' ?
-                                    <div>
-                                        Issuer address (
-                                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer}</a>
-                                        </Link>)
-                                    </div> :
-                                    props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'send' ?
-                                    <div style={{lineHeight:"22px",display:'inline-block'}}>
-                                        send NFT <Link href={{ pathname: '/nft/nftInfo', query: { id: props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId} }}>
-                                            <a href="" style={{margin:0}}>{'('+ props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId+')'}</a>
-                                        </Link><br/>
-                                            from <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
-                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
-                                            </Link><br/>
-                                            to <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
-                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
+                                        <div>
+                                            Issuer address&nbsp;
+                                            <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer} }}>
+                                                <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer}</a>
                                             </Link>
-                                    </div> :
+                                        </div> :
+                                    props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'send' ?
+                                        <div style={{lineHeight:"22px",display:'inline-block'}}>
+                                            send NFT&nbsp;<Link href={{ pathname: '/nft/nftInfo', query: { id: props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId} }}>
+                                                <a href="" style={{margin:0}}>{'('+ props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId+')'}</a>
+                                            </Link><br/>
+                                                from&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                                    <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
+                                                </Link><br/>
+                                                to&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
+                                                    <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
+                                                </Link>
+                                        </div> :
                                     props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'transfer' ?
-                                    <div>
-                                        transfer NFT (
-                                        <Link href={{ pathname: '/nft/nftInfo', query: { id: props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId} }}>
-                                            <a href="" style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId}</a>
-                                        </Link>)
-                                    </div> :''
+                                        <div>
+                                            transfer NFT&nbsp;
+                                            <Link href={{ pathname: '/nft/nftInfo', query: { id: props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId} }}>
+                                                <a href="" style={{margin:0}}>{'('+props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId +')'}</a>
+                                            </Link>
+                                        </div> :''
                                 }
                         </Descriptions.Item> : 
                         <Descriptions.Item label='Recipient'>
