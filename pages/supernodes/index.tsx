@@ -13,7 +13,13 @@ const Supernodes = (props: Props) => {
     }, [])
     const getSupernodePageData = async () => {
         const data = (await postindex({ name: 'superNode' })).data
-        setsupernodeInit(data.data)
+        if (data.data) {
+            setsupernodeInit(data.data)
+        } else {
+            setsupernodeInit({ message: 'no data' })
+        }
+
+
     }
     return (
         <div className={styles.page_padding}>

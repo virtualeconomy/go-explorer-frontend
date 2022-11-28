@@ -14,7 +14,11 @@ const Transactions = () => {
     }, [])
     const getTXPageData = async () => {
         const data = (await postindex({ name: 'transaction' })).data
-        settransactionInit(data.data)
+        if (data.data) {
+            settransactionInit(data.data)
+        } else {
+            settransactionInit({ message: 'no data' })
+        }
     }
 
     return (

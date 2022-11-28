@@ -12,7 +12,11 @@ const Blocks = (props: Props) => {
     }, [])
     const getblcokPageData = async () => {
         const data = (await postindex({ name: 'block' })).data
-        setblockInit(data.data)
+        if (data.data) {
+            setblockInit(data.data)
+        } else {
+            setblockInit({ message: 'no data' })
+        }
     }
     const postData = { page: 1, size: 20, height: 0 }
     return (

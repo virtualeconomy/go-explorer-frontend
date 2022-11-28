@@ -13,7 +13,11 @@ const Token = (props: Props) => {
     }, [])
     const getTokenPageData = async () => {
         const data = (await postindex({ name: 'token' })).data
-        settokenInit(data.data)
+        if (data.data) {
+            settokenInit(data.data)
+        } else {
+            settokenInit({ message: 'no data' })
+        }
     }
 
     return (
