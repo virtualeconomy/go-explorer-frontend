@@ -20,12 +20,12 @@ const OwnershiphistoryDetail = (props: NftOwnershiphistoryProps) => {
                                 <Descriptions key={item.Id + index} column={1} className={styles.ownership_history_detail} style={{ display: (props.spinshow) ? 'block' : 'none', borderBottom: '.5px solid' }}>
                                     <Descriptions.Item label='Owner' style={{ border: 'none' }}>
                                         <Link href={{ pathname: '/transactions/addressDetail', query: { address: item.FuncRecipient ? item.FuncRecipient : item.FuncData.Issuer } }}>
-                                            <a href="">{item.FuncRecipient ? item.FuncRecipient : item.FuncData.Issuer}</a>
+                                            <a  >{item.FuncRecipient ? item.FuncRecipient : item.FuncData.Issuer}</a>
                                         </Link>
                                     </Descriptions.Item>
                                     <Descriptions.Item label='Transactions hash' style={{ border: 'none' }}>
                                         <Link href={'/transactions/transactionDetail/' + item.Id}>
-                                            <a href="">{item.Id}</a>
+                                            <a  >{item.Id}</a>
                                         </Link>
                                     </Descriptions.Item>
                                     <Descriptions.Item label='Transfer Date' style={{ border: 'none' }}>

@@ -25,12 +25,12 @@ const TokenInfoDetail = (props: TokenInfoDetailProps) => {
                     </Descriptions.Item>
                     <Descriptions.Item label='Issuer'>
                         <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.Issuer } }}>
-                            <a href="">{props.detailData?.Issuer}</a>
+                            <a  >{props.detailData?.Issuer}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Maker'>
                         <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.Maker } }}>
-                            <a href="">{props.detailData?.Maker}</a>
+                            <a  >{props.detailData?.Maker}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Unity'>

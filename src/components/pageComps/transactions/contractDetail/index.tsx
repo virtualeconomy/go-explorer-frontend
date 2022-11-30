@@ -20,7 +20,7 @@ const ContractDetail = (props: ContractDetailProps) => {
                 </Descriptions.Item>
                 <Descriptions.Item label='Creator Address'>
                     <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.creatorAddress } }}>
-                        <a href="">{props.detailData?.creatorAddress}</a>
+                        <a  >{props.detailData?.creatorAddress}</a>
                     </Link>
                 </Descriptions.Item>
                 <Descriptions.Item label='Time Stamp'>
@@ -28,7 +28,7 @@ const ContractDetail = (props: ContractDetailProps) => {
                 </Descriptions.Item>
                 <Descriptions.Item label='Transaction'>
                     <Link href={{ pathname: '/transactions/transactionDetail/' + props.detailData?.transactionId }}>
-                        <a href="">{props.detailData?.transactionId}</a>
+                        <a  >{props.detailData?.transactionId}</a>
                     </Link>
                 </Descriptions.Item>
                 <Descriptions.Item label='Function'>

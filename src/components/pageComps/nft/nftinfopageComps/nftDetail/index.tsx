@@ -22,7 +22,7 @@ const NftInfoDetail = (props: NftDeailProps) => {
                     </Descriptions.Item>
                     <Descriptions.Item label='Creation transaction'>
                         <Link href={'/transactions/transactionDetail/' + props.detailData?.NftDetail.Id}>
-                            <a href="">{props.detailData?.NftDetail.Id}</a>
+                            <a  >{props.detailData?.NftDetail.Id}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Creation Block'>
@@ -34,13 +34,13 @@ const NftInfoDetail = (props: NftDeailProps) => {
                         <span>{props.detailData?.NftDetail.RegisterTime / VSYS_TIME ? moment(props.detailData?.NftDetail.RegisterTime / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Creator'>
-                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.NftDetail.Id } }}>
-                            <a href="">{props.detailData?.NftDetail.Attributes.Creator}</a>
+                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.NftDetail.Attributes.Creator } }}>
+                            <a  >{props.detailData?.NftDetail.Attributes.Creator}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Current Owner'>
-                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.NftDetail.Id } }}>
-                            <a href="">{props.detailData?.NftDetail.CurrentOwner}</a>
+                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.NftDetail.CurrentOwner } }}>
+                            <a  >{props.detailData?.NftDetail.CurrentOwner}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Collection'>
