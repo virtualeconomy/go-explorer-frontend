@@ -97,6 +97,16 @@ git pull  // pull the lastest code from Github
 npm run build 
 ```
 
+### build from docker
+```bash
+# Write env in ~/.bashrc or /etc/profile
+VEBACKEND_DEPLOYMODE = "build" #or "build-test"
+
+# url example: "x.x.x.x:xx"
+MAIN_BACKEND = "<your main-backend-url>"
+TEST_BACKEND = "<your test-backend-url>"
+```
+
 ### Website Url
 
 [Test Site](http://devexplorer.v.systems)
