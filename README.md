@@ -105,6 +105,18 @@ export VEBACKEND_DEPLOYMODE="build" #or "build-test"
 # url example: "x.x.x.x:xx"
 export MAIN_BACKEND="<your main-backend-url>"
 export TEST_BACKEND="<your test-backend-url>"
+
+# docker build
+docker build \
+--platform=linux/amd64 \
+-t <your username>/vsys-explorer:frontend \
+--build-arg deploy_mode=$VEFRONTEND_DEPLOYMODE \
+--build-arg main_backend=$VEFRONTEND_MAINBACKEND \
+--build-arg test_backend=$VEFRONTEND_TESTBACKEND \
+-f Dockerfile .
+
+# docker run
+docker run -d -p 3000:3000 --name vsys-explorer-frontend <your username>/vsys-explorer:frontend
 ```
 
 ### Website Url
