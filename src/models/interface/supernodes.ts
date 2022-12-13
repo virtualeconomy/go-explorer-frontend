@@ -17,9 +17,10 @@ export interface postsupernodeDetail {
 //supernode List Request parameter types
 export interface postsupernodeDetailList {
     address?: string;
-    pageNumber?: number;
-    pageSize?: number;
-    reqName?: string
+    page?: number;
+    size?: number;
+    reqName?: string;
+    seqId?:number;
 }
 
 //supernodeDetail

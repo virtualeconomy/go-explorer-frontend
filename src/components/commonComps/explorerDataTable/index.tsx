@@ -355,6 +355,9 @@ const CommonDataTable = (props: commonTableProps) => {
                     let newLoadData = JSON.parse(JSON.stringify(postData))
                     setIsRefresh(true)
                     newLoadData.page = 1
+                    if (newLoadData.seqId == 0 || newLoadData.seqId) {
+                        newLoadData.seqId = 0
+                    }
                     if (tableType === 'doubletransactionsTable') {
                         setLoadData(newLoadData)
                         let result = (await loadTableListFun(props.addressID, newLoadData)).data.data
@@ -399,6 +402,9 @@ const CommonDataTable = (props: commonTableProps) => {
                     if (loadType === 'loadone') {
                         let newTableList = JSON.parse(JSON.stringify(tableList))
                         let newLoadData = JSON.parse(JSON.stringify(loadData))
+                        if (newLoadData.seqId == 0 || newLoadData.seqId) {
+                            newLoadData.seqId = newTableList[newTableList.length - 1].SeqId
+                        }
                         newLoadData.page++
                         setLoadData(newLoadData)
                         if (tableType === 'doubletransactionsTable') {

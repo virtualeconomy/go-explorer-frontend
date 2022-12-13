@@ -14,7 +14,7 @@ import { txColumns, TokenRecordscolumns, tokenInfocolumns } from '../../../src/m
 type Props = {
 
 };
-const postData = { page: 1, size: 10 }
+const postData = { page: 1, size: 10, seqId: 0 }
 const TransactionAddressDetail = (props: Props) => {
     const router = useRouter()
     var { address } = router.query

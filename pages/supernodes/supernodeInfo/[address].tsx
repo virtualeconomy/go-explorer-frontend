@@ -27,11 +27,11 @@ const SupernodeInfo = (props: Props) => {
         NodeAddress: ''
     })
     const [spinshow, setspinshow] = useState(true)
-    const [postData, setpostData] = useState<postsupernodeDetailList>({ address: address as string, pageNumber: 1, pageSize: 10, reqName: "transactions" })
+    const [postData, setpostData] = useState<postsupernodeDetailList>({ address: address as string, page: 1, size: 10, reqName: "transactions", seqId: 0 })
     useEffect(() => {
         if (address) {
             setspinshow(false)
-            setpostData({ address: address as string, pageNumber: 1, pageSize: 10, reqName: "transactions" })
+            setpostData({ address: address as string, page: 1, size: 10, reqName: "transactions", seqId: 0 })
             postSupernodeDetail({ address: address as string, pastTime: 1440, reqName: "info" }).then((res: any) => {
                 setdetailData(res.data)
             }).finally(() => {
