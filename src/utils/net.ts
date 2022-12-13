@@ -3,7 +3,6 @@ import axios from 'axios'
   // request intercept for API
 axios.interceptors.request.use(
   config => {
-    config.baseURL = process.env.BASE_API_URL
     return config;
   },
   error => {

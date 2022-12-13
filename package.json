@@ -8,6 +8,8 @@
     "build": "DEPLOY_MODE=prod next build",
     "build-test": "DEPLOY_MODE=test next build",
     "start": "next start -p $PORT",
+    "start-dev:node": "DEPLOY_MODE=test NODE_ENV=production node server.js",
+    "start-prod:node": "DEPLOY_MODE=prod NODE_ENV=production node server.js",
     "lint": "next lint",
     "export": "next export"
   },
