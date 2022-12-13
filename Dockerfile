@@ -13,4 +13,7 @@ COPY package.json /app
 COPY . /app
 RUN npm install
 RUN npm run build
+# start production version
 CMD ["npm", "start-prod:node"]
+# start dev version
+# CMD ["npm", "start-dev:node"]
