@@ -110,9 +110,7 @@ export VEFRONTEND_TESTBACKEND="<your test-backend-url>"
 docker build \
 --platform=linux/amd64 \
 -t <your username>/vsys-explorer:frontend \
---build-arg deploy_mode=$VEFRONTEND_DEPLOYMODE \
---build-arg main_backend=$VEFRONTEND_MAINBACKEND \
---build-arg test_backend=$VEFRONTEND_TESTBACKEND \
+--build-arg deploy_mode=$DEPLOY_MODE \
 -f Dockerfile .
 
 # docker run
