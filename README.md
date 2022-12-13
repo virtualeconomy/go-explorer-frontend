@@ -100,11 +100,8 @@ npm run build
 ### build from docker
 ```bash
 # Write env in ~/.bashrc or /etc/profile
-export VEFRONTEND_DEPLOYMODE="build" #or "build-test"
+export DEPLOY_MODE="prod" #or "build-test"
 
-# url example: "x.x.x.x:xx"
-export VEFRONTEND_MAINBACKEND="<your main-backend-url>"
-export VEFRONTEND_TESTBACKEND="<your test-backend-url>"
 
 # docker build
 docker build \
