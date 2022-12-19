@@ -3,6 +3,10 @@ FROM node:18-alpine
 # Pass environment variables to image
 ARG deploy_mode
 ENV DEPLOY_MODE=$deploy_mode
+ARG main_backend
+ENV MAIN_BACKEND=$main_backend
+ARG test_backend
+ENV TEST_BACKEND=$test_backend
 
 ENV PORT=3000
 EXPOSE 3000
