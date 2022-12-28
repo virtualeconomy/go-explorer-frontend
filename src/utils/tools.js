@@ -64,15 +64,15 @@ const cutString = (str, len) => {
 
 //convert attachment 
 const byteArrayToString = (str) => {
-    let  attachment = ""
-    try{
+    let attachment = ""
+    try {
         const bytes = base58.decode(str)
         attachment = decodeURIComponent(escape(String.fromCharCode.apply(null, bytes)))
-    }catch{
+    } catch{
         attachment = "-"
     }
 
-    return  attachment
+    return attachment
 }
 
 //set NFT ipfs IconUrl Name
@@ -103,6 +103,8 @@ const setipfsIconUrlName = (str, index) => {
             IconUrl = 'https://' + BuseUrl[index % 16] + '/ipfs/' + url.img
         } else if (url.image) {
             IconUrl = 'https://' + BuseUrl[index % 16] + '/ipfs/' + url.image
+        } else if (url.content) {
+            IconUrl = 'https://' + BuseUrl[index % 16] + '/ipfs/' + url.content
         } else if (url.ipfs_json_file) {
             let result = (getNftimg(url.ipfs_json_file)).data?.image
             IconUrl = result
