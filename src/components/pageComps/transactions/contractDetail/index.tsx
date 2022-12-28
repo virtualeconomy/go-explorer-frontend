@@ -32,6 +32,7 @@ const ContractDetail = (props: ContractDetailProps) => {
                     </Link>
                 </Descriptions.Item>
                 <Descriptions.Item label='Function'>
+                <div style={{lineHeight:"22px"}}>
                     {
                         props.detailData?.funcList?.map((item) => {
                             return <div key={item.index + item.Name}>{item.Name}({item.Args?.map((i: any, index: number) => {
@@ -39,6 +40,7 @@ const ContractDetail = (props: ContractDetailProps) => {
                             })})</div>
                         })
                     }
+                </div>
                 </Descriptions.Item>
             </Descriptions>
             <div className={styles.spinning} style={{ display: (!props.spinshow) ? 'flex' : 'none' }}>
