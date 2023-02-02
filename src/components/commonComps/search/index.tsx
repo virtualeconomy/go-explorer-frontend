@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input, Button, Image, message } from 'antd';
 import styles from './search.module.scss'
 import { getSearch } from '../../../api/index'
@@ -12,18 +12,25 @@ const Search = (props: Props) => {
     function updataKey(e: Event & { target: HTMLInputElement }) {
         setKey(e.target?.value)
     }
-    function submit() {
-        if (key != '') {
-            getSearch(key).then(res => {
+
+    function submit(val?: any) {
+        const serachVal = key || val
+        if (serachVal != '') {
+            getSearch(serachVal).then(res => {
+                setKey('')
+                if (res.data.error) {
+                    message.error(res.data.error)
+                    return
+                }
                 let url = ''
                 switch (res.data.type) {
-                    case 'transaction': url = '/transactions/transactionDetail/' + key; break;
-                    case 'address': url = '/transactions/addressDetail?address=' + key; break;
-                    case 'token': url = '/token/tokenInfo?Id=' + key; break;
-                    case "block": url = '/blocks/detail/' + key; break;
-                    case "nft": url = '/nft/nftInfo?id=' + key; break;
-                    case "nft_contract": url = '/nft/collection?id=' + key; break;
-                    case "contract": url = '/transactions/addressDetail?address=' + key; break;
+                    case 'transaction': url = '/transactions/transactionDetail/' + serachVal; break;
+                    case 'address': url = '/transactions/addressDetail?address=' + serachVal; break;
+                    case 'token': url = '/token/tokenInfo?Id=' + serachVal; break;
+                    case "block": url = '/blocks/detail/' + serachVal; break;
+                    case "nft": url = '/nft/nftInfo?id=' + serachVal; break;
+                    case "nft_contract": url = '/nft/collection?id=' + serachVal; break;
+                    case "contract": url = '/transactions/addressDetail?address=' + serachVal; break;
                     default: false;
                 }
                 router.push(url)
@@ -33,6 +40,13 @@ const Search = (props: Props) => {
             })
         }
     }
+
+    useEffect(() => {
+        if (router.query.searchKey) {
+            submit(router.query.searchKey)
+        }
+    }, [router.query.searchKey])
+
     return (
         <div className={styles.searchall}>
             <div className={styles.search}>
