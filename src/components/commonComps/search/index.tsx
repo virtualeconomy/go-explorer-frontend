@@ -14,7 +14,10 @@ const Search = (props: Props) => {
     }
 
     function submit(val?: any) {
-        const serachVal = key || val
+        let serachVal = key
+        if (typeof (val) === 'string') {
+            serachVal = val
+        }
         if (serachVal != '') {
             getSearch(serachVal).then(res => {
                 setKey('')
