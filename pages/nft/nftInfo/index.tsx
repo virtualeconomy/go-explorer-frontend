@@ -46,8 +46,10 @@ const NftInfo = (props: Props) => {
                 if (res.data.data) {
                     if (res.data.data.NftDetail?.Collection) {
                         res.data.data.NftDetail.Attributes.Name = res.data.data.NftDetail.Collection + ' #' + res.data.data.NftDetail.Index
-                    }else{
+                    }else if(res.data.data.NftDetail.Attributes.Description[0]=='{'){
                         res.data.data.NftDetail.Attributes.Name = JSON.parse(res.data.data.NftDetail.Attributes.Description).name + ' #' + res.data.data.NftDetail.Index
+                    }else{
+                        res.data.data.NftDetail.Attributes.Name = '#' + res.data.data.NftDetail.Index
                     }
                     
                     if (res.data.data.NftDetail?.Attributes?.Description) {

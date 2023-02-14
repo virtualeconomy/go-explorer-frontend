@@ -96,11 +96,15 @@ const Nft = (props: Props) => {
                     if (item.Collection) {
                         item.Attributes.Name = item.Collection + ' #' + item.Index
                     }
-                    if (item.Attributes.Description[0] === '{') {
+                    else if (item.Attributes.Description[0] === '{') {
                         let url = JSON.parse(item.Attributes?.Description)
                         if (url?.properties) {
                             item.Attributes.Name = url.properties?.name
+                        } else if (url?.name) {
+                            item.Attributes.Name = url.name + ' #' + item.Index
                         }
+                    } else {
+                        item.Attributes.Name = ' #' + item.Index
                     }
                 })
 

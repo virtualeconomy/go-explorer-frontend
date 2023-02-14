@@ -35,7 +35,16 @@ const NftCollection = (props: Props) => {
                 if (res.data.data.data) {
                     //Add NFT Name in NftCord component
                     res.data.data.data.map((item: any, index: number) => {
-                        if (item.Collection) {
+                        if (item.Attributes.Description[0] == '{') {
+                            let url = JSON.parse(item.Attributes?.Description)
+                            if (url?.properties) {
+                                item.Attributes.Name = url.properties?.name
+                            } else if (url?.name) {
+                                item.Attributes.Name = url.name + '#' + item.Index
+                            }
+                        } else if (item.Collection) {
+                            item.Attributes.Name = item.Collection + '#' + item.Index
+                        } else {
                             item.Attributes.Name = '#' + item.Index
                         }
                     })
@@ -54,7 +63,16 @@ const NftCollection = (props: Props) => {
             if (res.data.data.data.length) {
                 //Add NFT Name in NftCord component
                 res.data.data.data.map((item: any, index: number) => {
-                    if (item.Collection) {
+                    if (item.Attributes.Description[0] == '{') {
+                        let url = JSON.parse(item.Attributes?.Description)
+                        if (url?.properties) {
+                            item.Attributes.Name = url.properties?.name
+                        } else if (url?.name) {
+                            item.Attributes.Name = url.name + '#' + item.Index
+                        }
+                    } else if (item.Collection) {
+                        item.Attributes.Name = '#' + item.Index
+                    } else {
                         item.Attributes.Name = '#' + item.Index
                     }
                 })
