@@ -19,9 +19,13 @@ const NftCollection = (props: Props) => {
     const [nftCordget, setnftCordget] = useState<nftCordget>({ contractId: '', page: 1, size: 16 })
     const [nftTableget, setnftTableget] = useState<nftCordget>({ contractId: '', page: 1, size: 10 })
     const [spinshow, setspinshow] = useState(false)
+    const [collectionName, setCollectionName] = useState('')
     const [nftCordTotal, setnftCordTotal] = useState(0)
     const { id, Name } = router.query
     useEffect(() => {
+        if (Name) {
+            setCollectionName(Name)
+        }
         if (id) {
             setnftCordget({ contractId: id as string, page: 1, size: 16 })
             setnftTableget({ contractId: id as string, page: 1, size: 10 })
@@ -39,11 +43,14 @@ const NftCollection = (props: Props) => {
                             let url = JSON.parse(item.Attributes?.Description)
                             if (url?.properties) {
                                 item.Attributes.Name = url.properties?.name
+                                setCollectionName(url.properties?.name)
                             } else if (url?.name) {
                                 item.Attributes.Name = url.name + '#' + item.Index
+                                setCollectionName(url.name)
                             }
                         } else if (item.Collection) {
                             item.Attributes.Name = item.Collection + '#' + item.Index
+                            setCollectionName(item.Collection)
                         } else {
                             item.Attributes.Name = '#' + item.Index
                         }
@@ -67,11 +74,14 @@ const NftCollection = (props: Props) => {
                         let url = JSON.parse(item.Attributes?.Description)
                         if (url?.properties) {
                             item.Attributes.Name = url.properties?.name
+                            setCollectionName(url.properties?.name)
                         } else if (url?.name) {
                             item.Attributes.Name = url.name + '#' + item.Index
+                            setCollectionName(url.name)
                         }
                     } else if (item.Collection) {
                         item.Attributes.Name = '#' + item.Index
+                        setCollectionName(item.Collection)
                     } else {
                         item.Attributes.Name = '#' + item.Index
                     }
@@ -83,7 +93,7 @@ const NftCollection = (props: Props) => {
     }
     return (
         <div className={style.collection}>
-            <h1 className={style.title}>Collections - {Name}</h1>
+            <h1 className={style.title}>Collections - {collectionName}</h1>
             <CollectionsGeneral generalData={nftGeneraldata} />
             <NftCord nftsdata={nftCorddata} loadMore={loadCord} spinshow={spinshow} total={nftCordTotal} />
             <NftsTable
