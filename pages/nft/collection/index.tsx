@@ -43,14 +43,14 @@ const NftCollection = (props: Props) => {
                                 item.Attributes.Name = url.properties?.name
                                 setCollectionName(url.properties?.name)
                             } else if (url?.name) {
-                                item.Attributes.Name = url.name + '#' + item.Index
+                                item.Attributes.Name = url.name + ' #' + item.Index
                                 setCollectionName(url.name)
                             }
                         } else if (item.Collection) {
-                            item.Attributes.Name = item.Collection + '#' + item.Index
+                            item.Attributes.Name = item.Collection + ' #' + item.Index
                             setCollectionName(item.Collection)
                         } else {
-                            item.Attributes.Name = '#' + item.Index
+                            item.Attributes.Name = ' #' + item.Index
                         }
                     })
                     setnftCorddata(res.data.data.data)
@@ -74,14 +74,14 @@ const NftCollection = (props: Props) => {
                             item.Attributes.Name = url.properties?.name
                             setCollectionName(url.properties?.name)
                         } else if (url?.name) {
-                            item.Attributes.Name = url.name + '#' + item.Index
+                            item.Attributes.Name = url.name + ' #' + item.Index
                             setCollectionName(url.name)
                         }
                     } else if (item.Collection) {
-                        item.Attributes.Name = '#' + item.Index
+                        item.Attributes.Name = ' #' + item.Index
                         setCollectionName(item.Collection)
                     } else {
-                        item.Attributes.Name = '#' + item.Index
+                        item.Attributes.Name = ' #' + item.Index
                     }
                 })
                 setnftCorddata([...nftCorddata, ...res.data.data.data])

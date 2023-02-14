@@ -182,7 +182,7 @@ const CommonDataTable = (props: commonTableProps) => {
                 if (!isRefresh) {
                     if (tableType === 'briefTable') {
                         setIsRefresh(true)
-                        let result = (await loadTableListFun()).data.data
+                        let result = (await loadTableListFun()).data.data                        
                         result.data.map((item: any) => {
                             //Add NFT Name 
                             if (item.Collection) {
@@ -192,6 +192,8 @@ const CommonDataTable = (props: commonTableProps) => {
                                 let url = JSON.parse(item.Attributes?.Description)
                                 if (url.properties) {
                                     item.Attributes.Name = url.properties?.name
+                                }else if (url?.name) {
+                                    item.Attributes.Name = url.name + ' #' + item.Index
                                 }
                             }
                             item.key ? item.key = item.key + Math.random() : item.key = (item.Timestamp | item.TimeStamp) + Math.random()
@@ -267,6 +269,8 @@ const CommonDataTable = (props: commonTableProps) => {
                                     let url = JSON.parse(item.Attributes?.Description)
                                     if (url.url) {
                                         item.Attributes.Name = url.properties?.name
+                                    } else if (url?.name) {
+                                        item.Attributes.Name = url.name + ' #' + item.Index
                                     }
                                 }
                                 if (item.slotId || item.slotId === 0) {
