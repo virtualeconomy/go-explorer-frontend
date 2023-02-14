@@ -19,13 +19,11 @@ const NftCollection = (props: Props) => {
     const [nftCordget, setnftCordget] = useState<nftCordget>({ contractId: '', page: 1, size: 16 })
     const [nftTableget, setnftTableget] = useState<nftCordget>({ contractId: '', page: 1, size: 10 })
     const [spinshow, setspinshow] = useState(false)
-    const [collectionName, setCollectionName] = useState('')
+    const [collectionName, setCollectionName] = useState<any>('')
     const [nftCordTotal, setnftCordTotal] = useState(0)
     const { id, Name } = router.query
     useEffect(() => {
-        if (Name) {
-            setCollectionName(Name)
-        }
+        setCollectionName(Name ? Name : '')
         if (id) {
             setnftCordget({ contractId: id as string, page: 1, size: 16 })
             setnftTableget({ contractId: id as string, page: 1, size: 10 })
