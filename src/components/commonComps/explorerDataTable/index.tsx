@@ -182,7 +182,7 @@ const CommonDataTable = (props: commonTableProps) => {
                 if (!isRefresh) {
                     if (tableType === 'briefTable') {
                         setIsRefresh(true)
-                        let result = (await loadTableListFun()).data.data                        
+                        let result = (await loadTableListFun()).data.data
                         result.data.map((item: any) => {
                             //Add NFT Name 
                             if (item.Collection) {
@@ -192,7 +192,7 @@ const CommonDataTable = (props: commonTableProps) => {
                                 let url = JSON.parse(item.Attributes?.Description)
                                 if (url.properties) {
                                     item.Attributes.Name = url.properties?.name
-                                }else if (url?.name) {
+                                } else if (url?.name) {
                                     item.Attributes.Name = url.name + ' #' + item.Index
                                 }
                             }
@@ -261,16 +261,24 @@ const CommonDataTable = (props: commonTableProps) => {
                         let result = (await loadTableListFun(newLoadData)).data.data
                         if (result.data) {
                             result.data.map((item: any) => {
-                                //Add NFT Name 
-                                if (item.Collection) {
-                                    item.Attributes.Name = item.Collection + ' #' + item.Index
-                                }
-                                if (item.Attributes?.Description[0] === '{') {
-                                    let url = JSON.parse(item.Attributes?.Description)
-                                    if (url.url) {
-                                        item.Attributes.Name = url.properties?.name
-                                    } else if (url?.name) {
-                                        item.Attributes.Name = url.name + ' #' + item.Index
+                                if (item.Attributes) {
+                                    //Add NFT Name
+                                    if (tableType === 'nfts') {
+                                        // in the nfts page
+                                        if (item.Collection) {
+                                            item.Attributes.Name = item.Collection + ' #' + item.Index
+                                        }
+                                        if (item.Attributes?.Description[0] === '{') {
+                                            let url = JSON.parse(item.Attributes?.Description)
+                                            if (url.url) {
+                                                item.Attributes.Name = url.properties?.name
+                                            } else if (url?.name) {
+                                                item.Attributes.Name = url.name + ' #' + item.Index
+                                            }
+                                        }
+                                    } else {
+                                        // in the collection page
+                                        item.Attributes.Name = ' #' + item.Index
                                     }
                                 }
                                 if (item.slotId || item.slotId === 0) {
@@ -318,14 +326,22 @@ const CommonDataTable = (props: commonTableProps) => {
                             })
                         } else {
                             result.data.map((item: any) => {
-                                //Add NFT Name 
-                                if (item.Collection) {
-                                    item.Attributes.Name = item.Collection + ' #' + item.Index
-                                }
-                                if (item.Attributes?.Description[0] === '{') {
-                                    let url = JSON.parse(item.Attributes?.Description)
-                                    if (url.url) {
-                                        item.Attributes.Name = url.properties?.name
+                                if (item.Attributes) {
+                                    //Add NFT Name 
+                                    if (tableType === 'nfts') {
+                                        // in the nfts page
+                                        if (item.Collection) {
+                                            item.Attributes.Name = item.Collection + ' #' + item.Index
+                                        }
+                                        if (item.Attributes?.Description[0] === '{') {
+                                            let url = JSON.parse(item.Attributes?.Description)
+                                            if (url.url) {
+                                                item.Attributes.Name = url.properties?.name
+                                            }
+                                        }
+                                    } else {
+                                        // in the collection page
+                                        item.Attributes.Name = ' #' + item.Index
                                     }
                                 }
                                 if (item.slotId || item.slotId === 0) {

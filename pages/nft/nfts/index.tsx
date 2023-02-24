@@ -16,6 +16,7 @@ const Nfts = (props: Props) => {
                 postData={postData}
                 initalPostData={postData}
                 loadTableListFun={getLeastNft}
+                tableType='nfts'
             />
         </div>
     )
