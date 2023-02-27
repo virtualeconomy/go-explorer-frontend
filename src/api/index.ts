@@ -45,7 +45,7 @@ const postSupernodeDetail = (data: object) => http.post('/api/v1/superNodes/deta
 //NftHome
 const getNftGeneralInfo = () => http.get('/api/v1/nft/all/generalInfo')
 const getNftCollections = (data?: object) => http.get('/api/v1/nft/all/collections', { params: data })
-const getMostUsedNft = (data?: object) => http.get('/api/v1/nft/all/popular', { params: data })
+const getMostUsedNft = (data?: object) => http.get('/api/v1/nft/all/popular/lastMonth', { params: data })
 const getMostChangedNft = (data?: object) => http.get('/api/v1/nft/all/changedOwners', { params: data })
 const getNftAllTransaction = (data: object) => http.get('/api/v1/nft/all/transactions', { params: data })
 const getLeastNft = (data: object) => http.get('/api/v1/nft/all/latestNft', { params: data })

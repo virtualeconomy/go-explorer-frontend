@@ -199,6 +199,18 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                 }
                 {
                     props.detailData?.TxExplain?.TxType == 'tx'?
+                    <Descriptions.Item label='Sender'>
+                        {
+                            props.detailData?.SenderAddress?
+                            <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.SenderAddress } }}>
+                                <a>{props.detailData?.SenderAddress}</a>
+                            </Link>:'-'
+                        }
+                    </Descriptions.Item>:''
+                }
+
+                {
+                    props.detailData?.TxExplain?.TxType == 'tx'?
                     <Descriptions.Item label='Amount'>
                         <span>{(props.detailData?.Amount as number / VSYS_PRECISION).toString()} VSYS</span>
                     </Descriptions.Item>:''
