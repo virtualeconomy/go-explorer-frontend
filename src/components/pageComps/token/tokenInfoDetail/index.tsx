@@ -11,7 +11,7 @@ const TokenInfoDetail = (props: TokenInfoDetailProps) => {
         <div className={styles.table}>
             <div className={styles.tableDetail}>
                 <Descriptions title={props.detailData?.Symbol ? props.detailData?.Symbol : '***'} column={1} style={{ display: (props.spinshow) ? 'block' : 'none' }} >
-                    <Descriptions.Item className={styles.icon}> <Image preview={false} src={props.detailData?.IconUrl} fallback='/Group.svg' alt={''} /> </Descriptions.Item>
+                    <Descriptions.Item className={styles.icon}> <Image preview={false} src={props.detailData.IconUrl ? props.detailData.IconUrl : '/Group.svg'} fallback='/Group.svg' alt={''} /> </Descriptions.Item>
                     <Descriptions.Item className={styles.subtitle}>{props.detailData?.TokenId}</Descriptions.Item>
                     <Descriptions.Item className={styles.icon_media} style={{ border: 'none' }}> <Image preview={false} src={props.detailData?.IconUrl} fallback='/Group.svg' alt={''} /> </Descriptions.Item>
                     <Descriptions.Item label='Max Supply' style={{ border: 'none' }}>
