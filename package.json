@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "DEPLOY_MODE=dev node server.js",
+    "dev-test": "DEPLOY_MODE=test node server.js",
     "dev-prod": "DEPLOY_MODE=prod node server.js",
     "build": "DEPLOY_MODE=prod next build",
     "build-test": "DEPLOY_MODE=test next build",
+    "build-dev": "DEPLOY_MODE=dev next build",
     "start": "next start -p $PORT",
     "lint": "next lint",
     "export": "next export"

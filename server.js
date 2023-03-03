@@ -2,7 +2,7 @@ const express = require('express')
 const next = require('next')
 const {createProxyMiddleware } = require('http-proxy-middleware')
 
-const baseUrl = process.env.DEPLOY_MODE === 'prod' ? 'http://39.98.109.219:9080/api' : 'http://157.230.241.14:9080/api'  // 192.168.1.10:9080 local url for testing
+const baseUrl = process.env.DEPLOY_MODE === 'prod' ? 'http://39.98.109.219:9080/api' : process.env.DEPLOY_MODE === 'test' ? 'http://157.230.241.14:9080/api' : 'http://157.230.241.14:9081/api'  // 192.168.1.10:9080 local url for testing
 const devProxy = {
     '/api': {
         target: baseUrl,

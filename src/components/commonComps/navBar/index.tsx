@@ -32,7 +32,9 @@ const menuItems: MenuProps['items'] = [
         key: 'nft',
     }
 ];
-const isTest = process.env.DEPLOY_MODE !== 'prod'
+const isProd = process.env.DEPLOY_MODE == 'prod'
+const isTest = process.env.DEPLOY_MODE == 'test'
+const isDev = process.env.DEPLOY_MODE == 'dev'
 const selectOptions = { color: '#FF8232', border: '1px solid #FF8232', width: '100%', height: '40px', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: 400, cursor: 'pointer', marginTop: '16px' }
 
 const NavBar = (props: Props) => {
@@ -60,29 +62,39 @@ const NavBar = (props: Props) => {
 
     const styleOpt = (type: string) => {
         let style = JSON.parse(JSON.stringify(selectOptions))
+
         if (type === 'mainnet') {
-            style.color = isTest ? '#EEEEEE' : '#FF8232'
-            style.border = isTest ? '1px solid #EEEEEE' : '1px solid #FF8232'
-        } else {
+            style.color = isProd ? '#FF8232' : '#EEEEEE'
+            style.border = isProd ? '1px solid #FF8232' : '1px solid #EEEEEE'
+        } else if (type === 'testnet') {
             style.color = isTest ? '#FF8232' : '#EEEEEE'
             style.border = isTest ? '1px solid #FF8232' : '1px solid #EEEEEE'
+        } else if (type === 'devnet' && isDev) {
+            style.color = isDev ? '#FF8232' : '#EEEEEE'
+            style.border = isDev ? '1px solid #FF8232' : '1px solid #EEEEEE'
         }
         return style
     }
 
     const switchNetwork = (type: string) => {
-        //We can remove this code if deploy the production site in the future.
-        // if (type === 'mainnet') {
-        //     message.info({
-        //         content: 'Sorry! Currently we just support DEV site.'
-        //     })
-        //     return
-        // }
-        if (process.env.NODE_ENV === 'development' && type === 'testnet') {
-            jumpPage()
+        if (process.env.NODE_ENV === 'development') {
+            if (type === 'mainnet' && isProd) return
+            if (type === 'testnet' && isTest) return
+            if (type === 'devnet' && isDev) return
+            message.info({
+                content: `Plaese run the ${type.toUpperCase()} mode!`
+            })
+            return
         } else {
-            const url: any = type === 'mainnet' ? process.env.BASE_MAIN_SITE_URL : process.env.BASE_TEST_SITE_URL
-            window.location.replace(url)
+            if (type === 'testnet') {
+                message.info({
+                    content: `The ${type.toUpperCase()} is coming soon!`
+                })
+            } else {
+                const url: any = type === 'mainnet' ? process.env.BASE_MAIN_SITE_URL : type === 'testnet' ? process.env.BASE_TEST_SITE_URL : process.env.BASE_DEV_SITE_URL
+                window.location.replace(url)
+            }
+
         }
     }
 
@@ -101,7 +113,7 @@ const NavBar = (props: Props) => {
                 </div>
                 <div className={styles.menu_content}>
                     <Menu className={styles.menu} overflowedIndicator={false} onClick={selectMenu} selectedKeys={[currentMenu]} mode="horizontal" items={menuItems} />
-                    <Button className={styles.btn} onClick={() => optDarwer(true, 'pc')} >{isTest ? 'Testnet' : 'Mainnet'}</Button>
+                    <Button className={styles.btn} onClick={() => optDarwer(true, 'pc')} >{isProd ? 'MainNet' : isTest ? 'TestNet' : 'DevNet'}</Button>
                 </div>
                 <div className={styles.mobile_content}>
                     <Image
@@ -133,6 +145,7 @@ const NavBar = (props: Props) => {
                         <div style={{ width: '100%', textAlign: 'center', fontWeight: 700, }}>Select a Network</div>
                         <div style={styleOpt('mainnet')} onClick={() => switchNetwork('mainnet')}>MainNet</div>
                         <div style={styleOpt('testnet')} onClick={() => switchNetwork('testnet')}>TestNet</div>
+                        <div style={styleOpt('devnet')} onClick={() => switchNetwork('devnet')}>DevNet</div>
                     </div>
                 </div>
             </Drawer>
