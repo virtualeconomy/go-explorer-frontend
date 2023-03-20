@@ -69,7 +69,7 @@ const NavBar = (props: Props) => {
         } else if (type === 'testnet') {
             style.color = isTest ? '#FF8232' : '#EEEEEE'
             style.border = isTest ? '1px solid #FF8232' : '1px solid #EEEEEE'
-        } else if (type === 'devnet' && isDev) {
+        } else if (type === 'devnet') {
             style.color = isDev ? '#FF8232' : '#EEEEEE'
             style.border = isDev ? '1px solid #FF8232' : '1px solid #EEEEEE'
         }

@@ -14,7 +14,7 @@ const devProxy = {
 }
 
 const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
+const dev = true
 
 const app = next({
     dev
