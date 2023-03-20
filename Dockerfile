@@ -7,6 +7,8 @@ ARG main_backend
 ENV MAIN_BACKEND=$main_backend
 ARG test_backend
 ENV TEST_BACKEND=$test_backend
+ARG dev_backend
+ENV DEV_BACKEND=$dev_backend
 
 ENV PORT=3000
 EXPOSE 3000

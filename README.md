@@ -9,9 +9,6 @@ You can read scripts that the package.json file in order to know more about it!
 ```js
 npm run dev  // run for devnet
 
-npm run dev-test  // run for testnet
-
-npm run dev-prod  // run for mainnet
 ```
 
 ### Deploy on server (Linux)
@@ -33,10 +30,6 @@ npm install
 
 ```js
 npm run build // build for miannet
-
-npm run build-test // build for testnet
-
-npm run build-dev // build for devnet
 
 ```
 #### 4. Install pm2 for managing process and running project
