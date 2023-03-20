@@ -24,7 +24,7 @@ const handle = app.getRequestHandler()
 app.prepare()
     .then(() => {
         const server = express()
-        if (dev && devProxy) {
+        if (devProxy) {
             Object.keys(devProxy).forEach(function(context) {
                 server.use(createProxyMiddleware(context, devProxy[context]))
             })

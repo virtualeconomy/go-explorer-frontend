@@ -9,7 +9,11 @@
     "build": "DEPLOY_MODE=prod next build",
     "build-test": "DEPLOY_MODE=test next build",
     "build-dev": "DEPLOY_MODE=dev next build",
-    "start": "next start -p $PORT",
+    "start-next": "next start -p $PORT",
+    "start": "DEPLOY_MODE=prod NODE_ENV=production node server.js",
+    "start-dev-node": "DEPLOY_MODE=dev NODE_ENV=production node server.js",
+    "start-test-node": "DEPLOY_MODE=test NODE_ENV=production node server.js",
+    "start-prod-node": "DEPLOY_MODE=prod NODE_ENV=production node server.js",
     "lint": "next lint",
     "export": "next export"
   },

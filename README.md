@@ -7,7 +7,11 @@
 You can read scripts that the package.json file in order to know more about it!
 
 ```js
-npm run dev  // run for dev
+npm run dev  // run for devnet
+
+npm run dev-test  // run for testnet
+
+npm run dev-prod  // run for mainnet
 ```
 
 ### Deploy on server (Linux)
@@ -28,16 +32,19 @@ npm install
 #### 3. Build a file pack(name as dist) for deploying
 
 ```js
+npm run build // build for miannet
+
 npm run build-test // build for testnet
 
-npm run build // build for miannet
+npm run build-dev // build for devnet
+
 ```
 #### 4. Install pm2 for managing process and running project
 
 ```js
 npm install pm2 -g // install for global
 
-pm2 start npm --watch --name Explorer -- run start 3000 // run by pm2 (default port is 3000)
+pm2 start npm --watch --name Explorer -- run start-next 3000 // run by pm2 (default port is 3000)
 
 pm2 list // check out the process info 
 ```
@@ -95,6 +102,23 @@ sudo systemctl restart nginx
 git pull  // pull the lastest code from Github
 
 npm run build 
+```
+
+### build from docker
+```bash
+# Write env in ~/.bashrc or /etc/profile
+export DEPLOY_MODE="prod" #or "build-test"
+
+
+# docker build
+docker build \
+--platform=linux/amd64 \
+-t <your username>/vsys-explorer:frontend \
+--build-arg deploy_mode=$DEPLOY_MODE \
+-f Dockerfile .
+
+# docker run
+docker run -d -p 3000:3000 --name vsys-explorer-frontend <your username>/vsys-explorer:frontend
 ```
 
 ### Website Url
