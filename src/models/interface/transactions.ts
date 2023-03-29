@@ -28,6 +28,7 @@ export interface TransactionDataType {
 
 //transactionDetail table
 export interface TransactionDetailDataType {
+    DBEntry: any
     TypeName: string;
     Id: string;
     TimeStamp: number;
