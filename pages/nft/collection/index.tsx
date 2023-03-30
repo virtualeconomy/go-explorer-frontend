@@ -92,12 +92,15 @@ const NftCollection = (props: Props) => {
                     item.Attributes.Name = "#" + item.Index
                 }
             } else {
-                const IconObj = Imglist[i].DBEntry?.Data
-                let result = setipfsIconUrlName(IconObj, i)
-                if (result.IconUrl) {
-                    item.Attributes.IconUrl = result.IconUrl
-                    item.Attributes.Name = "#" + item.Index
+                if (Imglist.length) {
+                    const IconObj = Imglist[i].DBEntry?.Data
+                    let result = setipfsIconUrlName(IconObj, i)
+                    if (result.IconUrl) {
+                        item.Attributes.IconUrl = result.IconUrl
+                        item.Attributes.Name = "#" + item.Index
+                    }
                 }
+
             }
         }
         if (type == 'init') {

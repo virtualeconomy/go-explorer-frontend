@@ -44,33 +44,44 @@ const NftInfo = (props: Props) => {
             getNftDetail(id as string).then(async (res) => {
                 if (res.data.data) {
                     if (res.data.data.NftDetail?.Collection) {
-                        res.data.data.NftDetail.Attributes.Name = res.data.data.NftDetail.Collection + ' #' + res.data.data.NftDetail.Index
-                    }else if(res.data.data.NftDetail.Attributes.Description[0]=='{'){
-                        res.data.data.NftDetail.Attributes.Name = JSON.parse(res.data.data.NftDetail.Attributes.Description).name + ' #' + res.data.data.NftDetail.Index
-                    }else{
+                        res.data.data.NftDetail.Attributes.Name = res.data.data?.NftDetail?.Collection + ' #' + res.data.data.NftDetail.Index
+                    }
+                    if (res.data.data.NftDetail.Attributes.Description[0] == '{') {
+                        let result = setipfsIconUrlName(res.data.data.NftDetail.Attributes.Description, 1)
+                        if (result.IconUrl) {
+                            res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
+                        }
+                        if (result.Name) {
+                            res.data.data.NftDetail.Attributes.Name = result.Name
+                        }
+                        if (result.CollectionName) {
+                            res.data.data.NftDetail.Attributes.Name = result.CollectionName + ' #' + res.data.data.NftDetail.Index
+                        }
+                    } else {
                         res.data.data.NftDetail.Attributes.Name = '#' + res.data.data.NftDetail.Index
                     }
                     if (res.data.data.NftDetail?.Attributes?.Description[0] != '{') {
                         let IconObj = (await postTransactionDetail(res.data.data.NftDetail?.Attributes?.Description))?.data?.data?.DBEntry?.Data
-                        if (IconObj[0] == '{') {
-                            let result = setipfsIconUrlName(IconObj, 1)
-                            if (result.IconUrl) {
-                                res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
-                            }
-                            if (result.Name) {
-                                res.data.data.NftDetail.Attributes.Name = result.Name
-                            }
-                            if (result.CollectionName) {
-                                res.data.data.NftDetail.Attributes.Name = result.CollectionName + ' #' + res.data.data.NftDetail.Index
-                            }
-                        }
-                        else {
-                            let result = setipfsIconUrlName(res.data.data.NftDetail?.Attributes?.Description, 1)
-                            if (result.IconUrl) {
-                                res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
-                            }
-                            if (result.Name) {
-                                res.data.data.NftDetail.Attributes.Name = result.Name
+                        if (IconObj) {
+                            if (IconObj[0] == '{') {
+                                let result = setipfsIconUrlName(IconObj, 1)
+                                if (result.IconUrl) {
+                                    res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
+                                }
+                                if (result.Name) {
+                                    res.data.data.NftDetail.Attributes.Name = result.Name
+                                }
+                                if (result.CollectionName) {
+                                    res.data.data.NftDetail.Attributes.Name = result.CollectionName + ' #' + res.data.data.NftDetail.Index
+                                }
+                            } else {
+                                let result = setipfsIconUrlName(res.data.data.NftDetail?.Attributes?.Description, 1)
+                                if (result.IconUrl) {
+                                    res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
+                                }
+                                if (result.Name) {
+                                    res.data.data.NftDetail.Attributes.Name = result.Name
+                                }
                             }
                         }
                     }
