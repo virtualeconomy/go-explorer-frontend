@@ -21,6 +21,7 @@ const getSearch = (key?: string) => http.get('/api/v1/search/' + key)
 //Transaction
 const postTransaction = (data?: object) => http.get('/api/v1/transactions/latest', { params: data })
 const postTransactionDetail = (id: string) => http.get('/api/v1/transactions/info/' + id)
+const postTransactionDetailList = (data: string[]) => http.post('/api/v1/transactions/list', { 'txList': data })
 
 
 //Address
@@ -75,6 +76,7 @@ export {
     postTransaction,
     getSearch,
     postTransactionDetail,
+    postTransactionDetailList,
     getAddressDetail,
     getContractDetail,
     postAddressTrans,

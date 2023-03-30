@@ -191,6 +191,10 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     </div> :''
                             }
                         </Descriptions.Item> : 
+                        props.detailData?.TypeName=='dbput'?
+                        <Descriptions.Item label='Date'>
+                            <span style={{lineHeight:"22px",display:'-webkit-box',width:"40%",height:'44px',textOverflow:'ellipsis',overflow:'hidden',WebkitBoxOrient:'vertical',WebkitLineClamp:2}}>{props.detailData?.DBEntry?.Data}</span>
+                        </Descriptions.Item>:
                         <Descriptions.Item label='Recipient'>
                             <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.Recipient } }}>
                                 <a  >{props.detailData?.Recipient}</a>

@@ -6,7 +6,7 @@ import { nftDetail, nftdetailgetdata, nftOwershiphistory } from '../../../src/mo
 import NftOwnershipHistoryDetail from '../../../src/components/pageComps/nft/nftinfopageComps/nftOwnershiphistory'
 import NftregistryTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftregistryColumns } from '../../../src/models/commonData/tableColumns'
-import { getNftDetail, getNftimg, getNftRegister, getNftTransactions } from '../../../src/api'
+import { getNftDetail, getNftRegister, getNftTransactions, getSearch, postTransactionDetail } from '../../../src/api'
 import { setipfsIconUrlName } from '../../../src/utils/tools'
 type Props = {}
 
@@ -42,7 +42,6 @@ const NftInfo = (props: Props) => {
     useEffect(() => {
         if (id) {
             getNftDetail(id as string).then(async (res) => {
-                setnftDetailSpin(true)
                 if (res.data.data) {
                     if (res.data.data.NftDetail?.Collection) {
                         res.data.data.NftDetail.Attributes.Name = res.data.data.NftDetail.Collection + ' #' + res.data.data.NftDetail.Index
@@ -51,16 +50,31 @@ const NftInfo = (props: Props) => {
                     }else{
                         res.data.data.NftDetail.Attributes.Name = '#' + res.data.data.NftDetail.Index
                     }
-                    
-                    if (res.data.data.NftDetail?.Attributes?.Description) {
-                        let result = setipfsIconUrlName(res.data.data.NftDetail?.Attributes?.Description,1)
-                        if (result.IconUrl) {
-                            res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
+                    if (res.data.data.NftDetail?.Attributes?.Description[0] != '{') {
+                        let IconObj = (await postTransactionDetail(res.data.data.NftDetail?.Attributes?.Description))?.data?.data?.DBEntry?.Data
+                        if (IconObj[0] == '{') {
+                            let result = setipfsIconUrlName(IconObj, 1)
+                            if (result.IconUrl) {
+                                res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
+                            }
+                            if (result.Name) {
+                                res.data.data.NftDetail.Attributes.Name = result.Name
+                            }
+                            if (result.CollectionName) {
+                                res.data.data.NftDetail.Attributes.Name = result.CollectionName + ' #' + res.data.data.NftDetail.Index
+                            }
                         }
-                        if (result.Name) {
-                            res.data.data.NftDetail.Attributes.Name = result.Name
+                        else {
+                            let result = setipfsIconUrlName(res.data.data.NftDetail?.Attributes?.Description, 1)
+                            if (result.IconUrl) {
+                                res.data.data.NftDetail.Attributes.IconUrl = result.IconUrl
+                            }
+                            if (result.Name) {
+                                res.data.data.NftDetail.Attributes.Name = result.Name
+                            }
                         }
                     }
+                    setnftDetailSpin(true)
                     setnftDetaildata(res.data.data)
                 }
             }).catch((err) => {
