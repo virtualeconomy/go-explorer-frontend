@@ -7,8 +7,8 @@ import NftCord from '../../../src/components/pageComps/nft/collectionpageComps/c
 import NftsTable from '../../../src/components/commonComps/explorerDataTable'
 import NftTransactionsTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftsColumns, NftTransactionColumns } from '../../../src/models/commonData/tableColumns';
-import { getCollectionGeneral, getCollectionRegister, getCollectionTransactions } from '../../../src/api'
-import { cutString } from '../../../src/utils/tools'
+import { getCollectionGeneral, getCollectionRegister, getCollectionTransactions, getSearch, postTransactionDetail } from '../../../src/api'
+import { setipfsIconUrlName } from '../../../src/utils/tools'
 
 type Props = {}
 
@@ -32,63 +32,70 @@ const NftCollection = (props: Props) => {
                     setnftGeneraldata(res.data.data)
                 }
             })
-            getCollectionRegister({ contractId: id as string, page: 1, size: 16 }).then((res) => {
-                setspinshow(true)
+            getCollectionRegister({ contractId: id as string, page: 1, size: 16 }).then(async (res) => {
                 if (res.data.data.data) {
-                    //Add NFT Name in NftCord component
-                    res.data.data.data.map((item: any, index: number) => {
-                        if (item.Attributes.Description[0] == '{') {
-                            let url = JSON.parse(item.Attributes?.Description)
-                            if (url?.properties) {
-                                item.Attributes.Name = url.properties?.name
-                                setCollectionName(url.properties?.name)
-                            } else if (url?.name) {
-                                item.Attributes.Name = "#" + item.Index
-                                setCollectionName(url.name)
-                            } else {
-                                item.Attributes.Name = "#" + item.Index
-                            }
-                        } else if (item.Collection) {
-                            item.Attributes.Name = "#" + item.Index
-                            setCollectionName(item.Collection)
-                        } else {
-                            item.Attributes.Name = ' #' + item.Index
-                        }
-                    })
-                    setnftCorddata(res.data.data.data)
-                    setnftCordTotal(res.data.data.total)
+                    let data = JSON.parse(JSON.stringify(res.data.data))
+                    fillterdata(data, 'init')
                 }
             }).catch(() => {
                 setspinshow(true)
             })
         }
     }, [id])
+
+    async function fillterdata(data: any, type?: string) {
+        let array = data.data
+        let total = data.total
+        for (let i = 0; i < array.length; i++) {
+            let item = array[i]
+            if (item.Attributes.Description[0] == '{') {
+                let url = JSON.parse(item.Attributes?.Description)
+                if (url?.properties) {
+                    item.Attributes.Name = url.properties?.name
+                    setCollectionName(url.properties?.name)
+                } else if (url?.name) {
+                    item.Attributes.Name = "#" + item.Index
+                    setCollectionName(url.name)
+                } else {
+                    item.Attributes.Name = "#" + item.Index
+                }
+            } else if (item.Attributes.Description[0] != '{') {
+                let desc = item.Attributes.Description
+                const IdType = await (await getSearch(desc)).data.type
+                if (IdType == 'transaction') {
+                    const IconObj = await (await postTransactionDetail(desc)).data.data?.DBEntry?.Data
+                    let result = setipfsIconUrlName(IconObj, i)
+                    if (result.IconUrl) {
+                        item.Attributes.IconUrl = result.IconUrl
+                        item.Attributes.Name = "#" + item.Index
+                    }
+                }
+            }
+            if (item.Collection) {
+                item.Attributes.Name = "#" + item.Index
+                setCollectionName(item.Collection)
+            } else {
+                item.Attributes.Name = ' #' + item.Index
+            }
+        }
+        if (type == 'init') {
+            setnftCorddata(array)
+            setspinshow(true)
+            setnftCordTotal(total)
+        }
+        else {
+            setnftCorddata([...nftCorddata, ...array])
+        }
+
+    }
     function loadCord() {
         let newLoadData = JSON.parse(JSON.stringify(nftCordget))
         newLoadData.page++
         getCollectionRegister(newLoadData).then((res) => {
             if (res.data.data.data.length) {
                 //Add NFT Name in NftCord component
-                res.data.data.data.map((item: any, index: number) => {
-                    if (item.Attributes.Description[0] == '{') {
-                        let url = JSON.parse(item.Attributes?.Description)
-                        if (url?.properties) {
-                            item.Attributes.Name = url.properties?.name
-                            setCollectionName(url.properties?.name)
-                        } else if (url?.name) {
-                            item.Attributes.Name = ' #' + item.Index
-                            setCollectionName(url.name)
-                        } else {
-                            item.Attributes.Name = ' #' + item.Index
-                        }
-                    } else if (item.Collection) {
-                        item.Attributes.Name = ' #' + item.Index
-                        setCollectionName(item.Collection)
-                    } else {
-                        item.Attributes.Name = ' #' + item.Index
-                    }
-                })
-                setnftCorddata([...nftCorddata, ...res.data.data.data])
+                let data = JSON.parse(JSON.stringify(res.data.data))
+                fillterdata(data)
                 setnftCordget(newLoadData)
             }
         })
