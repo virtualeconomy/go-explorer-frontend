@@ -7,7 +7,7 @@ import NftCord from '../../../src/components/pageComps/nft/collectionpageComps/c
 import NftsTable from '../../../src/components/commonComps/explorerDataTable'
 import NftTransactionsTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftsColumns, NftTransactionColumns } from '../../../src/models/commonData/tableColumns';
-import { getCollectionGeneral, getCollectionRegister, getCollectionTransactions, getSearch, postTransactionDetail } from '../../../src/api'
+import { getCollectionGeneral, getCollectionRegister, getCollectionTransactions, getNftimg, postTransactionDetail } from '../../../src/api'
 import { setipfsIconUrlName } from '../../../src/utils/tools'
 
 type Props = {}
@@ -21,6 +21,7 @@ const NftCollection = (props: Props) => {
     const [spinshow, setspinshow] = useState(false)
     const [collectionName, setCollectionName] = useState<any>('')
     const [nftCordTotal, setnftCordTotal] = useState(0)
+    const [transactionTotal, setTransactionTotal] = useState(0)
     const { id, Name } = router.query
     useEffect(() => {
         setCollectionName(Name ? Name : '')
@@ -43,11 +44,34 @@ const NftCollection = (props: Props) => {
         }
     }, [id])
 
+    useEffect(() => {
+        if (transactionTotal) {
+            getCollectionTransactions({ contractId: id, page: transactionTotal, size: 1 }).then((res) => {
+                console.log(res.data.data.data[0].Description);
+                if (res.data?.data?.data[0]?.Description) {
+                    if (res.data?.data?.data[0]?.Description[0] != "{") {
+                        let url = 'https://gateway.ipfs.io/ipfs/' + res.data?.data?.data[0]?.Description
+                        getNftimg(url).then((res) => {
+                            setCollectionName(res.data.name)
+                        })
+                    }
+                }
+            })
+        }
+    }, [transactionTotal])
+
     async function fillterdata(data: any, type?: string) {
         let array = data.data
         let total = data.total
         for (let i = 0; i < array.length; i++) {
             let item = array[i]
+            if (item.Collection) {
+                item.Attributes.Name = "#" + item.Index
+                setCollectionName(item.Collection)
+            } else {
+                setTransactionTotal(nftGeneraldata.transactionNumber)
+                item.Attributes.Name = ' #' + item.Index
+            }
             if (item.Attributes.Description[0] == '{') {
                 let url = JSON.parse(item.Attributes?.Description)
                 if (url?.properties) {
@@ -59,23 +83,14 @@ const NftCollection = (props: Props) => {
                 } else {
                     item.Attributes.Name = "#" + item.Index
                 }
-            } else if (item.Attributes.Description[0] != '{') {
-                let desc = item.Attributes.Description
-                const IdType = await (await getSearch(desc)).data.type
-                if (IdType == 'transaction') {
-                    const IconObj = await (await postTransactionDetail(desc)).data.data?.DBEntry?.Data
-                    let result = setipfsIconUrlName(IconObj, i)
-                    if (result.IconUrl) {
-                        item.Attributes.IconUrl = result.IconUrl
-                        item.Attributes.Name = "#" + item.Index
-                    }
-                }
-            }
-            if (item.Collection) {
-                item.Attributes.Name = "#" + item.Index
-                setCollectionName(item.Collection)
             } else {
-                item.Attributes.Name = ' #' + item.Index
+                let desc = item.Attributes.Description
+                const IconObj = await (await postTransactionDetail(desc)).data.data?.DBEntry?.Data
+                let result = setipfsIconUrlName(IconObj, i)
+                if (result.IconUrl) {
+                    item.Attributes.IconUrl = result.IconUrl
+                    item.Attributes.Name = "#" + item.Index
+                }
             }
         }
         if (type == 'init') {
