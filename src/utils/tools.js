@@ -97,7 +97,7 @@ const setipfsIconUrlName = (str, index) => {
     ]
     let IconUrl = ''
     let Name = ''
-    let CollectionName
+    let CollectionName = ''
     if (str[0] === '{') {
         let url = JSON.parse(str)
         if (url.img) {
@@ -117,7 +117,7 @@ const setipfsIconUrlName = (str, index) => {
             CollectionName = url.name
         }
     }
-    return { IconUrl, Name,CollectionName }
+    return { IconUrl, Name, CollectionName }
 }
 
 export {
