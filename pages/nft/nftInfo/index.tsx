@@ -45,6 +45,8 @@ const NftInfo = (props: Props) => {
                 if (res.data.data) {
                     if (res.data.data.NftDetail?.Collection) {
                         res.data.data.NftDetail.Attributes.Name = res.data.data?.NftDetail?.Collection + ' #' + res.data.data.NftDetail.Index
+                    } else {
+                        res.data.data.NftDetail.Attributes.Name = '#' + res.data.data.NftDetail.Index
                     }
                     if (res.data.data.NftDetail.Attributes.Description[0] == '{') {
                         let result = setipfsIconUrlName(res.data.data.NftDetail.Attributes.Description, 1)
@@ -57,8 +59,6 @@ const NftInfo = (props: Props) => {
                         if (result.CollectionName) {
                             res.data.data.NftDetail.Attributes.Name = result.CollectionName + ' #' + res.data.data.NftDetail.Index
                         }
-                    } else {
-                        res.data.data.NftDetail.Attributes.Name = '#' + res.data.data.NftDetail.Index
                     }
                     if (res.data.data.NftDetail?.Attributes?.Description[0] != '{') {
                         let IconObj = (await postTransactionDetail(res.data.data.NftDetail?.Attributes?.Description))?.data?.data?.DBEntry?.Data
@@ -87,6 +87,8 @@ const NftInfo = (props: Props) => {
                     }
                     setnftDetailSpin(true)
                     setnftDetaildata(res.data.data)
+                }else{
+                    setnftDetailSpin(true)
                 }
             }).catch((err) => {
                 setnftDetailSpin(true)
