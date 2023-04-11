@@ -6,7 +6,7 @@ import { nftDetail, nftdetailgetdata, nftOwershiphistory } from '../../../src/mo
 import NftOwnershipHistoryDetail from '../../../src/components/pageComps/nft/nftinfopageComps/nftOwnershiphistory'
 import NftregistryTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftregistryColumns } from '../../../src/models/commonData/tableColumns'
-import { getNftDetail, getNftRegister, getNftTransactions, getSearch, postTransactionDetail } from '../../../src/api'
+import { getNftDetail, getNftRegister, getNftTransactions, postTransactionDetail } from '../../../src/api'
 import { setipfsIconUrlName } from '../../../src/utils/tools'
 type Props = {}
 
@@ -43,11 +43,7 @@ const NftInfo = (props: Props) => {
         if (id) {
             getNftDetail(id as string).then(async (res) => {
                 if (res.data.data) {
-                    if (res.data.data.NftDetail?.Collection) {
-                        res.data.data.NftDetail.Attributes.Name = res.data.data?.NftDetail?.Collection + ' #' + res.data.data.NftDetail.Index
-                    } else {
-                        res.data.data.NftDetail.Attributes.Name = '#' + res.data.data.NftDetail.Index
-                    }
+                    res.data.data.NftDetail.Attributes.Name = '#' + res.data.data.NftDetail.Index
                     if (res.data.data.NftDetail.Attributes.Description[0] == '{') {
                         let result = setipfsIconUrlName(res.data.data.NftDetail.Attributes.Description, 1)
                         if (result.IconUrl) {
@@ -85,6 +81,9 @@ const NftInfo = (props: Props) => {
                             }
                         }
                     }
+                    if (res.data.data.NftDetail?.Collection) {
+                        res.data.data.NftDetail.Attributes.Name = res.data.data?.NftDetail?.Collection + ' #' + res.data.data.NftDetail.Index
+                    } 
                     setnftDetailSpin(true)
                     setnftDetaildata(res.data.data)
                 }else{
