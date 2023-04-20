@@ -80,7 +80,7 @@ const setipfsIconUrlName = (str, index) => {
     const BuseUrl = [
         'gateway.ipfs.io',
         'gateway.pinata.cloud',
-        'gateway.pinata.cloud',
+        'cloudflare-ipfs.com',
         'gateway.ipfs.io',
         'gateway.pinata.cloud',
         'gateway.pinata.cloud',
@@ -88,12 +88,12 @@ const setipfsIconUrlName = (str, index) => {
         'gateway.pinata.cloud',
         'gateway.pinata.cloud',
         'gateway.ipfs.io',
-        'gateway.pinata.cloud',
+        'gateway.ipfs.io',
         'gateway.pinata.cloud',
         'gateway.ipfs.io',
         'gateway.pinata.cloud',
-        'ipfs.io',
-        'ipfs.io',
+        'cloudflare-ipfs.com',
+        'cloudflare-ipfs.com',
     ]
     let IconUrl = ''
     let Name = ''
