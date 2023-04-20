@@ -86,15 +86,8 @@ const NavBar = (props: Props) => {
             })
             return
         } else {
-            if (type === 'testnet') {
-                message.info({
-                    content: `The ${type.toUpperCase()} is coming soon!`
-                })
-            } else {
-                const url: any = type === 'mainnet' ? process.env.BASE_MAIN_SITE_URL : type === 'testnet' ? process.env.BASE_TEST_SITE_URL : process.env.BASE_DEV_SITE_URL
-                window.location.replace(url)
-            }
-
+            const url: any = type === 'mainnet' ? process.env.BASE_MAIN_SITE_URL : type === 'testnet' ? process.env.BASE_TEST_SITE_URL : process.env.BASE_DEV_SITE_URL
+            window.location.replace(url)
         }
     }
 
