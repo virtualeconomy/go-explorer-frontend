@@ -2,6 +2,7 @@ import moment from 'moment'
 import Link from 'next/link'
 import type { ColumnsType } from 'antd/es/table';
 import { Image } from 'antd'
+import BigNumber from "bignumber.js";
 
 import { commonTableListType } from '../interface/common'
 import { VSYS_PRECISION, VSYS_TIME } from '../../utils/constant'
@@ -28,7 +29,7 @@ export const txColumns: ColumnsType<commonTableListType> = [
     width: '8%',
     ellipsis: true,
     render: (val: any) => {
-      return val / VSYS_PRECISION + 'VSYS'
+      return BigNumber(val).dividedBy(VSYS_PRECISION)+'VSYS'
     }
   },
   {
@@ -69,7 +70,7 @@ export const txColumns: ColumnsType<commonTableListType> = [
       multiple: 1,
     },
     render: (val: any) => {
-      return val / VSYS_PRECISION + 'VSYS'
+      return BigNumber(val).dividedBy(VSYS_PRECISION)+'VSYS'
     }
   },
   {
@@ -107,7 +108,7 @@ export const blockTransactionsColumns: ColumnsType<commonTableListType> = [
     width: '10%',
     ellipsis: true,
     render: (val: any) => {
-      return val / VSYS_PRECISION + 'VSYS'
+      return BigNumber(val).dividedBy(VSYS_PRECISION)+'VSYS'
     }
   },
   {
@@ -140,7 +141,7 @@ export const blockTransactionsColumns: ColumnsType<commonTableListType> = [
       multiple: 1,
     },
     render: (val: any) => {
-      return val / VSYS_PRECISION + 'VSYS'
+      return BigNumber(val).dividedBy(VSYS_PRECISION)+'VSYS'
     }
   },
   {
@@ -322,7 +323,7 @@ export const TokenInfoColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'TotalSupply',
     ellipsis: true,
     render: (val, record) => {
-      return val / record.Unity
+      return BigNumber(val).dividedBy(record.Unity)+''
     }
   },
   {
@@ -368,7 +369,7 @@ export const TokenRecordscolumns: ColumnsType<commonTableListType> = [
       multiple: 1,
     },
     render: (val, record) => {
-      return val.FuncData.Amount / record.Unity
+      return BigNumber(val.FuncData.Amount).dividedBy(record.Unity)+''
     }
   },
   {
@@ -377,7 +378,7 @@ export const TokenRecordscolumns: ColumnsType<commonTableListType> = [
     width: '10%',
     ellipsis: true,
     render: (val) => {
-      return val / VSYS_PRECISION
+      return BigNumber(val).dividedBy(VSYS_PRECISION)+''
     }
   },
   {
@@ -475,7 +476,7 @@ export const tokenInfocolumns: ColumnsType<commonTableListType> = [
       multiple: 1,
     },
     render: (val, record) => {
-      return val.FuncData.Amount / record.Unity
+      return BigNumber(val.FuncData.Amount).dividedBy(record.Unity)+''
     }
   },
   {
@@ -522,7 +523,7 @@ export const supernodescolumns: ColumnsType<commonTableListType> = [
     dataIndex: 'EffectiveStr',
     ellipsis: true,
     render: (val) => {
-      return toThousands(Math.round(val / VSYS_PRECISION)) + 'VSYS'
+      return toThousands(Math.round(BigNumber(val).dividedBy(VSYS_PRECISION) as unknown as number)) + 'VSYS'
     }
   },
   {
@@ -530,7 +531,7 @@ export const supernodescolumns: ColumnsType<commonTableListType> = [
     dataIndex: 'MintingAverageStr',
     ellipsis: true,
     render: (val) => {
-      return toThousands(Math.round(val / VSYS_PRECISION)) + 'VSYS'
+      return toThousands(Math.round(BigNumber(val).dividedBy(VSYS_PRECISION) as unknown as number)) + 'VSYS'
     }
   },
   {

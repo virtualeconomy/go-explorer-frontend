@@ -2,6 +2,8 @@ import { useRouter } from 'next/router'
 import { Descriptions, Image } from 'antd';
 import styles from '../transactionsDetail/tableDetail.module.scss'
 import { AddressDetailProps } from '../../../../models/interface/transactions'
+import BigNumber from "bignumber.js";
+import { VSYS_PRECISION } from '../../../../utils/constant'
 
 
 const AddressDetail = (props: AddressDetailProps) => {
@@ -12,10 +14,10 @@ const AddressDetail = (props: AddressDetailProps) => {
             <Descriptions title={props.title} column={1} style={{ display: (props.spinshow) ? 'block' : 'none' }} >
                 <Descriptions.Item className={styles.subtitle}>{props.subtitle}</Descriptions.Item>
                 <Descriptions.Item label='Total Balance' style={{ border: 'none' }}>
-                    <span>{props.detailData?.regular} VSYS</span>
+                    <span>{BigNumber(props.detailData?.regular).dividedBy(VSYS_PRECISION)+'VSYS'}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Available Balance'>
-                    <span>{props.detailData?.available} VSYS</span>
+                    <span>{BigNumber(props.detailData?.available).dividedBy(VSYS_PRECISION)+'VSYS'}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Leased In Balance'>
                     <span>{props.detailData?.LeaseInBalanceStr} VSYS</span>

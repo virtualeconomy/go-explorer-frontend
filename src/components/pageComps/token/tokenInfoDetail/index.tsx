@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { Descriptions, Image } from 'antd';
 import styles from '../../../pageComps/transactions/transactionsDetail/tableDetail.module.scss'
 import { TokenInfoDetailProps } from '../../../../models/interface/token'
-import { VSYS_PRECISION, VSYS_TIME } from '../../../../utils/constant';
+import { VSYS_TIME } from '../../../../utils/constant';
+import BigNumber from "bignumber.js";
 import moment from 'moment';
 
 
@@ -15,10 +16,10 @@ const TokenInfoDetail = (props: TokenInfoDetailProps) => {
                     <Descriptions.Item className={styles.subtitle}>{props.detailData?.TokenId}</Descriptions.Item>
                     <Descriptions.Item className={styles.icon_media} style={{ border: 'none' }}> <Image preview={false} src={props.detailData?.IconUrl} fallback='/Group.svg' alt={''} /> </Descriptions.Item>
                     <Descriptions.Item label='Max Supply' style={{ border: 'none' }}>
-                        <span>{(props.detailData?.TotalSupply / props.detailData.Unity).toString()}</span>
+                        <span>{ BigNumber(props.detailData?.TotalSupply).dividedBy(props.detailData.Unity)+''}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Issued Token'>
-                        <span>{(props.detailData?.CurrentSupply / props.detailData.Unity).toString()}</span>
+                        <span>{BigNumber(props.detailData?.CurrentSupply).dividedBy(props.detailData.Unity)+''}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Register Time'>
                         <span>{props.detailData?.RegisterTime / VSYS_TIME ? moment(props.detailData?.RegisterTime / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
