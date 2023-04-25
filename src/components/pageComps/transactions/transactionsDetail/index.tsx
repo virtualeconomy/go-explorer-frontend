@@ -6,6 +6,7 @@ import moment from 'moment'
 import { TransactionsDetailProps } from '../../../../models/interface/transactions'
 import { VSYS_PRECISION, VSYS_TIME } from '../../../../utils/constant'
 import { byteArrayToString } from '../../../../utils/tools';
+import BigNumber from "bignumber.js";
 
 const TransactionDetail = (props: TransactionsDetailProps) => {
 
@@ -41,7 +42,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                         <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId } }}>
                                             <a style={{margin:0}}>{'('+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link>&nbsp;
-                                        with Max Supply {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Max / props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Unity}
+                                        with Max Supply {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Max).dividedBy(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Unity)+''}
                                         &nbsp;,&nbsp;Unity {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Unity}
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'supersede' ?
@@ -53,7 +54,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'issue' ?
                                     <div>
-                                        {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                        {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                         &nbsp;(With Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})&nbsp;token&nbsp;
                                         <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId } }}>
                                             <a style={{margin:0}}>{'(' +props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+ ")"}</a>
@@ -61,7 +62,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'destroy' ?
                                     <div>
-                                        {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                        {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                         &nbsp;(With Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})&nbsp;token&nbsp;
                                         <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.SenderAddress } }}>
                                             <a style={{margin:0}}>{'(' +props.detailData?.SenderAddress+ ")"}</a>
@@ -73,7 +74,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                         <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
                                             <a   style={{margin:0}}>{'(' +props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link>&nbsp;&nbsp;
-                                        {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                        {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                         &nbsp;(With Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity}) 
                                         {
                                             props.detailData?.Status=='Success'?
@@ -91,7 +92,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     <div style={{lineHeight:"22px",display:'inline-block'}}>
                                         Send token&nbsp;<Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
                                             <a style={{margin:0}}>{'('+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
-                                        </Link>&nbsp; {props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                        </Link>&nbsp; {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                         &nbsp;(with Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity}) <br/>
                                             From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
                                                 <a style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
@@ -104,7 +105,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     <div style={{lineHeight:"22px",display:'inline-block' }}>
                                         Deposit token&nbsp; <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
                                             <a   style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
-                                        </Link>&nbsp;&nbsp;{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                        </Link>&nbsp;&nbsp;{BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                             &nbsp;&nbsp;(with Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
                                             From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
                                                 <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
@@ -117,7 +118,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                    <div style={{lineHeight:"22px",display:'inline-block' }}>
                                         Withdraw token&nbsp;<Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
                                             <a  style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
-                                        </Link>&nbsp;{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount / props.detailData?.TxExplain?.TxExtend?.Info?.Unity}
+                                        </Link>&nbsp;{BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                             &nbsp;(with Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
                                             From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
                                                 <a  style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
@@ -216,12 +217,12 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                 {
                     props.detailData?.TxExplain?.TxType == 'tx'?
                     <Descriptions.Item label='Amount'>
-                        <span>{(props.detailData?.Amount as number / VSYS_PRECISION).toString()} VSYS</span>
+                        <span>{BigNumber(props.detailData?.Amount).dividedBy(VSYS_PRECISION)+' VSYS'}</span>
                     </Descriptions.Item>:''
                 }
                 
                 <Descriptions.Item label='Fee'>
-                    <span>{(props.detailData?.Fee as number / VSYS_PRECISION).toString()} VSYS</span>
+                    <span>{BigNumber(props.detailData?.Fee).dividedBy(VSYS_PRECISION)+' VSYS'}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Status'>
                     <span>{props.detailData?.Status}</span>
