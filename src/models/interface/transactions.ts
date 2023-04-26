@@ -47,6 +47,8 @@ export interface addressDetailDataType {
     regular: string;
     available: string;
     effective:string;
+    LeaseInBalance:number;
+    LeaseOutBalance:number;
 }
 
 //ContractDetail table

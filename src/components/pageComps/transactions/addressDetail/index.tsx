@@ -20,10 +20,10 @@ const AddressDetail = (props: AddressDetailProps) => {
                     <span>{BigNumber(Number(props.detailData?.available)).dividedBy(VSYS_PRECISION)+'VSYS'}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Leased In Balance'>
-                    <span>{BigNumber(Number(props.detailData?.effective)).minus(Number(props.detailData?.available)).dividedBy(VSYS_PRECISION)+'VSYS'}</span>
+                    <span>{BigNumber(props.detailData.LeaseInBalance).dividedBy(VSYS_PRECISION)+'VSYS'}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Leased Out Balance'>
-                    <span>{BigNumber(Number(props.detailData?.regular)).minus(Number(props.detailData?.available)).dividedBy(VSYS_PRECISION)+'VSYS'}</span>
+                    <span>{BigNumber(props.detailData.LeaseOutBalance).dividedBy(VSYS_PRECISION)+'VSYS'}</span>
                 </Descriptions.Item>
             </Descriptions>
             <div className={styles.spinning} style={{ display: (!props.spinshow) ? 'flex' : 'none' }}>
@@ -35,6 +35,7 @@ const AddressDetail = (props: AddressDetailProps) => {
             </div>
         </div>
     )
+    
 }
 
 export default AddressDetail
