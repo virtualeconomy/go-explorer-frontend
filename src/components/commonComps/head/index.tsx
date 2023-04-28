@@ -1,11 +1,12 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
+
+if (typeof window !== "undefined") {
+    import("amfe-flexible");
+
+}
 type Props = {};
 
 const ExplorerHead = (props: Props) => {
-    useEffect(() => {
-        import("amfe-flexible");
-    }, []);
     return (
         <div>
             <Head>
@@ -16,6 +17,7 @@ const ExplorerHead = (props: Props) => {
                 <link href="https://fonts.googleapis.com/css2?family=Lato" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css2?family=Exo%202" rel="stylesheet" />
+                <script>var window = { }</script>
             </Head>
         </div>
     )
