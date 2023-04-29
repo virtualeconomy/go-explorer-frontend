@@ -16,8 +16,8 @@ export const commonSlice = createSlice({
             state.count++
         }
     },
-    extraReducers: {
-    }
+    // extraReducers: {
+    // }
 })
 
 export const { opt } = commonSlice.actions
