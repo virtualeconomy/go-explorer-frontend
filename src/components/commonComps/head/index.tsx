@@ -1,8 +1,5 @@
 import Head from 'next/head'
 
-if (typeof window !== "undefined") {
-    import("amfe-flexible");
-}
 type Props = {};
 
 const ExplorerHead = (props: Props) => {
@@ -16,6 +13,7 @@ const ExplorerHead = (props: Props) => {
                 <link href="https://fonts.googleapis.com/css2?family=Lato" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css2?family=Exo%202" rel="stylesheet" />
+                <script src="/static/js/rem.js"/>
             </Head>
         </div>
     )
