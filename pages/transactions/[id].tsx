@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import TableDetail from '../../../src/components/pageComps/transactions/transactionsDetail/index'
+import TableDetail from '../../src/components/pageComps/transactions/transactionsDetail/index'
 import styles from '../blocks/page_padding.module.scss'
-import { postTransactionDetail } from '../../../src/api/index'
-import { TransactionDetailDataType } from '../../../src/models/interface/transactions'
+import { postTransactionDetail } from '../../src/api/index'
+import { TransactionDetailDataType } from '../../src/models/interface/transactions'
 
 type Props = {
 

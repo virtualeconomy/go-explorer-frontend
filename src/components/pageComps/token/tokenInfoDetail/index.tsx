@@ -25,12 +25,12 @@ const TokenInfoDetail = (props: TokenInfoDetailProps) => {
                         <span>{props.detailData?.RegisterTime / VSYS_TIME ? moment(props.detailData?.RegisterTime / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Issuer'>
-                        <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.Issuer } }}>
+                        <Link replace href={{ pathname: '/address/' + props.detailData?.Issuer }}>
                             <a  >{props.detailData?.Issuer}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Maker'>
-                        <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.Maker } }}>
+                        <Link replace href={{ pathname: '/address/' + props.detailData?.Maker }}>
                             <a  >{props.detailData?.Maker}</a>
                         </Link>
                     </Descriptions.Item>

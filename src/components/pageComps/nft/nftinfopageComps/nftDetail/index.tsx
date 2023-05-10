@@ -21,12 +21,12 @@ const NftInfoDetail = (props: NftDeailProps) => {
                         <span>{props.detailData?.ChangeOwnerLastDay}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Creation transaction'>
-                        <Link href={'/transactions/transactionDetail/' + props.detailData?.NftDetail.Id}>
+                        <Link href={'/transactions/' + props.detailData?.NftDetail.Id}>
                             <a  >{props.detailData?.NftDetail.Id}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Creation Block'>
-                        <Link href={'/blocks/detail/' + props.detailData.NftDetail.CreatingHeight}>
+                        <Link href={'/blocks/' + props.detailData.NftDetail.CreatingHeight}>
                             <a>{props.detailData?.NftDetail.CreatingHeight}</a>
                         </Link>
                     </Descriptions.Item>
@@ -34,12 +34,12 @@ const NftInfoDetail = (props: NftDeailProps) => {
                         <span>{props.detailData?.NftDetail.RegisterTime / VSYS_TIME ? moment(props.detailData?.NftDetail.RegisterTime / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Creator'>
-                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.NftDetail.Attributes.Creator } }}>
+                        <Link href={{ pathname: '/address/' + props.detailData?.NftDetail.Attributes.Creator}}>
                             <a  >{props.detailData?.NftDetail.Attributes.Creator}</a>
                         </Link>
                     </Descriptions.Item>
                     <Descriptions.Item label='Current Owner'>
-                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.NftDetail.CurrentOwner } }}>
+                        <Link href={{ pathname: '/address/' + props.detailData?.NftDetail.CurrentOwner}}>
                             <a  >{props.detailData?.NftDetail.CurrentOwner}</a>
                         </Link>
                     </Descriptions.Item>

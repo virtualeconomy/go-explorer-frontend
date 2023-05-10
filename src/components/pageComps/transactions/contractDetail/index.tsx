@@ -19,7 +19,7 @@ const ContractDetail = (props: ContractDetailProps) => {
                     <span>{props.detailData?.contractType}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Creator Address'>
-                    <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.creatorAddress } }}>
+                    <Link href={{ pathname: '/address/' + props.detailData?.creatorAddress  }}>
                         <a  >{props.detailData?.creatorAddress}</a>
                     </Link>
                 </Descriptions.Item>
@@ -27,7 +27,7 @@ const ContractDetail = (props: ContractDetailProps) => {
                     <span>{props.detailData?.timestamp / VSYS_TIME ? moment(props.detailData?.timestamp / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Transaction'>
-                    <Link href={{ pathname: '/transactions/transactionDetail/' + props.detailData?.transactionId }}>
+                    <Link href={{ pathname: '/transactions/' + props.detailData?.transactionId }}>
                         <a  >{props.detailData?.transactionId}</a>
                     </Link>
                 </Descriptions.Item>

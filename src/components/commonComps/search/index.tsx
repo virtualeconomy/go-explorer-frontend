@@ -27,13 +27,13 @@ const Search = (props: Props) => {
                 }
                 let url = ''
                 switch (res.data.type) {
-                    case 'transaction': url = '/transactions/transactionDetail/' + serachVal; break;
-                    case 'address': url = '/transactions/addressDetail?address=' + serachVal; break;
-                    case 'token': url = '/token/tokenInfo?Id=' + serachVal; break;
-                    case "block": url = '/blocks/detail/' + serachVal; break;
+                    case 'transaction': url = '/transactions/' + serachVal; break;
+                    case 'address': url = '/address/' + serachVal; break;
+                    case 'token': url = '/token/' + serachVal; break;
+                    case "block": url = '/blocks/' + serachVal; break;
                     case "nft": url = '/nft/nftInfo?id=' + serachVal; break;
                     case "nft_contract": url = '/nft/collection?id=' + serachVal; break;
-                    case "contract": url = '/transactions/addressDetail?address=' + serachVal; break;
+                    case "contract": url = '/address/' + serachVal; break;
                     default: false;
                 }
                 router.push(url)
