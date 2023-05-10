@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import styles from './page_padding.module.scss'
+import styles from '../page_padding.module.scss'
 import BlockDetail from '../../../src/components/pageComps/blocks/blocksDetail/index'
 import { getBlockDetailByHight, getBlockDetailByID } from '../../../src/api/index'
 import { blockDetail } from '../../../src/models/interface/block'
