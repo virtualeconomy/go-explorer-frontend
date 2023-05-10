@@ -25,7 +25,7 @@ const TableDetail = (props: BlockDetailProps) => {
                     <span>{props.detailData?.TimeStamp / VSYS_TIME ? moment(props.detailData?.TimeStamp / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Generator'>
-                    <Link replace href={'/transactions/addressDetail?address=' + props.detailData?.Generator}>{props.detailData?.Generator}</Link>
+                    <Link replace href={'/address/' + props.detailData?.Generator}>{props.detailData?.Generator}</Link>
                 </Descriptions.Item>
                 <Descriptions.Item label='Txs'>
                     <span>{props.detailData?.Txs}</span>
@@ -34,7 +34,7 @@ const TableDetail = (props: BlockDetailProps) => {
                     <span>{props.detailData?.Signature}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Parent Block ID'>
-                    <Link replace href={'/blocks/detail/' + props.detailData?.ParentBlockSig}>{props.detailData?.ParentBlockSig}</Link>
+                    <Link replace href={'/blocks/' + props.detailData?.ParentBlockSig}>{props.detailData?.ParentBlockSig}</Link>
                 </Descriptions.Item>
                 <Descriptions.Item label='Size'>
                     <span>{props.detailData?.Size} B</span>

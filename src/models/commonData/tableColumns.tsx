@@ -14,7 +14,7 @@ export const txColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'Id',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/transactions/transactionDetail/' + val}>{val}</Link>
+      return <Link href={'/transactions/' + val}>{val}</Link>
     }
   },
   {
@@ -41,7 +41,7 @@ export const txColumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 6)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 6)}</Link>
       }
     }
   },
@@ -54,7 +54,7 @@ export const txColumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val  }} >{cutString(val, 12)}</Link>
       }
     }
   },
@@ -93,7 +93,7 @@ export const blockTransactionsColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'Id',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/transactions/transactionDetail/' + val}>{val}</Link>
+      return <Link href={'/transactions/' + val}>{val}</Link>
     }
   },
   {
@@ -125,7 +125,7 @@ export const blockTransactionsColumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 12)}</Link>
       }
     }
   },
@@ -175,7 +175,7 @@ export const BlocksColumns: ColumnsType<commonTableListType> = [
     width: '30%',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/blocks/detail/' + val}>{val}</Link>
+      return <Link href={'/blocks/' + val}>{val}</Link>
     }
   },
   {
@@ -237,7 +237,7 @@ export const BlocksGeneralColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'BlockId',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/blocks/detail/' + val}>{val}</Link>
+      return <Link href={'/blocks/' + val}>{val}</Link>
     }
   },
   {
@@ -245,7 +245,7 @@ export const BlocksGeneralColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'Generator',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/supernodes/supernodeInfo/' + val}>{cutString(val, 12)}</Link>
+      return <Link href={'/nodeInfo/' + val}>{cutString(val, 12)}</Link>
     }
   },
   {
@@ -315,7 +315,7 @@ export const TokenInfoColumns: ColumnsType<commonTableListType> = [
     width: '30%',
     ellipsis: true,
     render: (val) => {
-      return <Link href={{ pathname: '/token/tokenInfo', query: { Id: val } }} >{val}</Link>
+      return <Link href={{ pathname: '/token/' + val }} >{val}</Link>
     }
   },
   {
@@ -348,7 +348,7 @@ export const TokenRecordscolumns: ColumnsType<commonTableListType> = [
     dataIndex: ['TokenTransaction', 'Id'],
     ellipsis: true,
     render: (val) => {
-      return <Link href={'/transactions/transactionDetail/' + val}>{val}</Link>
+      return <Link href={'/transactions/' + val}>{val}</Link>
     }
   },
   {
@@ -387,9 +387,9 @@ export const TokenRecordscolumns: ColumnsType<commonTableListType> = [
     ellipsis: true,
     render: (val: any) => {
       if (val.ActionAddress) {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val.ActionAddress } }} >{cutString(val.ActionAddress, 12)}</Link>
+        return <Link href={{ pathname: '/address/'+ val.ActionAddress}} >{cutString(val.ActionAddress, 12)}</Link>
       } else if (val.Recipient) {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val.Recipient } }} >{cutString(val.Recipient, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val.Recipient }} >{cutString(val.Recipient, 12)}</Link>
       } else {
         return '-'
       }
@@ -417,7 +417,7 @@ export const tokenInfocolumns: ColumnsType<commonTableListType> = [
     width: '25%',
     ellipsis: true,
     render: (val) => {
-      return <Link href={'/transactions/transactionDetail/' + val}>{val}</Link>
+      return <Link href={'/transactions/' + val}>{val}</Link>
     }
   },
   {
@@ -446,7 +446,7 @@ export const tokenInfocolumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 12)}</Link>
       }
     }
   },
@@ -456,9 +456,9 @@ export const tokenInfocolumns: ColumnsType<commonTableListType> = [
     ellipsis: true,
     render: (val: any) => {
       if (val.ActionAddress) {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val.ActionAddress } }} >{cutString(val.ActionAddress, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val.ActionAddress }} >{cutString(val.ActionAddress, 12)}</Link>
       } else if (val.Recipient) {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val.Recipient } }} >{cutString(val.Recipient, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val.Recipient}} >{cutString(val.Recipient, 12)}</Link>
       } else {
         return '-'
       }
@@ -515,7 +515,7 @@ export const supernodescolumns: ColumnsType<commonTableListType> = [
     width: '20%',
     ellipsis: true,
     render: (val) => {
-      return <Link href={'/supernodes/supernodeInfo/' + val}>{val}</Link>
+      return <Link href={'/nodeInfo/' + val}>{val}</Link>
     }
   },
   {
@@ -540,7 +540,7 @@ export const supernodescolumns: ColumnsType<commonTableListType> = [
     ellipsis: true,
     width: '20%',
     render: (val: any) => {
-      return <Link href={'/blocks/detail/' + val}>{val}</Link>
+      return <Link href={'/blocks/' + val}>{val}</Link>
     }
   }
 ];
@@ -571,7 +571,7 @@ export const NftsColumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 12)}</Link>
       }
     }
   },
@@ -588,7 +588,7 @@ export const NftsColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'CreatingHeight',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/blocks/detail/' + val}>{val}</Link>
+      return <Link href={'/blocks/' + val}>{val}</Link>
     }
   },
   {
@@ -596,7 +596,7 @@ export const NftsColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'Id',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/transactions/transactionDetail/' + val}>{val}</Link>
+      return <Link href={'/transactions/' + val}>{val}</Link>
     }
   },
   {
@@ -619,7 +619,7 @@ export const NftTransactionColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'Id',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/transactions/transactionDetail/' + val}>{val}</Link>
+      return <Link href={'/transactions/' + val}>{val}</Link>
     }
   },
   // {
@@ -654,7 +654,7 @@ export const NftTransactionColumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 12)}</Link>
       }
     }
   },
@@ -664,9 +664,9 @@ export const NftTransactionColumns: ColumnsType<commonTableListType> = [
     ellipsis: true,
     render: (val: any, record: any) => {
       if (val) {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 12)}</Link>
       } else if (record.FuncData?.Issuer) {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: record.FuncData?.Issuer } }} >{cutString(record.FuncData?.Issuer, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + record.FuncData?.Issuer}} >{cutString(record.FuncData?.Issuer, 12)}</Link>
       } else {
         return '-'
       }
@@ -691,7 +691,7 @@ export const NftregistryColumns: ColumnsType<commonTableListType> = [
     dataIndex: 'Id',
     ellipsis: true,
     render: (val: any) => {
-      return <Link href={'/transactions/transactionDetail/' + val}>{val}</Link>
+      return <Link href={'/transactions/' + val}>{val}</Link>
     }
   },
   {
@@ -702,7 +702,7 @@ export const NftregistryColumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 12)}</Link>
       }
     }
   },
@@ -714,7 +714,7 @@ export const NftregistryColumns: ColumnsType<commonTableListType> = [
       if (!val || val == '-') {
         return '-'
       } else {
-        return <Link href={{ pathname: '/transactions/addressDetail', query: { address: val } }} >{cutString(val, 12)}</Link>
+        return <Link href={{ pathname: '/address/' + val }} >{cutString(val, 12)}</Link>
       }
     }
   },

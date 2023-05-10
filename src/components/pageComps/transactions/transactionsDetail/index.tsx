@@ -28,7 +28,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                     <span>{props.detailData?.TimeStamp / VSYS_TIME ? moment(props.detailData?.TimeStamp / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>
                 </Descriptions.Item>
                 <Descriptions.Item label='Block Height'>
-                    <Link replace href={{ pathname: '/blocks/detail/' + props.detailData?.BlockHeight }}>
+                    <Link replace href={{ pathname: '/blocks/' + props.detailData?.BlockHeight }}>
                         <a>{props.detailData?.BlockHeight}</a>
                     </Link>
                 </Descriptions.Item>
@@ -39,7 +39,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'register' ?
                                     <div>
                                         Create token &nbsp;
-                                        <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId } }}>
+                                        <Link href={{ pathname: '/token/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId}}>
                                             <a style={{margin:0}}>{'('+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link>&nbsp;
                                         with Max Supply {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Max).dividedBy(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Unity)+''}
@@ -48,7 +48,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'supersede' ?
                                     <div>
                                         Set issuer to &nbsp;
-                                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.SenderAddress } }}>
+                                        <Link href={{ pathname: '/address/' +  props.detailData?.SenderAddress }}>
                                             <a style={{margin:0}}>{props.detailData?.SenderAddress}</a>
                                         </Link>&nbsp;
                                     </div> :
@@ -56,7 +56,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     <div>
                                         {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                         &nbsp;(With Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})&nbsp;token&nbsp;
-                                        <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId } }}>
+                                        <Link href={{ pathname: '/token/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId }}>
                                             <a style={{margin:0}}>{'(' +props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+ ")"}</a>
                                         </Link>&nbsp;issued
                                     </div> :
@@ -64,14 +64,14 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     <div>
                                         {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                         &nbsp;(With Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})&nbsp;token&nbsp;
-                                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.SenderAddress } }}>
+                                        <Link href={{ pathname: '/address/' + props.detailData?.SenderAddress }}>
                                             <a style={{margin:0}}>{'(' +props.detailData?.SenderAddress+ ")"}</a>
                                         </Link>&nbsp; destroyed
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'transfer' ?
                                     <div style={{lineHeight:"22px",display:'inline-block'}}>
                                         Transfer token&nbsp;
-                                        <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                        <Link href={{ pathname: '/token/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId}}>
                                             <a   style={{margin:0}}>{'(' +props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link>&nbsp;&nbsp;
                                         {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
@@ -79,10 +79,10 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                         {
                                             props.detailData?.Status=='Success'?
                                             <div>
-                                                From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                                From&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender }}>
                                                     <a style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
                                                 </Link><br/>  
-                                                To&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
+                                                To&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}}>
                                                     <a  style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
                                                 </Link>
                                             </div>:''
@@ -90,49 +90,49 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'send' ?
                                     <div style={{lineHeight:"22px",display:'inline-block'}}>
-                                        Send token&nbsp;<Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                        Send token&nbsp;<Link href={{ pathname: '/token/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId}}>
                                             <a style={{margin:0}}>{'('+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link>&nbsp; {BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                         &nbsp;(with Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity}) <br/>
-                                            From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                            From&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender }}>
                                                 <a style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
                                             </Link><br/>  
-                                            To&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
+                                            To&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient }}>
                                                 <a  style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
                                             </Link>
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'deposit' ?
                                     <div style={{lineHeight:"22px",display:'inline-block' }}>
-                                        Deposit token&nbsp; <Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                        Deposit token&nbsp; <Link href={{ pathname: '/token/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId }}>
                                             <a   style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link>&nbsp;&nbsp;{BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                             &nbsp;&nbsp;(with Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
-                                            From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                            From&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender }}>
                                                 <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
                                             </Link><br/>
-                                            To&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress} }}>
+                                            To&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress }}>
                                                 <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress}</a>
                                             </Link>
                                     </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'withdraw'  ?
                                    <div style={{lineHeight:"22px",display:'inline-block' }}>
-                                        Withdraw token&nbsp;<Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                        Withdraw token&nbsp;<Link href={{ pathname: '/token/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId }}>
                                             <a  style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link>&nbsp;{BigNumber(props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.Amount ).dividedBy(props.detailData?.TxExplain?.TxExtend?.Info?.Unity)+''}
                                             &nbsp;(with Unity {props.detailData?.TxExplain?.TxExtend?.Info?.Unity})<br/>
-                                            From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                            From&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender }}>
                                                 <a  style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
                                             </Link><br/>
-                                            To&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress} }}>
+                                            To&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress}}>
                                                 <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.ActionAddress}</a>
                                             </Link>
                                    </div> :
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'updateList' ?
                                     <div style={{lineHeight:"22px",display:'inline-block' }}>
-                                        UpdateList token&nbsp;<Link href={{ pathname: '/token/tokenInfo', query: { Id: props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId} }}>
+                                        UpdateList token&nbsp;<Link href={{ pathname: '/token/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId }}>
                                             <a   style={{margin:0}}>{"("+props.detailData?.TxExplain?.TxExtend?.Transaction?.TokenId+')'}</a>
                                         </Link><br/>
-                                        UpdateAddress&nbsp;:&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.UpdateAddress} }}>
+                                        UpdateAddress&nbsp;:&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.UpdateAddress }}>
                                             <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData?.UpdateAddress}</a>
                                         </Link>
                                     </div> :''
@@ -150,7 +150,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                 props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncName == 'supersede' ?
                                     <div>
                                         Set issuer to&nbsp;
-                                        <Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer } }}>
+                                        <Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer }}>
                                             <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncData.Issuer}</a>
                                         </Link>
                                     </div> : 
@@ -165,10 +165,10 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                         Send NFT&nbsp;<Link href={{ pathname: '/nft/nftInfo', query: { id: props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId} }}>
                                             <a   style={{margin:0}}>{'('+ props.detailData?.TxExplain?.TxExtend?.Transaction?.NftTokenId+')'}</a>
                                         </Link><br/>
-                                        From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                        From&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender }}>
                                             <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
                                         </Link><br/>
-                                        To&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
+                                        To&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient }}>
                                             <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
                                         </Link>
                                     </div> :
@@ -181,10 +181,10 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                         {
                                             props.detailData?.Status=='Success'?
                                             <div>
-                                                From&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender} }}>
+                                                From&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender }}>
                                                     <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncSender}</a>
                                                 </Link><br/>
-                                                To&nbsp;<Link href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient} }}>
+                                                To&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient }}>
                                                     <a   style={{margin:0}}>{props.detailData?.TxExplain?.TxExtend?.Transaction?.FuncRecipient}</a>
                                                 </Link>
                                             </div>:''
@@ -197,7 +197,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                             <span style={{lineHeight:"22px",display:'-webkit-box',width:"40%",height:'44px',textOverflow:'ellipsis',overflow:'hidden',WebkitBoxOrient:'vertical',WebkitLineClamp:2}}>{props.detailData?.DBEntry?.Data}</span>
                         </Descriptions.Item>:
                         <Descriptions.Item label='Recipient'>
-                            <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.Recipient } }}>
+                            <Link replace href={{ pathname: '/address/' + props.detailData?.Recipient }}>
                                 <a  >{props.detailData?.Recipient}</a>
                             </Link>
                         </Descriptions.Item>
@@ -207,7 +207,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                     <Descriptions.Item label='Sender'>
                         {
                             props.detailData?.SenderAddress?
-                            <Link replace href={{ pathname: '/transactions/addressDetail', query: { address: props.detailData?.SenderAddress } }}>
+                            <Link replace href={{ pathname: '/address/' + props.detailData?.SenderAddress}}>
                                 <a>{props.detailData?.SenderAddress}</a>
                             </Link>:'-'
                         }
