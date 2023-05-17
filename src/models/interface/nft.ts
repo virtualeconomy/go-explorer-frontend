@@ -9,7 +9,8 @@ export interface nftgeneralType {
 
 //nft general component props
 export type NftGeneralProps = {
-    generalData: nftgeneralType
+    generalData: nftgeneralType,
+    show: boolean
 }
 
 //nft collections type

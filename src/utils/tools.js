@@ -99,7 +99,7 @@ const setipfsIconUrlName = (str, index) => {
     let Name = ''
     let CollectionName = ''
     if (str[0] === '{') {
-        let url = JSON.parse(str)
+        let url = eval("(" + str + ")")
         if (url.img) {
             IconUrl = 'https://' + BuseUrl[index % 16] + '/ipfs/' + url.img
         } else if (url.image) {

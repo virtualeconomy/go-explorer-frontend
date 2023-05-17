@@ -11,7 +11,8 @@ export interface generalInfoType {
 
 export type HomeProps = {
   supplyData: supplyInfoType,
-  generalData: generalInfoType
+  generalData: generalInfoType,
+  show: boolean
 }
 
 // block table type

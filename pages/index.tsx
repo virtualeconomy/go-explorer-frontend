@@ -36,6 +36,7 @@ const Home: NextPage = () => {
   const [generalData, setGeneralData] = useState<generalInfoType>(initalGeneralData)
   const [blockInit, setblockInit] = useState({})
   const [transactionInit, settransactionInit] = useState({})
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     try {
@@ -53,15 +54,17 @@ const Home: NextPage = () => {
       setGeneralData(data)
       setblockInit(data.Blocks)
       settransactionInit(data.Transactions)
+      setShow(true)
     } else {
       setblockInit({ message: 'no data' })
       settransactionInit({ message: 'no data' })
+      setShow(true)
     }
   }
 
   return (
     <div className={styles.home}>
-      <GeneralInfo generalData={generalData} supplyData={supplyData} />
+      <GeneralInfo generalData={generalData} supplyData={supplyData} show={show} />
       <LastBlockTable
         tableTitle='Last Blocks'
         viewPath="blocks"
