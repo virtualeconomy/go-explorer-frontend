@@ -71,6 +71,7 @@ const Nft = (props: Props) => {
     const [nftCollectionsData, setnftCollectionsData] = useState<Array<nftcollectionsType>>([])
     const [collectionPageData, setCollectionPageData] = useState({ page: 1, size: 10 })
     const [totalCollection, setTotalCollection] = useState(0)
+    const [show, setShow] = useState(false)
     // most used nfts data
     const [nftUsedParallelingdata, setNftUsedParallelingdata] = useState<Array<paralleingtableType>>([])
     // most changed nfts data
@@ -90,6 +91,7 @@ const Nft = (props: Props) => {
             setspinshow(true)
             if (!res.data.code) {
                 setnftGeneraldata(res.data.data.GeneralInfo)
+                setShow(true)
                 setnftCollectionsData(res.data.data.Collections.data)
                 setTotalCollection(res.data.data.Collections.total)
                 res.data.data.LatestNft.data.map((item: any, index: number) => {
@@ -111,10 +113,12 @@ const Nft = (props: Props) => {
                 setnftInit(res.data.data.LatestNft)
                 setnftTransactionInit(res.data.data.Transactions)
             } else {
+                setShow(true)
                 setnftInit({ message: 'no data' })
                 setnftTransactionInit({ message: 'no data' })
             }
         }).finally(() => {
+            setShow(true)
             setspinshow(true)
         })
         updateParallelingNft()
@@ -174,7 +178,7 @@ const Nft = (props: Props) => {
 
     return (
         <div className={style.nft}>
-            <NftGeneral generalData={nftGeneraldata} />
+            <NftGeneral generalData={nftGeneraldata} show={show}  />
             <CollectionsInfo collectionsData={nftCollectionsData} updateCollections={updateCollections} spinshow={spinshow} />
             <div className={style.paralleling_table}>
                 <NftparallelingTable
