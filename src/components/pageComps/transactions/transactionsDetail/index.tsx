@@ -187,7 +187,7 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                                 To&nbsp;<Link href={{ pathname: '/address/' + props.detailData?.TxExplain?.Transaction?.FuncRecipient }}>
                                                     <a   style={{margin:0}}>{props.detailData?.TxExplain?.Transaction?.FuncRecipient}</a>
                                                 </Link>
-                                            </div>:<div></div>
+                                            </div>: ''
                                         }
                                     </div> :<div></div>
                             }
