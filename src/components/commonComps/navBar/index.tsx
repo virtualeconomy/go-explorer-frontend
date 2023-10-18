@@ -120,7 +120,7 @@ const NavBar = (props: Props) => {
                     />
                 </div>
             </div>
-            <Drawer open={isOpen} closeIcon={<CloseOutlined rev={null} style={{ color: '#EEEEEE', fontSize: '17px' }} />} width={isPc ? '' : '100%'} onClose={() => optDarwer(false, isPc ? 'pc' : '')} headerStyle={{ border: 'none' }} bodyStyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} drawerStyle={{ background: '#2D323C', color: '#EEEEEE', fontSize: '18px', fontFamily: 'Lato' }}>
+            <Drawer open={isOpen} closeIcon={<CloseOutlined style={{ color: '#EEEEEE', fontSize: '17px' }} />} width={isPc ? '' : '100%'} onClose={() => optDarwer(false, isPc ? 'pc' : '')} headerStyle={{ border: 'none' }} bodyStyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} drawerStyle={{ background: '#2D323C', color: '#EEEEEE', fontSize: '18px', fontFamily: 'Lato' }}>
                 {
                     !isPc && (
                         <div style={{ borderBottom: '1px solid #FF8232', width: '102%', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingBottom: '100px' }}>
