@@ -30,13 +30,13 @@ const Token = () => (
 );
 
 const TokenIcon = (props: Partial<CustomIconComponentProps>) => (
-    <Icon component={Token} {...props} />
+    <Icon rev={null} component={Token} {...props} />
 );
 const RefreshIcon = (props: Partial<CustomIconComponentProps>) => (
-    <Icon component={Refresh} {...props} />
+    <Icon rev={null} component={Refresh} {...props} />
 );
 const DropIcon = (props: Partial<CustomIconComponentProps>) => (
-    <Icon component={Drop} {...props} />
+    <Icon rev={null} component={Drop} {...props} />
 );
 
 
