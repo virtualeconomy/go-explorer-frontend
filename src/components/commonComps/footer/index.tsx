@@ -58,7 +58,7 @@ const Footer = (props: Props) => {
                     }
                 </div>
                 <div className={styles.copy_right}>
-                    <div>© 2023 V Systems All Rights Reserved.</div>
+                    <div>© 2024 V Systems All Rights Reserved.</div>
                     <div className={styles.terms}><span onClick={() => window.open('https://v.systems/terms-of-use')}>Terms </span>& <span onClick={() => window.open('https://v.systems/privacy-policy')}>Privacy </span></div>
                 </div>
             </div>
