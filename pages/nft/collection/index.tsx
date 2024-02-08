@@ -52,7 +52,10 @@ const NftCollection = (props: Props) => {
         if (transactionTotal && collectionName == '') {
             getCollectionTransactions({ contractId: id, page: transactionTotal, size: 1 }).then((res) => {
                 if (res.data?.data?.data[0]?.Description) {
-                    if (res.data?.data?.data[0]?.Description[0] != "{") {
+                    if (res.data?.data?.data[0]?.Description[0] == "V") {
+                        setCollectionName(res.data?.data?.data[0]?.Description)
+                    }
+                    else if (res.data?.data?.data[0]?.Description[0] != "{") {
                         let url = 'https://gateway.ipfs.io/ipfs/' + res.data?.data?.data[0]?.Description
                         getNftimg(url).then((res) => {
                             setCollectionName(res.data.name)
@@ -93,7 +96,10 @@ const NftCollection = (props: Props) => {
                 }
             } else {
                 if (Imglist.length) {
-                    const IconObj = Imglist[i].DBEntry?.Data
+                    let imgobj = Imglist.find((img: any) => {
+                        return img.Id === item.Attributes.Description
+                    })
+                    const IconObj = imgobj.DBEntry?.Data
                     let result = setipfsIconUrlName(IconObj, i)
                     if (result.IconUrl) {
                         item.Attributes.IconUrl = result.IconUrl
