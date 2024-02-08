@@ -52,7 +52,7 @@ const NftCollection = (props: Props) => {
         if (transactionTotal && collectionName == '') {
             getCollectionTransactions({ contractId: id, page: transactionTotal, size: 1 }).then((res) => {
                 if (res.data?.data?.data[0]?.Description) {
-                    if (res.data?.data?.data[0]?.Description[0] == "V") {
+                    if (res.data?.data?.data[0]?.Description == "VSYS Lunar New Year 2024") {
                         setCollectionName(res.data?.data?.data[0]?.Description)
                     }
                     else if (res.data?.data?.data[0]?.Description[0] != "{") {
