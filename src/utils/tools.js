@@ -68,7 +68,7 @@ const byteArrayToString = (str) => {
     try {
         const bytes = base58.decode(str)
         attachment = decodeURIComponent(escape(String.fromCharCode.apply(null, bytes)))
-    } catch{
+    } catch {
         attachment = "-"
     }
 
@@ -98,8 +98,18 @@ const setipfsIconUrlName = (str, index) => {
     let IconUrl = ''
     let Name = ''
     let CollectionName = ''
+    let url = ''
     if (str[0] === '{') {
-        let url = eval("(" + str + ")")
+        try {
+            url = eval("(" + str + ")")
+        } catch (error) {
+            str = str.replace('', '').replace(/[\\]/g, '');
+            try {
+                url = eval("(" + str + ")")
+            } catch (error) {
+                console.log(error)
+            }
+        }
         if (url.img) {
             IconUrl = 'https://' + BuseUrl[index % 16] + '/ipfs/' + url.img
         } else if (url.image) {
