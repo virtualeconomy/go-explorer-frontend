@@ -18,10 +18,10 @@ const ChevronRight = () => (
 );
 
 const ChevronLeftIcon = (props: Partial<CustomIconComponentProps>) => (
-    <Icon rev={null} component={ChevronLeft} {...props} />
+    <Icon component={ChevronLeft} {...props} />
 );
 const ChevronRightIcon = (props: Partial<CustomIconComponentProps>) => (
-    <Icon rev={null} component={ChevronRight} {...props} />
+    <Icon component={ChevronRight} {...props} />
 );
 
 
