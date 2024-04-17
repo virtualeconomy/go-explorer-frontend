@@ -98,11 +98,13 @@ const NftCollection = (props: Props) => {
                     let imgobj = Imglist.find((img: any) => {
                         return img.Id === item.Attributes.Description
                     })
-                    const IconObj = imgobj.DBEntry?.Data
-                    let result = setipfsIconUrlName(IconObj, i)
-                    if (result.IconUrl) {
-                        item.Attributes.IconUrl = result.IconUrl
-                        item.Attributes.Name = "#" + item.Index
+                    if (imgobj) {
+                        const IconObj = imgobj?.DBEntry?.Data
+                        let result = setipfsIconUrlName(IconObj, i)
+                        if (result.IconUrl) {
+                            item.Attributes.IconUrl = result.IconUrl
+                            item.Attributes.Name = "#" + item.Index
+                        }
                     }
                 }
 
