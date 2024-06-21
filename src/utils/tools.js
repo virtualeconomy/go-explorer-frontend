@@ -130,6 +130,13 @@ const setipfsIconUrlName = (str, index) => {
     return { IconUrl, Name, CollectionName }
 }
 
+const isVSYSToken = (token) => {
+    if ((process.env.DEPLOY_MODE === 'test' && token == "TWuKDNU1SAheHR99s1MbGZLPh1KophEmKk1eeU3mW") ||
+        (process.env.DEPLOY_MODE === 'prod' && token == "TWatCreEv7ayv6iAfLgke6ppVV33kDjFqSJn8yicf")) { 
+            return true 
+        }
+}
+
 export {
     toThousands,
     formdataify,
@@ -137,4 +144,5 @@ export {
     cutString,
     byteArrayToString,
     setipfsIconUrlName,
+    isVSYSToken,
 }
