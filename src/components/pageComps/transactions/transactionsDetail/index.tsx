@@ -224,12 +224,45 @@ const TransactionDetail = (props: TransactionsDetailProps) => {
                                                         <a  >{props.detailData?.TxExplain?.Transaction?.TokenBId}</a>
                                                     </Link>} &nbsp;{props.detailData?.TxExplain?.Transaction?.VSwapDetails?.amountOut / props.detailData?.TxExplain?.Transaction?.TokenBUnity}
                                             </Descriptions.Item> : "")
-                                    :
-                                    <Descriptions.Item label='Recipient'>
-                                        <Link replace href={{ pathname: '/address/' + props.detailData?.Recipient }}>
-                                            <a  >{props.detailData?.Recipient}</a>
-                                        </Link>
-                                    </Descriptions.Item>
+                                    : props.detailData?.TxExplain?.TxFuncName == "atomicSwap" ?
+                                        <>
+                                            <Descriptions.Item label='Contract ID'>
+                                                <Link replace href={{ pathname: '/address/' + props.detailData?.TxExplain?.Transaction?.ContractId }}>
+                                                    <a>{props.detailData?.TxExplain?.Transaction?.ContractId}</a>
+                                                </Link>
+                                            </Descriptions.Item>
+                                            <Descriptions.Item label='Contract Type'>
+                                                <span>{props.detailData?.TxExplain?.TxFuncName}</span>
+                                            </Descriptions.Item>
+                                            <Descriptions.Item label='Function Index'>
+                                                <span>{props.detailData?.TxExplain?.Transaction?.FuncIdx}</span>
+                                            </Descriptions.Item>
+                                            <Descriptions.Item label='Function Arguments'>
+                                                <div style={{ lineHeight: "22px" }}>
+                                                    <div>{props.detailData?.TxExplain?.Transaction?.FuncName} ( {props.detailData?.TxExplain?.Transaction?.FuncArgs.map((item: any) => { return <i key={item}>{item + " "}</i> })} ) </div>
+                                                </div>
+                                            </Descriptions.Item>
+                                            <Descriptions.Item label='Input Data'>
+                                                <div style={{ lineHeight: "22px" }}>
+                                                    <div>Row Data: {props.detailData?.TxExplain?.Transaction?.FuncData}</div>
+                                                    {Object.keys(props.detailData?.TxExplain?.Transaction?.AtomicSwapDataParsed).map((key: any, index) => {
+                                                        return (
+                                                            <div key={key}>
+                                                                {key + " -> " + props.detailData?.TxExplain?.Transaction?.AtomicSwapDataParsed[key]}
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </Descriptions.Item>
+                                            <Descriptions.Item label='Attachment'>
+                                                <span>{props.detailData?.Attachment} </span>
+                                            </Descriptions.Item>
+                                        </> :
+                                        <Descriptions.Item label='Recipient'>
+                                            <Link replace href={{ pathname: '/address/' + props.detailData?.Recipient }}>
+                                                <a  >{props.detailData?.Recipient}</a>
+                                            </Link>
+                                        </Descriptions.Item>
                 }
                 {
                     props.detailData?.TxExplain?.TxType == 'tx' ?
