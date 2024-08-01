@@ -31,6 +31,9 @@ const OwnershiphistoryDetail = (props: NftOwnershiphistoryProps) => {
                                     <Descriptions.Item label='Transfer Date' style={{ border: 'none' }}>
                                         {item.Timestamp / VSYS_TIME ? moment(item.Timestamp / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}
                                     </Descriptions.Item>
+                                    <Descriptions.Item label='Transfer Status' style={{ border: 'none' }}>
+                                        { item.Status }
+                                    </Descriptions.Item>
                                 </Descriptions>
                             )
                         })

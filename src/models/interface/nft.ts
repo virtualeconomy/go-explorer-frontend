@@ -122,7 +122,8 @@ export interface owership {
     Id: string,
     Timestamp: number,
     FuncData: any,
-    FuncRecipient: string
+    FuncRecipient: string,
+    Status?: string
 }
 
 //nftOwershiphistory type
