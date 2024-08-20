@@ -121,9 +121,9 @@ export interface nftdetailgetdata {
 export interface owership {
     Id: string,
     Timestamp: number,
-    FuncData: any,
-    FuncRecipient: string,
-    Status?: string
+    NewOwner: string,
+    OldOwner: string,
+    TransactionType: string,
 }
 
 //nftOwershiphistory type

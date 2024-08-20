@@ -15,12 +15,17 @@ const OwnershiphistoryDetail = (props: NftOwnershiphistoryProps) => {
                         <Descriptions.Item className={styles.subtitle}>{props.nftID}</Descriptions.Item>
                     </Descriptions>
                     {
-                        props.detailList?.data.map((item, index) => {
+                        props.detailList?.data?.map((item, index) => {
                             return (
                                 <Descriptions key={item.Id + index} column={1} className={styles.ownership_history_detail} style={{ display: (props.spinshow) ? 'block' : 'none', borderBottom: '.5px solid' }}>
-                                    <Descriptions.Item label='Owner' style={{ border: 'none' }}>
-                                        <Link href={{ pathname: item.FuncRecipient ? '/address/' + item.FuncRecipient : '/address/' + item.FuncData.Issuer }}>
-                                            <a  >{item.FuncRecipient ? item.FuncRecipient : item.FuncData.Issuer}</a>
+                                    <Descriptions.Item label='New Owner' style={{ border: 'none' }}>
+                                        <Link href={{ pathname: '/address/' + item.NewOwner }}>
+                                            <a  >{item.NewOwner}</a>
+                                        </Link>
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label='Old Owner' style={{ border: 'none' }}>
+                                        <Link href={{ pathname: '/address/' + item.OldOwner }}>
+                                            <a  >{item.OldOwner}</a>
                                         </Link>
                                     </Descriptions.Item>
                                     <Descriptions.Item label='Transactions hash' style={{ border: 'none' }}>
@@ -31,15 +36,12 @@ const OwnershiphistoryDetail = (props: NftOwnershiphistoryProps) => {
                                     <Descriptions.Item label='Transfer Date' style={{ border: 'none' }}>
                                         {item.Timestamp / VSYS_TIME ? moment(item.Timestamp / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}
                                     </Descriptions.Item>
-                                    <Descriptions.Item label='Transfer Status' style={{ border: 'none' }}>
-                                        { item.Status }
-                                    </Descriptions.Item>
                                 </Descriptions>
                             )
                         })
                     }
-                    <span className={styles.page_sgin}>{props.detailList.total}/{props.detailList.data.length}</span>
-                    <Button className={styles.more_btn} style={{ display: props.detailList.total <= props.detailList.data.length ? 'none' : 'block' }} onClick={() => { props.loadMore() }}>Load More</Button>
+                    <span className={styles.page_sgin}>{props.detailList.total}/{props.detailList.data?.length}</span>
+                    <Button className={styles.more_btn} style={{ display: props.detailList.total <= props.detailList.data?.length ? 'none' : 'block' }} onClick={() => { props.loadMore() }}>Load More</Button>
                 </div>
                 <div className={styles.spinning} style={{ display: (!props.spinshow) ? 'flex' : 'none' }}>
                     <Image

@@ -61,6 +61,7 @@ const getCollectionRegister = (data: object) => http.get('/api/v1/nft/collection
 //NftDetail
 const getNftDetail = (id: string) => http.get('/api/v1/nft/detail/' + id)
 const getNftTransactions = (data: object) => http.get('/api/v1/nft/detail/transactions', { params: data })
+const getNftOwnerTransfer = (data: object) => http.get('/api/v1/nft/owner/transfer', { params: data })
 const getNftRegister = (id: string) => http.get('/api/v1/nft/detail/register/' + id)
 
 //getNftimg
@@ -99,6 +100,7 @@ export {
     getCollectionRegister,
     getNftDetail,
     getNftTransactions,
+    getNftOwnerTransfer,
     getNftRegister,
     getNftimg,
 } 

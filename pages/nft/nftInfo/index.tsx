@@ -6,7 +6,7 @@ import { nftDetail, nftdetailgetdata, nftOwershiphistory } from '../../../src/mo
 import NftOwnershipHistoryDetail from '../../../src/components/pageComps/nft/nftinfopageComps/nftOwnershiphistory'
 import NftregistryTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftregistryColumns } from '../../../src/models/commonData/tableColumns'
-import { getNftDetail, getNftRegister, getNftTransactions, postTransactionDetail } from '../../../src/api'
+import { getNftDetail, getNftRegister, getNftOwnerTransfer, postTransactionDetail } from '../../../src/api'
 import { setipfsIconUrlName } from '../../../src/utils/tools'
 type Props = {}
 
@@ -28,12 +28,7 @@ const NftInfo = (props: Props) => {
         ChangeOwnerLastDay: 0
     })
     const [nftOwnershipHistoryDetaillist, setnftOwnershipHistoryDetaillist] = useState<nftOwershiphistory>({
-        data: [{
-            Id: '',
-            Timestamp: 0,
-            FuncData: {},
-            FuncRecipient: ''
-        }],
+        data: [],
         total: 0
     })
     const [nftgetdata, setnftgetdata] = useState<nftdetailgetdata>({})
@@ -83,20 +78,20 @@ const NftInfo = (props: Props) => {
                     }
                     if (res.data.data.NftDetail?.Collection) {
                         res.data.data.NftDetail.Attributes.Name = res.data.data?.NftDetail?.Collection + ' #' + res.data.data.NftDetail.Index
-                    } 
+                    }
                     setnftDetailSpin(true)
                     setnftDetaildata(res.data.data)
-                }else{
+                } else {
                     setnftDetailSpin(true)
                 }
             }).catch((err) => {
                 setnftDetailSpin(true)
             })
             setnftgetdata({ 'nftTokenId': id as string, page: 1, size: 5 })
-            getNftTransactions({ 'nftTokenId': id as string, page: 1, size: 5 }).then((res) => {
+            getNftOwnerTransfer({ 'nftTokenId': id as string, page: 1, size: 5 }).then((res) => {
                 setnftOwnershipHistoryDetailSpin(true)
-                if (res.data.data) {
-                    setnftOwnershipHistoryDetaillist(res.data.data)
+                if (res.data?.data) {
+                    setnftOwnershipHistoryDetaillist(res.data?.data)
                 }
             }).catch((err) => {
                 setnftOwnershipHistoryDetailSpin(true)
@@ -106,7 +101,7 @@ const NftInfo = (props: Props) => {
     function loadMoreOwnershipHistroy() {
         let newgetdata = JSON.parse(JSON.stringify(nftgetdata))
         newgetdata.page++
-        getNftTransactions(newgetdata).then((res) => {
+        getNftOwnerTransfer(newgetdata).then((res) => {
             if (res.data.data.data.length) {
                 setnftOwnershipHistoryDetaillist({ total: res.data.data.total, data: [...nftOwnershipHistoryDetaillist.data, ...res.data.data.data] })
                 setnftgetdata(newgetdata)

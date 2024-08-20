@@ -1,4 +1,5 @@
 import base58 from 'bs58'
+import { getNftimg } from '../api';
 
 const toThousands = (val) => {
     val = Number(val);
