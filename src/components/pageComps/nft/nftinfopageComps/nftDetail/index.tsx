@@ -4,6 +4,7 @@ import styles from '../../../../pageComps/transactions/transactionsDetail/tableD
 import { NftDeailProps } from '../../../../../models/interface/nft';
 import moment from 'moment';
 import { VSYS_TIME } from '../../../../../utils/constant';
+import { LoadImg } from '../../../../commonComps/loadImg';
 
 
 const NftInfoDetail = (props: NftDeailProps) => {
@@ -11,7 +12,9 @@ const NftInfoDetail = (props: NftDeailProps) => {
         <div className={styles.table}>
             <div className={styles.tableDetail}>
                 <Descriptions title={props.detailData?.NftDetail.Attributes.Name || '***'} column={1} style={{ display: (props.spinshow) ? 'block' : 'none' }} >
-                    <Descriptions.Item className={styles.icon}> <Image preview={false} src={props.detailData?.NftDetail.Attributes.IconUrl || '/NftDef.jpg'} fallback='/NftDef.jpg' alt={''} /> </Descriptions.Item>
+                    <Descriptions.Item className={styles.icon}>
+                        <LoadImg src={props.detailData?.NftDetail.Attributes.IconUrl} />
+                    </Descriptions.Item>
                     <Descriptions.Item className={styles.subtitle}>{props.detailData?.NftDetail.NftTokenId}</Descriptions.Item>
                     <Descriptions.Item className={styles.icon_media} style={{ border: 'none' }}> <Image preview={false} src={props.detailData?.NftDetail.Attributes.IconUrl} fallback='/NftDef.jpg' alt={''} /> </Descriptions.Item>
                     <Descriptions.Item label='Transactions' style={{ border: 'none' }}>

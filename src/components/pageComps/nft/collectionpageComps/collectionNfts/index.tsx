@@ -6,6 +6,7 @@ import { nftCard, NftCardProps } from '../../../../../models/interface/nft'
 import styles from '../../collectionsInfo/collectionsInfo.module.scss'
 import { getNftimg } from '../../../../../api'
 import { setipfsIconUrlName } from '../../../../../utils/tools'
+import { LoadImg } from '../../../../commonComps/loadImg'
 
 const CollectionNfts = (props: NftCardProps) => {
     const router = useRouter()
@@ -16,7 +17,7 @@ const CollectionNfts = (props: NftCardProps) => {
             let data = props.nftsdata
             data.map(async (item, index) => {
                 if (item.Attributes?.Description) {
-                    let result = setipfsIconUrlName(item.Attributes?.Description, index)
+                    let result = await setipfsIconUrlName(item.Attributes?.Description)
                     if (result.IconUrl) {
                         item.Attributes.IconUrl = result.IconUrl
                     }
@@ -26,9 +27,7 @@ const CollectionNfts = (props: NftCardProps) => {
                 }
             })
             setnftcollectionsdata(data)
-            setTimeout(() => {
-                setisLoading(false)
-            }, 10000);
+            setisLoading(false)
         }
 
     }, [props.nftsdata])
@@ -44,7 +43,7 @@ const CollectionNfts = (props: NftCardProps) => {
                             <div className={styles.collections} key={item.NftTokenId + index}>
                                 <Link href={{ pathname: '/nft/nftInfo', query: { id: item.NftTokenId } }}>
                                     <div>
-                                        <Image src={item.Attributes.IconUrl} alt="" fallback='/NftDef.jpg' preview={false} />
+                                        <LoadImg src={item.Attributes.IconUrl} />
                                     </div>
                                 </Link>
                                 <p>{item.Attributes.Name}</p>
