@@ -74,8 +74,7 @@ const NftCollection = (props: Props) => {
             })
             var Imglist = (await postTransactionDetailList(requestarray))?.data?.data
         }
-        for (let i = 0; i < array.length; i++) {
-            let item = array[i]
+        for await (let item of array) {
             if (item.Collection) {
                 item.Attributes.Name = "#" + item.Index
                 setCollectionName(item.Collection)
@@ -100,7 +99,7 @@ const NftCollection = (props: Props) => {
                     })
                     if (imgobj) {
                         const IconObj = imgobj?.DBEntry?.Data
-                        let result = setipfsIconUrlName(IconObj, i)
+                        let result = await setipfsIconUrlName(IconObj)
                         if (result.IconUrl) {
                             item.Attributes.IconUrl = result.IconUrl
                             item.Attributes.Name = "#" + item.Index
