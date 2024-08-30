@@ -66,9 +66,8 @@ export function LoadImg(props: LoadImgProps) {
                         borderRadius: ".044rem",
                     }}
                 >
-                    <Image
-                        style={{ width: "45%" }}
-                        preview={false}
+                    <img
+                        style={{ width: "45%", objectFit: "fill" }}
                         alt="Loading"
                         src='/loading.svg'
                     />
