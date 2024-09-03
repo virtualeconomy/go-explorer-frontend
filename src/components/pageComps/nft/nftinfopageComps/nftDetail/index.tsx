@@ -13,10 +13,44 @@ const NftInfoDetail = (props: NftDeailProps) => {
             <div className={styles.tableDetail}>
                 <Descriptions title={props.detailData?.NftDetail.Attributes.Name || '***'} column={1} style={{ display: (props.spinshow) ? 'block' : 'none' }} >
                     <Descriptions.Item className={styles.icon}>
-                        <LoadImg src={props.detailData?.NftDetail.Attributes.IconUrl} />
+                        {(props.detailData?.NftDetail?.Attributes && !props.detailData?.NftDetail.Attributes.IconUrl) || props.detailData?.NftDetail?.Attributes.IconUrl.startsWith("http") ?
+                            <LoadImg src={props.detailData?.NftDetail.Attributes.IconUrl} />
+                            : <div
+                                style={{
+                                    backgroundColor: "#222831",
+                                    borderRadius: ".044rem",
+                                    width: "100%",
+                                    aspectRatio: "1 / 1",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    lineHeight: 1.25
+                                }}
+                            >
+                                <i>{props.detailData?.NftDetail.Attributes.IconUrl}</i>
+                            </div>}
                     </Descriptions.Item>
                     <Descriptions.Item className={styles.subtitle}>{props.detailData?.NftDetail.NftTokenId}</Descriptions.Item>
-                    <Descriptions.Item className={styles.icon_media} style={{ border: 'none' }}> <Image preview={false} src={props.detailData?.NftDetail.Attributes.IconUrl} fallback='/NftDef.jpg' alt={''} /> </Descriptions.Item>
+                    <Descriptions.Item className={styles.icon_media} style={{ border: 'none' }}>
+                        {(props.detailData?.NftDetail?.Attributes && !props.detailData?.NftDetail.Attributes.IconUrl) || props.detailData?.NftDetail?.Attributes.IconUrl.startsWith("http") ?
+                            <LoadImg src={props.detailData?.NftDetail.Attributes.IconUrl} />
+                            : <div
+                                style={{
+                                    backgroundColor: "#222831",
+                                    borderRadius: ".22rem",
+                                    width: "100%",
+                                    aspectRatio: "1 / 1",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    lineHeight: 1.25
+                                }}
+                            >
+                                <i>{props.detailData?.NftDetail.Attributes.IconUrl}</i>
+                            </div>}
+                    </Descriptions.Item>
                     <Descriptions.Item label='Transactions' style={{ border: 'none' }}>
                         <span>{props.detailData?.TransactionNumber}</span>
                     </Descriptions.Item>

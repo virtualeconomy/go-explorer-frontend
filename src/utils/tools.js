@@ -99,7 +99,7 @@ const setipfsIconUrlName = async (string) => {
         try {
             let result = await (getNftimg('https://gateway.pinata.cloud/ipfs/' + str))
             if (result.constructor === Object) {
-                url = result
+                url = result.data ? result.data : result
             }
         } catch (error) {
             IconUrl = 'https://gateway.pinata.cloud/ipfs/' + str
