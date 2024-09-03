@@ -59,6 +59,16 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
+            i {
+                padding: 0;
+                margin: 0;
+                color: $WHITE_DEFAULT;
+                font-family: $LATO;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                word-break: "break-all";
+            }
         }
         .link {
             background: linear-gradient(90deg, rgba(45, 50, 60, 0) 0%, rgba(45, 50, 60, 0.8) 46.35%);

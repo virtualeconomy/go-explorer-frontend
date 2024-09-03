@@ -8,7 +8,7 @@ import NftsTable from '../../../src/components/commonComps/explorerDataTable'
 import NftTransactionsTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftsColumns, NftTransactionColumns } from '../../../src/models/commonData/tableColumns';
 import { getCollectionGeneral, getCollectionRegister, getCollectionTransactions, getNftimg, postTransactionDetailList } from '../../../src/api'
-import { setipfsIconUrlName } from '../../../src/utils/tools'
+import { isEvalString, setipfsIconUrlName } from '../../../src/utils/tools'
 
 type Props = {}
 
@@ -68,45 +68,54 @@ const NftCollection = (props: Props) => {
     async function fillterdata(data: any, type?: string) {
         let array: any[] = data.data
         let total = data.total
-        if (array[0].Attributes.Description[0] != '{') {
-            const requestarray = array.map((item: any, index: number) => {
-                return item.Attributes.Description
-            })
-            var Imglist = (await postTransactionDetailList(requestarray))?.data?.data
-        }
-        for await (let item of array) {
-            if (item.Collection) {
-                item.Attributes.Name = "#" + item.Index
-                setCollectionName(item.Collection)
-            } else {
-                item.Attributes.Name = ' #' + item.Index
+        let getNftAttrIdList: string[] = []
+        let nftUrlList: any[] = []
+        array.map(async (item: any, index: number) => {
+            if (item.Attributes.Description && !isEvalString(item.Attributes.Description)) {
+                getNftAttrIdList.push(item.Attributes.Description)
             }
-            if (item.Attributes.Description[0] == '{') {
-                let url = JSON.parse(item.Attributes?.Description)
-                if (url?.properties) {
-                    item.Attributes.Name = url.properties?.name
-                    setCollectionName(url.properties?.name)
-                } else if (url?.name) {
-                    item.Attributes.Name = "#" + item.Index
-                    setCollectionName(url.name)
+        })
+        if (getNftAttrIdList.length > 0) {
+            nftUrlList = (await postTransactionDetailList(getNftAttrIdList))?.data?.data
+        }
+        if (array?.length > 0) {
+            for await (let item of array) {
+                let IconObj = nftUrlList.find((nftUrl: any) => {
+                    return nftUrl.Id === item.Attributes.Description
+                })?.DBEntry.Data
+                if (IconObj) {
+                    let result = await setipfsIconUrlName(IconObj)
+                    if (result.IconUrl && !item.Attributes.IconUrl) {
+                        item.Attributes.IconUrl = result.IconUrl
+                    } else if (result.Word) {
+                        item.Attributes.IconUrl = result.Word
+                    }
+                    if (result.Name && !item.Collection) {
+                        item.Collection = result.Name
+                    }
+                    if (result.CollectionName && !item.Collection) {
+                        item.Collection = result.CollectionName
+                    }
                 } else {
-                    item.Attributes.Name = "#" + item.Index
-                }
-            } else {
-                if (Imglist.length) {
-                    let imgobj = Imglist.find((img: any) => {
-                        return img.Id === item.Attributes.Description
-                    })
-                    if (imgobj) {
-                        const IconObj = imgobj?.DBEntry?.Data
-                        let result = await setipfsIconUrlName(IconObj)
-                        if (result.IconUrl) {
-                            item.Attributes.IconUrl = result.IconUrl
-                            item.Attributes.Name = "#" + item.Index
-                        }
+                    let result = await setipfsIconUrlName(item.Attributes.Description)
+                    if (result.IconUrl && !item.Attributes.IconUrl) {
+                        item.Attributes.IconUrl = result.IconUrl
+                    } else if (result.Word) {
+                        item.Attributes.IconUrl = result.Word
+                    }
+                    if (result.Name && !item.collection) {
+                        item.Collection = result.Name
+                    }
+                    if (result.CollectionName && !item.collection) {
+                        item.Collection = result.CollectionName
                     }
                 }
-
+                if (item.Collection) {
+                    item.Attributes.Name = "#" + item.Index
+                    setCollectionName(item.Collection)
+                } else {
+                    item.Attributes.Name = ' #' + item.Index
+                }
             }
         }
         if (type == 'init') {

@@ -40,6 +40,16 @@
             width: 120px;
             border-radius: 10px;
         }
+        i {
+            padding: 0;
+            margin: 0;
+            color: $WHITE_DEFAULT;
+            font-family: $LATO;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            word-break: "break-all";
+        }
     }
     tr > .icon_media {
         display: none;
@@ -171,10 +181,21 @@
         }
         tr > .icon_media {
             display: inline-block;
+            height: 600px;
+            width: 600px;
             img {
                 height: 600px;
                 width: 600px;
                 border-radius: 40px;
+            }
+            i {
+                padding: 0;
+                margin: 0;
+                color: $WHITE_DEFAULT;
+                font-family: $LATO;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 60px;
             }
         }
         :global {

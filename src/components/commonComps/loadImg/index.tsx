@@ -11,7 +11,11 @@ export function LoadImg(props: LoadImgProps) {
     const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        setImgSrc(src)
+        if (src) {
+            setImgSrc(src)
+        } else {
+            setLoading(false)
+        }
     }, [src])
 
     const BuseUrl = [

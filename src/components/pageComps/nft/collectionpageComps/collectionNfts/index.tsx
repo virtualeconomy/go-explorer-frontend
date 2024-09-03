@@ -43,7 +43,23 @@ const CollectionNfts = (props: NftCardProps) => {
                             <div className={styles.collections} key={item.NftTokenId + index}>
                                 <Link href={{ pathname: '/nft/nftInfo', query: { id: item.NftTokenId } }}>
                                     <div>
-                                        <LoadImg src={item.Attributes.IconUrl} />
+                                        {(item?.Attributes && !item.Attributes.IconUrl) || item?.Attributes.IconUrl.startsWith("http") ?
+                                            <LoadImg src={item.Attributes.IconUrl} />
+                                            : <div
+                                                style={{
+                                                    backgroundColor: "#222831",
+                                                    borderRadius: ".044rem",
+                                                    width: "100%",
+                                                    aspectRatio: "1 / 1",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                <i>{item.Attributes.IconUrl}</i>
+                                            </div>}
+
                                     </div>
                                 </Link>
                                 <p>{item.Attributes.Name}</p>
