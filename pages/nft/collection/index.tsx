@@ -7,7 +7,7 @@ import NftCord from '../../../src/components/pageComps/nft/collectionpageComps/c
 import NftsTable from '../../../src/components/commonComps/explorerDataTable'
 import NftTransactionsTable from '../../../src/components/commonComps/explorerDataTable'
 import { NftsColumns, NftTransactionColumns } from '../../../src/models/commonData/tableColumns';
-import { getCollectionGeneral, getCollectionRegister, getCollectionTransactions, getNftimg, postTransactionDetailList } from '../../../src/api'
+import { getCollectionGeneral, getCollectionRegister, getCollectionTransactions, getNftimg, postTransactionDetail, postTransactionDetailList } from '../../../src/api'
 import { isEvalString, setipfsIconUrlName } from '../../../src/utils/tools'
 
 type Props = {}
@@ -26,6 +26,8 @@ const NftCollection = (props: Props) => {
     useEffect(() => {
         setCollectionName(Name ? Name : '')
         if (id) {
+            setnftCordTotal(0)
+            setTransactionTotal(0)
             setnftCordget({ contractId: id as string, page: 1, size: 16 })
             setnftTableget({ contractId: id as string, page: 1, size: 10 })
             getCollectionGeneral(id as string).then((res) => {
@@ -46,24 +48,44 @@ const NftCollection = (props: Props) => {
     }, [id])
 
     useEffect(() => {
-        if (collectionName) {
-            setCollectionName(collectionName)
-        }
         if (transactionTotal && collectionName == '') {
-            getCollectionTransactions({ contractId: id, page: transactionTotal, size: 1 }).then((res) => {
+            getCollectionTransactions({ contractId: id, page: transactionTotal, size: 1 }).then(async (res) => {
                 if (res.data?.data?.data[0]?.Description) {
-                    if (res.data?.data?.data[0]?.Description[0] != "{") {
-                        let url = 'https://gateway.ipfs.io/ipfs/' + res.data?.data?.data[0]?.Description
-                        getNftimg(url).then((res) => {
-                            setCollectionName(res.data.name)
-                        }).catch((error) => {
-                            setCollectionName(res.data?.data?.data[0]?.Description)
-                        })
+                    if (res.data?.data?.data[0]?.Description) {
+                        let IconObj = ""
+                        if (!isEvalString(res.data?.data?.data[0]?.Description)) {
+                            try {
+                                IconObj = (await postTransactionDetail(res.data?.data?.data[0]?.Description))?.data?.data?.DBEntry?.Data
+                            } catch (error) {
+                                IconObj = ""
+                            }
+                        }
+                        if (IconObj) {
+                            let result = await setipfsIconUrlName(IconObj)
+                            if (result.Name) {
+                                setCollectionName(result.Name)
+                            }
+                            if (result.CollectionName) {
+                                setCollectionName(result.CollectionName)
+                            } else {
+                                setCollectionName(IconObj)
+                            }
+                        } else {
+                            let result = await setipfsIconUrlName(res.data?.data?.data[0]?.Description)
+                            if (result.Name) {
+                                setCollectionName(result.Name)
+                            }
+                            if (result.CollectionName) {
+                                setCollectionName(result.CollectionName)
+                            } else {
+                                setCollectionName(res.data?.data?.data[0]?.Description)
+                            }
+                        }
                     }
                 }
             })
         }
-    }, [transactionTotal, id])
+    }, [transactionTotal])
 
     async function fillterdata(data: any, type?: string) {
         let array: any[] = data.data
@@ -76,7 +98,11 @@ const NftCollection = (props: Props) => {
             }
         })
         if (getNftAttrIdList.length > 0) {
-            nftUrlList = (await postTransactionDetailList(getNftAttrIdList))?.data?.data
+            try {
+                nftUrlList = (await postTransactionDetailList(getNftAttrIdList))?.data?.data
+            } catch (error) {
+                nftUrlList = []
+            }
         }
         if (array?.length > 0) {
             for await (let item of array) {
@@ -112,7 +138,6 @@ const NftCollection = (props: Props) => {
                 }
                 if (item.Collection) {
                     item.Attributes.Name = "#" + item.Index
-                    setCollectionName(item.Collection)
                 } else {
                     item.Attributes.Name = ' #' + item.Index
                 }

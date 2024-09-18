@@ -42,7 +42,11 @@ const NftInfo = (props: Props) => {
                     let IconObj = ""
                     if (res.data.data.NftDetail?.Attributes?.Description) {
                         if (!isEvalString(res.data.data.NftDetail?.Attributes?.Description)) {
-                            IconObj = (await postTransactionDetail(res.data.data.NftDetail?.Attributes?.Description))?.data?.data?.DBEntry?.Data
+                            try {
+                                IconObj = (await postTransactionDetail(res.data.data.NftDetail?.Attributes?.Description))?.data?.data?.DBEntry?.Data
+                            } catch (error) {
+                                IconObj = ""
+                            }
                         }
                         if (IconObj) {
                             let result = await setipfsIconUrlName(IconObj)
