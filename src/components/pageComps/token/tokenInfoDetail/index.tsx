@@ -8,6 +8,15 @@ import moment from 'moment';
 
 
 const TokenInfoDetail = (props: TokenInfoDetailProps) => {
+    const tokenTypeIndex = (type: number) => {
+        switch (type) {
+            case 0: return 'Token v1 without split'; break;
+            case 1: return 'Token v1 with split'; break;
+            case 2: return 'Token v2 without split whitelist'; break;
+            case 3: return 'Token v2 without split blacklist'; break;
+            default: return 'Unknown'; break;
+        }
+    }
     return (
         <div className={styles.table}>
             <div className={styles.tableDetail}>
@@ -15,11 +24,14 @@ const TokenInfoDetail = (props: TokenInfoDetailProps) => {
                     <Descriptions.Item className={styles.icon}> <Image preview={false} src={props.detailData.IconUrl ? props.detailData.IconUrl : '/Group.svg'} fallback='/Group.svg' alt={''} /> </Descriptions.Item>
                     <Descriptions.Item className={styles.subtitle}>{props.detailData?.TokenId}</Descriptions.Item>
                     <Descriptions.Item className={styles.icon_media} style={{ border: 'none' }}> <Image preview={false} src={props.detailData?.IconUrl} fallback='/Group.svg' alt={''} /> </Descriptions.Item>
-                    <Descriptions.Item label='Max Supply' style={{ border: 'none' }}>
-                        <span>{ BigNumber(props.detailData?.TotalSupply).dividedBy(props.detailData.Unity)+''}</span>
+                    <Descriptions.Item label='Token Type' style={{ border: 'none' }}>
+                        <span>{ tokenTypeIndex(props.detailData?.TokenType)}</span>
+                    </Descriptions.Item>
+                    <Descriptions.Item label='Max Supply'>
+                        <span>{BigNumber(props.detailData?.TotalSupply).dividedBy(props.detailData.Unity) + ''}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Issued Token'>
-                        <span>{BigNumber(props.detailData?.CurrentSupply).dividedBy(props.detailData.Unity)+''}</span>
+                        <span>{BigNumber(props.detailData?.CurrentSupply).dividedBy(props.detailData.Unity) + ''}</span>
                     </Descriptions.Item>
                     <Descriptions.Item label='Register Time'>
                         <span>{props.detailData?.RegisterTime / VSYS_TIME ? moment(props.detailData?.RegisterTime / VSYS_TIME).format('YYYY-MM-DD HH:mm:ss') : ''}</span>

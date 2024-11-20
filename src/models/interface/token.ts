@@ -45,6 +45,7 @@ export interface TokenListDetail {
     Maker: string;
     Unity: number;
     Describe: string;
+    TokenType: number
 }
 
 //tokenInfotable 

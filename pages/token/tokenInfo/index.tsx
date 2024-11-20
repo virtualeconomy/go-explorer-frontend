@@ -25,7 +25,8 @@ const TokenInfo = (props: Props) => {
             Issuer: '',
             Maker: '',
             Unity: 0,
-            Describe: ''
+            Describe: '',
+            TokenType: 0
         }
     )
     const [spinshow, setspinshow] = useState(false)
