@@ -21,7 +21,7 @@ const HeightDetail = (props: Props) => {
         Height: 0,
         ParentBlockSig: "",
         Signature: "",
-        Size: "0B",
+        Size: "0",
         TimeStamp: 0,
         Txs: 0,
         Version: 0
@@ -33,21 +33,19 @@ const HeightDetail = (props: Props) => {
     function getBlockDetailByall(height: any) {
         if (height) {
             if (isNaN(height)) {
-                return new Promise(function (resovle) {
+                return new Promise(function (resovle, reject) {
                     getBlockDetailByID(height).then(res => {
-                        let code = res.data.code
-                        if (!code) {
-                            resovle(res)
-                        }
+                        resovle(res)
+                    }).catch(() => {
+                        reject()
                     })
                 })
             } else {
-                return new Promise(function (resovle) {
+                return new Promise(function (resovle, reject) {
                     getBlockDetailByHight(height).then(res => {
-                        let code = res.data.code
-                        if (!code) {
-                            resovle(res)
-                        }
+                        resovle(res)
+                    }).catch(() => {
+                        reject()
                     })
                 })
             }
@@ -59,10 +57,36 @@ const HeightDetail = (props: Props) => {
             setpostID(height as any)
             setspinshow(false)
             getBlockDetailByall(height as any)?.then((res: any) => {
-                setdetailData(res.data.data)
-
+                if (res.data.code) {
+                    setpostID("null" as any)
+                    setdetailData({
+                        Generator: "",
+                        Height: 0,
+                        ParentBlockSig: "",
+                        Signature: "",
+                        Size: "0",
+                        TimeStamp: 0,
+                        Txs: 0,
+                        Version: 0
+                    })
+                } else {
+                    setdetailData(res.data.data)
+                    setpostID(res.data.data.Height)
+                }
             }).finally(() => {
                 setspinshow(true)
+            }).catch(() => {
+                setpostID("null" as any)
+                setdetailData({
+                    Generator: "",
+                    Height: 0,
+                    ParentBlockSig: "",
+                    Signature: "",
+                    Size: "0",
+                    TimeStamp: 0,
+                    Txs: 0,
+                    Version: 0
+                })
             })
         }
     }, [height])

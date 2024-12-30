@@ -220,6 +220,10 @@ const CommonDataTable = (props: commonTableProps) => {
                         if (postID) {
                             setIsRefresh(true)
                             let result = (await loadTableListFun(postID)).data
+                            if (!result?.data) {
+                                setTableList([])
+                                setDataAmount(0)
+                            }
                             if (result.data.Transactions === null || result.data.list === null || result.data.Transactions) {
                                 result.data.Transactions.map((item: any) => {
                                     item.key = item.Id + Math.random()
@@ -237,6 +241,8 @@ const CommonDataTable = (props: commonTableProps) => {
                                 setTableList(newdata)
                                 setDataAmount(newdata.length)
                             } else {
+                                setTableList([])
+                                setDataAmount(0)
                                 setIsRefresh(false)
                             }
                             setIsRefresh(false)
