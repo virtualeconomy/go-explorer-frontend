@@ -542,6 +542,14 @@ export const supernodescolumns: ColumnsType<commonTableListType> = [
     render: (val: any) => {
       return <Link href={'/blocks/' + val}>{val}</Link>
     }
+  },
+  {
+    title: 'Availability',
+    dataIndex: 'AvailabilityStr',
+    ellipsis: true,
+    render: (val) => {
+      return val
+    }
   }
 ];
 
