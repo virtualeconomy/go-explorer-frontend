@@ -500,7 +500,7 @@ export const supernodescolumns: ColumnsType<commonTableListType> = [
   {
     title: 'Slot ID',
     dataIndex: 'slotId',
-    width: '15%',
+    width: '10%',
     sorter: {
       compare: (a, b) => {
         return a.slotId - b.slotId
@@ -547,8 +547,18 @@ export const supernodescolumns: ColumnsType<commonTableListType> = [
     title: 'Availability',
     dataIndex: 'AvailabilityStr',
     ellipsis: true,
+    width: '10%',
     render: (val) => {
       return val
+    }
+  },
+  {
+    title: 'Status',
+    dataIndex: 'Status',
+    width: '10%',
+    ellipsis: true,
+    render: (val) => {
+      return <span style={{ textTransform: 'capitalize' }}>{val}</span>
     }
   }
 ];
