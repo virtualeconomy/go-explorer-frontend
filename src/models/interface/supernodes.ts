@@ -25,6 +25,7 @@ export interface postsupernodeDetailList {
 
 //supernodeDetail
 export interface supernodeDetail {
+    Status: string;
     AvgBlockSize: number
     AvgBlockSizeStr: string
     AvgTxPerBlock: number

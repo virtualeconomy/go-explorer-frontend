@@ -29,6 +29,9 @@ const SupernodeDetail = (props: SupernodeDetailProps) => {
                 <Descriptions.Item label='Avg Block Size'>
                     <span>{props.detailData?.AvgBlockSizeStr}</span>
                 </Descriptions.Item>
+                <Descriptions.Item label='Status'>
+                    <span style={{ textTransform: 'capitalize' }}>{props.detailData?.Status}</span>
+                </Descriptions.Item>
             </Descriptions>
             <div className={styles.spinning} style={{ display: (!props.spinshow) ? 'flex' : 'none' }}>
                 <Image

@@ -24,7 +24,8 @@ const SupernodeInfo = (props: Props) => {
         LatestBlockNumber: 0,
         MissBlockRate: 0,
         MissBlockRateStr: '',
-        NodeAddress: ''
+        NodeAddress: '',
+        Status: ''
     })
     const [spinshow, setspinshow] = useState(true)
     const [postData, setpostData] = useState<postsupernodeDetailList>({ address: address as string, page: 1, size: 10, reqName: "transactions", seqId: 0 })
